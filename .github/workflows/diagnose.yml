@@ -40,6 +40,7 @@ jobs:
             echo '== Plugins'; wp plugin list --fields=name,status,version
             echo '== Theme'; wp theme list --status=active --fields=name,version
             echo '== Site title / tagline'; wp option get blogname; wp option get blogdescription; wp option get site_icon
+            echo '== Posts'; wp post list --post_type=post --post_status=any --fields=ID,post_title,post_status,post_name
             echo '== Database rows mentioning My WordPress'; wp db search 'My WordPress' --all-tables --stats 2>/dev/null | tail -15
             echo '== Composer platform checks requiring PHP >= 8.3'
             grep -rl --include=platform_check.php '80300' . 2>/dev/null
