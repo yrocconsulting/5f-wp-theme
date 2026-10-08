@@ -44,7 +44,7 @@ Repository secrets (Settings → Secrets and variables → Actions):
 | `SSH_PRIVATE_KEY` | Private key text |
 | `SSH_KEY_PASSPHRASE` | Only if the key has a passphrase (SiteGround-generated keys do) |
 | `WP_PATH` | `~/www/5f.yroc.host/public_html` |
-| `CONTACT_EMAIL` | Optional: where contact form messages go (defaults to the WordPress admin email) |
+| `CONTACT_EMAIL` | Optional: where contact form messages go (testing default: bradley@yrocconsulting.com) |
 
 No WordPress username or password is needed: the deploy runs WP-CLI on the server over SSH.
 
@@ -64,12 +64,12 @@ tools/process-photo.sh ~/Downloads/DJI_0042.JPG aerial-ponds
 | `long-pond` | "Why weekends only", Fishing | (photo in place) |
 | `quarry-lake` | Home intro, Fishing (wide) | (photo in place) |
 | `geese-lake` | Fishing, Fishing banner | (photo in place) |
-| `doves-lake` | Dove Hunting card, page and banner | (composite: doves added to `geese-lake`) |
+| `doves-lake` | Dove Hunting card and "The Hunting Area" | (composite: doves added to `geese-lake`) |
 | `creek` | Open Range card | (photo in place) |
-| `creek-bottom` | Open Range page and banner | `creek` |
-| `stock-tank` | spare dove-habitat slot | `doves-lake` |
-| `ranch-overview` | About the Ranch, Hunting & Fishing banner | `aerial-ponds` |
-| `headquarters` | About the Ranch (the 5F barn) | `quarry-lake` |
+| `creek-bottom` | Open Range page and banner | (photo in place) |
+| `stock-tank` | Dove Hunting banner | (photo in place) |
+| `ranch-overview` | About the Ranch, Hunting & Fishing banner | (photo in place; house cropped out) |
+| `headquarters` | About the Ranch banner (the 5F barn) | (photo in place) |
 
 `doves-lake.jpg` is a composite: the dove silhouettes were added digitally to the lake photo. Replace it if a real dove photo becomes available.
 

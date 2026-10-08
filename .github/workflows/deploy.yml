@@ -91,7 +91,8 @@ jobs:
 
       - name: Activate theme, plugins and run site setup
         env:
-          CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
+          # Testing default; set a CONTACT_EMAIL secret to change it.
+          CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL || 'bradley@yrocconsulting.com' }}
         run: |
           if [ -n "$CONTACT_EMAIL" ]; then
             case "$CONTACT_EMAIL" in *"'"*|*" "*) echo "::error::CONTACT_EMAIL looks invalid"; exit 1;; esac
