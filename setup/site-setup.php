@@ -22,6 +22,16 @@ $fivef_log = static function ( $msg ) {
 	}
 };
 
+$fivef_log(
+	sprintf(
+		'Environment: theme=%s, photos dir=%s (%s), Contact Form 7 %s',
+		get_stylesheet(),
+		get_theme_file_path( 'assets/photos' ),
+		is_dir( get_theme_file_path( 'assets/photos' ) ) ? count( glob( get_theme_file_path( 'assets/photos' ) . '/*.jpg' ) ) . ' photos' : 'missing',
+		class_exists( 'WPCF7_ContactForm' ) ? 'loaded' : 'NOT loaded'
+	)
+);
+
 /*
  * 1. Site basics.
  */

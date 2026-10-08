@@ -98,6 +98,7 @@ jobs:
             case "$CONTACT_EMAIL" in *"'"*|*" "*) echo "::error::CONTACT_EMAIL looks invalid"; exit 1;; esac
             ssh staging "cd '$WP_DIR' && wp option update fivef_contact_email '$CONTACT_EMAIL' > /dev/null"
           fi
+          ssh staging "cd '$WP_DIR' && ls wp-content/themes/5f-ranch/assets/photos | head -20 && wp theme list --status=active --fields=name,status && wp plugin list --fields=name,status; cat wp-cli.yml 2>/dev/null; true"
           ssh staging "cd '$WP_DIR' \
             && (wp theme is-active 5f-ranch || wp theme activate 5f-ranch) \
             && (wp plugin is-installed contact-form-7 || wp plugin install contact-form-7) \
