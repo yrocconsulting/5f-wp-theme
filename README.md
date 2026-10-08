@@ -14,7 +14,8 @@ Staging: https://5f.yroc.host/
 | `5f-ranch/assets/photos/` | Ranch photos, one file per slot (see below) |
 | `setup/site-setup.php` | Creates pages, the main menu, front page and featured images (safe to re-run) |
 | `tools/process-photo.sh` | Resizes and colour-grades a photo into a slot |
-| `.github/workflows/deploy.yml` | Deploys to staging over SSH on every push (also installs Contact Form 7) |
+| `.github/workflows/deploy.yml` | Deploys to staging over SSH on every push (also installs Contact Form 7, pinned to 6.1.7 because 6.2+ needs PHP 8.3) |
+| `.github/workflows/diagnose.yml` | Read-only server checks (PHP, plugins, theme); run from the Actions tab |
 
 ## Brand
 
@@ -78,3 +79,5 @@ On the next deploy, new photos are imported into the Media Library once and set 
 ## Contact form
 
 The deploy installs **Contact Form 7** and the setup script creates a form named *5F Ranch Contact*, which the Contact page shows in a styled card. Change fields or messages in WordPress under **Contact → Contact Forms**. The theme styles any field wrapped in `<p class="fivef-field">`; put two fields side by side inside `<div class="fivef-form-grid">`.
+
+**Version pin:** Contact Form 7 6.2 and newer need PHP 8.3+ on the website. The site's PHP is older, so the deploy pins 6.1.7 and turns off auto-updates for the plugin. Don't click "Update" on Contact Form 7 until the site's PHP (SiteGround → Devs → PHP Manager) is 8.3 or newer. After that, change `CF7_VERSION` in `deploy.yml`.

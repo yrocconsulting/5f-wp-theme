@@ -91,6 +91,8 @@ jobs:
 
       - name: Activate theme, plugins and run site setup
         env:
+          # 6.2+ needs PHP 8.3 on the website; 6.1.7 runs on PHP 7.4+.
+          CF7_VERSION: '6.1.7'
           # Testing default; set a CONTACT_EMAIL secret to change it.
           CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL || 'bradley@yrocconsulting.com' }}
         run: |
@@ -101,7 +103,10 @@ jobs:
           ssh staging "cd '$WP_DIR' \
             && wp theme activate 5f-ranch \
             && test \"\$(wp option get stylesheet)\" = 5f-ranch \
-            && (wp plugin install contact-form-7 --activate || wp plugin activate contact-form-7) \
+            && ( [ \"\$(wp plugin get contact-form-7 --field=version 2>/dev/null)\" = '$CF7_VERSION' ] \
+                 || wp plugin install contact-form-7 --version='$CF7_VERSION' --force ) \
+            && wp plugin activate contact-form-7 \
+            && (wp plugin auto-updates disable contact-form-7 > /dev/null 2>&1 || true) \
             && wp eval-file ~/5f-site-setup.php \
             && rm -f ~/5f-site-setup.php \
             && wp cache flush \
