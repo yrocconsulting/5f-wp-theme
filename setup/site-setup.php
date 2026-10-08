@@ -38,8 +38,10 @@ $fivef_log(
 if ( 'Just another WordPress site' === get_option( 'blogdescription' ) || '' === get_option( 'blogdescription' ) ) {
 	update_option( 'blogdescription', 'Private ranch hunting & fishing in Alvord, Texas' );
 }
-if ( in_array( get_option( 'blogname' ), array( '', 'My WordPress Website', 'My Blog' ), true ) ) {
+// Replace installer defaults such as "My WordPress" (SiteGround) or "My WordPress Website".
+if ( preg_match( '/^\s*(my (wordpress|blog|site|website)\b.*)?$/i', (string) get_option( 'blogname' ) ) ) {
 	update_option( 'blogname', '5F Ranch' );
+	$fivef_log( 'Site title set to 5F Ranch' );
 }
 if ( '' === get_option( 'permalink_structure' ) ) {
 	update_option( 'permalink_structure', '/%postname%/' );
@@ -113,6 +115,27 @@ $fivef_resolve = static function ( $slot ) use ( &$fivef_media ) {
 	$found = function_exists( 'fivef_photo_slot' ) ? fivef_photo_slot( $slot ) : $slot;
 	return ( $found && isset( $fivef_media[ $found ] ) ) ? $fivef_media[ $found ] : 0;
 };
+
+// Site Icon (favicon, app icons): set once from the theme's 512px icon. Change it any time in
+// Appearance → Editor → Styles, or Settings → General → Site Icon.
+if ( ! get_option( 'site_icon' ) && file_exists( get_theme_file_path( 'assets/images/site-icon-512.png' ) ) ) {
+	$tmp = wp_tempnam( 'site-icon-512.png' );
+	copy( get_theme_file_path( 'assets/images/site-icon-512.png' ), $tmp );
+	$icon_id = media_handle_sideload(
+		array(
+			'name'     => '5f-ranch-site-icon.png',
+			'tmp_name' => $tmp,
+		),
+		0,
+		'5F Ranch site icon'
+	);
+	if ( is_wp_error( $icon_id ) ) {
+		$fivef_log( 'Could not import site icon: ' . $icon_id->get_error_message() );
+	} else {
+		update_option( 'site_icon', $icon_id );
+		$fivef_log( "Site icon set (#{$icon_id})" );
+	}
+}
 
 /*
  * 3. Pages. Content is the matching theme pattern; the editor expands it into

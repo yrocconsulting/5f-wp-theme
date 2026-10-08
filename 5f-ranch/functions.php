@@ -246,3 +246,18 @@ function fivef_photo_alt( $slot ) {
  * so the theme's form styles control the layout.
  */
 add_filter( 'wpcf7_autop_or_not', '__return_false' );
+
+/**
+ * Favicons. The crisp SVG (letters only, made for 16-32px tabs) is always
+ * offered; modern browsers prefer it. The .ico and touch icon are only
+ * printed when no Site Icon is set, since WordPress prints its own then.
+ */
+function fivef_favicons() {
+	printf( '<link rel="icon" href="%s" type="image/svg+xml">' . "\n", esc_url( get_theme_file_uri( 'assets/images/favicon.svg' ) ) );
+	if ( has_site_icon() ) {
+		return;
+	}
+	printf( '<link rel="icon" href="%s" sizes="32x32">' . "\n", esc_url( get_theme_file_uri( 'assets/images/favicon.ico' ) ) );
+	printf( '<link rel="apple-touch-icon" href="%s">' . "\n", esc_url( get_theme_file_uri( 'assets/images/apple-touch-icon.png' ) ) );
+}
+add_action( 'wp_head', 'fivef_favicons', 2 );
