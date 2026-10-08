@@ -20,9 +20,9 @@ $fivef_cards = array(
 	array(
 		'title' => __( 'Open Range Hunting', '5f-ranch' ),
 		'url'   => '/hunting-fishing/open-range-hunting/',
-		'img'   => fivef_photo( 'hog-hunt-1' ),
-		'alt'   => fivef_photo_alt( 'hog-hunt-1' ),
-		'text'  => __( 'Room to roam across the wider 2,600-acre property, including guided thermal hog hunts.', '5f-ranch' ),
+		'img'   => fivef_photo( 'creek-bottom' ),
+		'alt'   => fivef_photo_alt( 'creek-bottom' ),
+		'text'  => __( 'White-tailed deer and feral hogs across the wider 2,600-acre property, including guided thermal night hunts.', '5f-ranch' ),
 	),
 	array(
 		'title' => __( 'Fishing', '5f-ranch' ),
