@@ -1,0 +1,321 @@
+/*
+Theme Name: 5F Ranch
+Theme URI: https://5f.yroc.host/
+Author: Yroc Consulting
+Author URI: https://yrocconsulting.com
+Description: Custom block theme for 5F Ranch, a private hunting and fishing ranch in Alvord, Texas. Built for the Site Editor: edit pages, menus, header and footer visually.
+Requires at least: 6.6
+Tested up to: 6.8
+Requires PHP: 7.4
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: 5f-ranch
+Tags: block-patterns, full-site-editing, custom-colors, custom-logo, custom-menu, editor-style, featured-images, wide-blocks
+*/
+
+/* Most styling lives in theme.json. This file holds the few things theme.json can't express. */
+
+html {
+	scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}
+
+:where(.wp-site-blocks) *:focus-visible {
+	outline: 2px solid var(--wp--preset--color--sunset-gold);
+	outline-offset: 3px;
+}
+
+/* ---------- Layout seams: header, main and footer sit flush ---------- */
+
+.wp-site-blocks > * + * {
+	margin-block-start: 0;
+}
+
+/* ---------- Header ---------- */
+
+.fivef-header {
+	position: sticky;
+	top: 0;
+	z-index: 50;
+	box-shadow: 0 1px 0 rgba(217, 200, 169, 0.12), 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.admin-bar .fivef-header {
+	top: var(--wp-admin--admin-bar--height, 32px);
+}
+
+@media (max-width: 600px) {
+	.admin-bar .fivef-header {
+		top: 0;
+	}
+}
+
+.fivef-header .wp-block-navigation .wp-block-navigation-item__content {
+	padding-block: 0.35em;
+	border-bottom: 2px solid transparent;
+	transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.fivef-header .wp-block-navigation .wp-block-navigation-item__content:hover,
+.fivef-header .wp-block-navigation .current-menu-item > .wp-block-navigation-item__content {
+	border-bottom-color: var(--wp--preset--color--sunset-gold);
+	color: var(--wp--preset--color--texas-tan);
+}
+
+.fivef-header .wp-block-navigation__submenu-container {
+	border: 1px solid rgba(217, 200, 169, 0.2) !important;
+	padding-block: 0.4rem;
+	min-width: 220px !important;
+}
+
+.fivef-header .wp-block-navigation__submenu-container .wp-block-navigation-item__content {
+	padding: 0.55em 1.1em;
+	border-bottom: 0;
+}
+
+.fivef-header .wp-block-navigation__responsive-container.is-menu-open {
+	padding: 1.5rem;
+}
+
+.fivef-header .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content {
+	font-size: 1.15rem;
+}
+
+@media (max-width: 781px) {
+	.fivef-header .fivef-header-cta {
+		display: none;
+	}
+}
+
+/* ---------- Hero ---------- */
+
+.fivef-hero .wp-block-cover__inner-container > * {
+	margin-inline: auto;
+}
+
+.fivef-hero-logo img {
+	filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.45));
+}
+
+.fivef-text-shadow {
+	text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
+}
+
+/* ---------- Block style: Tagline band (wide letter-spaced caps) ---------- */
+
+.is-style-tracked {
+	text-transform: uppercase;
+	letter-spacing: 0.32em;
+}
+
+/* ---------- Block style: Eyebrow heading ---------- */
+
+.is-style-eyebrow {
+	font-family: var(--wp--preset--font-family--montserrat) !important;
+	font-size: var(--wp--preset--font-size--x-small) !important;
+	font-weight: 700 !important;
+	text-transform: uppercase;
+	letter-spacing: 0.22em;
+	color: var(--wp--preset--color--sunset-gold);
+}
+
+/* ---------- Block style: Ruled heading (rule below) ---------- */
+
+.is-style-ruled {
+	padding-bottom: 0.6em;
+	background-image: linear-gradient(90deg, var(--wp--preset--color--sunset-gold), rgba(200, 150, 62, 0));
+	background-size: 100% 2px;
+	background-repeat: no-repeat;
+	background-position: bottom left;
+}
+
+/* ---------- Block style: Script ---------- */
+
+.is-style-script {
+	font-family: var(--wp--preset--font-family--yellowtail) !important;
+	font-weight: 400 !important;
+	text-transform: none !important;
+	letter-spacing: 0 !important;
+	line-height: 1.15;
+}
+
+/* ---------- Group style: Paper card (parchment with distressed edge) ---------- */
+
+.is-style-paper {
+	background-color: var(--wp--preset--color--parchment);
+	color: var(--wp--preset--color--charcoal);
+	background-image:
+		radial-gradient(ellipse at 20% 10%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 60%),
+		radial-gradient(ellipse at 80% 90%, rgba(150, 120, 80, 0.18), rgba(150, 120, 80, 0) 55%);
+	box-shadow: 0 12px 34px rgba(0, 0, 0, 0.35), inset 0 0 40px rgba(120, 90, 50, 0.18);
+	border-radius: 3px;
+	clip-path: polygon(0% 1.5%, 3% 0%, 12% 1%, 22% 0%, 35% 1.2%, 48% 0.2%, 60% 1.1%, 74% 0%, 86% 1%, 97% 0%, 100% 2%, 99.4% 20%, 100% 40%, 99.3% 60%, 100% 80%, 99.5% 98%, 96% 100%, 84% 99%, 70% 100%, 56% 99.1%, 42% 100%, 28% 99.2%, 14% 100%, 3% 99%, 0% 97%, 0.6% 78%, 0% 58%, 0.7% 38%, 0% 18%);
+}
+
+/* ---------- Group style: Ticket (double rule border) ---------- */
+
+.is-style-ticket {
+	background-color: var(--wp--preset--color--parchment);
+	color: var(--wp--preset--color--charcoal);
+	border: 2px solid var(--wp--preset--color--ranch-brown);
+	outline: 1px solid var(--wp--preset--color--ranch-brown);
+	outline-offset: -8px;
+	box-shadow: 0 12px 34px rgba(0, 0, 0, 0.3);
+	border-radius: 4px;
+}
+
+/* ---------- Group style: Hover lift card ---------- */
+
+.is-style-card {
+	background-color: var(--wp--preset--color--charcoal-soft);
+	border: 1px solid rgba(217, 200, 169, 0.14);
+	border-radius: 6px;
+	overflow: hidden;
+	transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.is-style-card:hover {
+	transform: translateY(-4px);
+	border-color: rgba(200, 150, 62, 0.6);
+	box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+}
+
+.is-style-card > .wp-block-image:first-child {
+	margin: 0;
+}
+
+.is-style-card > .wp-block-image:first-child,
+.is-style-card > .wp-block-image:first-child a {
+	display: block;
+	width: 100%;
+}
+
+.is-style-card > .wp-block-image:first-child img,
+.is-style-card > .wp-block-post-featured-image img {
+	aspect-ratio: 16 / 10;
+	object-fit: cover;
+	width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.is-style-card,
+	.is-style-card:hover {
+		transition: none;
+		transform: none;
+	}
+}
+
+/* ---------- Image style: Torn photo edge ---------- */
+
+.is-style-torn img {
+	width: 100%;
+	aspect-ratio: 3 / 2;
+	object-fit: cover;
+	clip-path: polygon(0% 3%, 4% 0%, 18% 2%, 33% 0%, 50% 1.5%, 66% 0%, 82% 2%, 96% 0%, 100% 4%, 99% 30%, 100% 55%, 98.8% 80%, 100% 96%, 95% 100%, 80% 98%, 64% 100%, 48% 98.5%, 32% 100%, 16% 98%, 3% 100%, 0% 95%, 1% 70%, 0% 45%, 1.2% 20%);
+}
+
+/* Wide torn images get a panoramic crop */
+.is-style-torn.alignwide img {
+	aspect-ratio: 21 / 9;
+}
+
+/* ---------- Stat strip ---------- */
+
+.fivef-stats > .wp-block-column {
+	text-align: center;
+}
+
+@media (min-width: 782px) {
+	.fivef-stats > .wp-block-column + .wp-block-column {
+		border-left: 1px solid rgba(217, 200, 169, 0.2);
+	}
+}
+
+.fivef-stats .fivef-stat-number {
+	font-family: var(--wp--preset--font-family--cinzel);
+	color: var(--wp--preset--color--texas-tan);
+	margin-bottom: 0.15em;
+}
+
+/* ---------- Icon list ---------- */
+
+.is-style-checks {
+	list-style: none;
+	padding-left: 0;
+}
+
+.is-style-checks li {
+	position: relative;
+	padding-left: 1.9em;
+	margin-bottom: 0.65em;
+}
+
+.is-style-checks li::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0.3em;
+	width: 1.05em;
+	height: 1.05em;
+	border-radius: 50%;
+	background: var(--wp--preset--color--sunset-gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='%23161512' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 70% no-repeat;
+}
+
+/* ---------- Footer ---------- */
+
+.fivef-footer a {
+	text-decoration: none;
+}
+
+.fivef-footer a:hover {
+	text-decoration: underline;
+	text-underline-offset: 0.2em;
+}
+
+.fivef-footer .wp-block-navigation .wp-block-navigation-item__content {
+	padding: 0.2em 0;
+}
+
+/* ---------- Content niceties ---------- */
+
+.wp-block-post-content a:where(:not(.wp-element-button)) {
+	text-underline-offset: 0.18em;
+}
+
+.wp-block-separator.is-style-default {
+	opacity: 1;
+}
+
+/* Responsive embeds (e.g. Google Maps iframe in a Custom HTML block) */
+.fivef-map iframe {
+	width: 100%;
+	min-height: 360px;
+	border: 0;
+	border-radius: 6px;
+	display: block;
+}
+
+/* Headings and links on light surfaces */
+:where(.is-style-paper, .is-style-ticket, .has-parchment-background-color, .has-texas-tan-background-color) :where(h1, h2, h3, h4, h5, h6) {
+	color: var(--wp--preset--color--ranch-brown);
+}
+
+:where(.is-style-paper, .is-style-ticket, .has-parchment-background-color, .has-texas-tan-background-color) a:where(:not(.wp-element-button)) {
+	color: var(--wp--preset--color--ranch-brown);
+}
+
+:where(.is-style-paper, .is-style-ticket, .has-parchment-background-color, .has-texas-tan-background-color) .wp-block-separator {
+	color: var(--wp--preset--color--ranch-brown);
+}
+
+@media (max-width: 600px) {
+	.fivef-hero-logo img {
+		width: 230px !important;
+	}
+}

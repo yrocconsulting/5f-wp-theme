@@ -1,0 +1,95 @@
+name: Deploy to staging
+
+# Pushes the theme to the SiteGround staging site over SSH, activates it and
+# runs the (safe, idempotent) site setup. Run it by hand from the Actions tab
+# with "Run workflow" at any time.
+
+on:
+  push:
+    branches: [main, 'claude/**']
+    paths:
+      - '5f-ranch/**'
+      - 'setup/**'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-staging
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      SSH_HOST: ${{ secrets.SSH_HOST }}
+      SSH_USER: ${{ secrets.SSH_USER }}
+      SSH_PORT: ${{ secrets.SSH_PORT }}
+      WP_PATH: ${{ secrets.WP_PATH }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lint PHP
+        run: find 5f-ranch setup -name '*.php' -print0 | xargs -0 -n1 php -l > /dev/null
+
+      - name: Check secrets
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          missing=0
+          for v in SSH_HOST SSH_USER SSH_PRIVATE_KEY WP_PATH; do
+            if [ -z "${!v}" ]; then echo "::error::Missing repository secret: $v"; missing=1; fi
+          done
+          exit $missing
+
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KEY_PASSPHRASE: ${{ secrets.SSH_KEY_PASSPHRASE }}
+        run: |
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          # SiteGround-generated keys carry a passphrase; strip it on the runner only.
+          if [ -n "$SSH_KEY_PASSPHRASE" ]; then
+            ssh-keygen -p -P "$SSH_KEY_PASSPHRASE" -N "" -f ~/.ssh/deploy_key > /dev/null
+          fi
+          PORT="${SSH_PORT:-18765}"
+          ssh-keyscan -p "$PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2> /dev/null
+          {
+            echo "Host staging"
+            echo "  HostName $SSH_HOST"
+            echo "  Port $PORT"
+            echo "  User $SSH_USER"
+            echo "  IdentityFile ~/.ssh/deploy_key"
+            echo "  IdentitiesOnly yes"
+            echo "  ServerAliveInterval 30"
+          } > ~/.ssh/config
+          chmod 600 ~/.ssh/config
+
+      - name: Resolve WordPress path
+        run: |
+          # Accept "~/www/site/public_html", "www/site/public_html" or an absolute path.
+          dir="${WP_PATH#\~/}"
+          dir="${dir%/}"
+          echo "WP_DIR=$dir" >> "$GITHUB_ENV"
+          ssh staging "test -f '$dir/wp-config.php'" \
+            || { echo "::error::No wp-config.php at '$dir' on the server. Check the WP_PATH secret."; exit 1; }
+
+      - name: Upload theme
+        run: |
+          rsync -rlz --delete --exclude '.DS_Store' --exclude '.gitkeep' \
+            5f-ranch/ "staging:$WP_DIR/wp-content/themes/5f-ranch/"
+          rsync -z setup/site-setup.php "staging:5f-site-setup.php"
+
+      - name: Activate theme and run site setup
+        run: |
+          ssh staging "cd '$WP_DIR' \
+            && (wp theme is-active 5f-ranch || wp theme activate 5f-ranch) \
+            && wp eval-file ~/5f-site-setup.php \
+            && rm -f ~/5f-site-setup.php \
+            && wp cache flush \
+            && (wp sg purge > /dev/null 2>&1 || true)"
+
+      - name: Summary
+        run: echo "Deployed ${GITHUB_SHA::7} to staging (https://5f.yroc.host/)" >> "$GITHUB_STEP_SUMMARY"
