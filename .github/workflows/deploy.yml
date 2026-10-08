@@ -52,7 +52,12 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           # SiteGround-generated keys carry a passphrase; strip it on the runner only.
           if [ -n "$SSH_KEY_PASSPHRASE" ]; then
-            ssh-keygen -p -P "$SSH_KEY_PASSPHRASE" -N "" -f ~/.ssh/deploy_key > /dev/null
+            ssh-keygen -p -P "$SSH_KEY_PASSPHRASE" -N "" -f ~/.ssh/deploy_key > /dev/null \
+              || { echo "::error::SSH_KEY_PASSPHRASE does not unlock SSH_PRIVATE_KEY."; exit 1; }
+          fi
+          if ! ssh-keygen -y -P "" -f ~/.ssh/deploy_key > /dev/null 2>&1; then
+            echo "::error::SSH_PRIVATE_KEY is protected by a passphrase (or is not a valid private key). Add the key's password as the SSH_KEY_PASSPHRASE secret."
+            exit 1
           fi
           PORT="${SSH_PORT:-18765}"
           ssh-keyscan -p "$PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2> /dev/null
@@ -66,6 +71,8 @@ jobs:
             echo "  ServerAliveInterval 30"
           } > ~/.ssh/config
           chmod 600 ~/.ssh/config
+          ssh -o BatchMode=yes -o ConnectTimeout=20 staging true \
+            || { echo "::error::SSH login to $SSH_HOST:$PORT as the SSH_USER secret was refused. Check SSH_HOST, SSH_USER and SSH_PORT, and that the key is listed (and authorized) in SiteGround Site Tools → Devs → SSH Keys Manager."; exit 1; }
 
       - name: Resolve WordPress path
         run: |
