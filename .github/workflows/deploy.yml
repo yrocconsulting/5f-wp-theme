@@ -82,10 +82,18 @@ jobs:
             5f-ranch/ "staging:$WP_DIR/wp-content/themes/5f-ranch/"
           rsync -z setup/site-setup.php "staging:5f-site-setup.php"
 
-      - name: Activate theme and run site setup
+      - name: Activate theme, plugins and run site setup
+        env:
+          CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
         run: |
+          if [ -n "$CONTACT_EMAIL" ]; then
+            case "$CONTACT_EMAIL" in *"'"*|*" "*) echo "::error::CONTACT_EMAIL looks invalid"; exit 1;; esac
+            ssh staging "cd '$WP_DIR' && wp option update fivef_contact_email '$CONTACT_EMAIL' > /dev/null"
+          fi
           ssh staging "cd '$WP_DIR' \
             && (wp theme is-active 5f-ranch || wp theme activate 5f-ranch) \
+            && (wp plugin is-installed contact-form-7 || wp plugin install contact-form-7) \
+            && (wp plugin is-active contact-form-7 || wp plugin activate contact-form-7) \
             && wp eval-file ~/5f-site-setup.php \
             && rm -f ~/5f-site-setup.php \
             && wp cache flush \

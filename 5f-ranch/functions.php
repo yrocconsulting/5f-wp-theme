@@ -150,31 +150,45 @@ function fivef_section( $slug ) {
 }
 
 /**
- * Ranch photo slots. Each slot uses assets/photos/{slot}.jpg when present,
- * otherwise falls back to a placeholder so the layout never breaks.
+ * Ranch photo slots: assets/photos/{slot}.jpg. A slot without its own photo
+ * borrows a related one, and finally a placeholder, so layouts never break.
+ */
+function fivef_photo_alternates() {
+	return array(
+		'stock-tank'     => array( 'doves-lake' ),
+		'creek-bottom'   => array( 'creek' ),
+		'ranch-overview' => array( 'aerial-ponds' ),
+		'headquarters'   => array( 'quarry-lake' ),
+	);
+}
+
+/**
+ * Resolve a slot to the slot whose photo file actually exists.
+ *
+ * @param string $slot Photo slot name.
+ * @return string|null Slot name with a file, or null.
+ */
+function fivef_photo_slot( $slot ) {
+	$alts = fivef_photo_alternates();
+	foreach ( array_merge( array( $slot ), isset( $alts[ $slot ] ) ? $alts[ $slot ] : array() ) as $candidate ) {
+		if ( file_exists( get_theme_file_path( 'assets/photos/' . sanitize_file_name( $candidate ) . '.jpg' ) ) ) {
+			return $candidate;
+		}
+	}
+	return null;
+}
+
+/**
+ * URL for a photo slot.
  *
  * @param string $slot     Photo slot name.
- * @param string $fallback Optional placeholder file in assets/images.
+ * @param string $fallback Placeholder file in assets/images when no photo exists.
  * @return string Escaped URL.
  */
-function fivef_photo( $slot, $fallback = '' ) {
-	$fallbacks = array(
-		'aerial-ponds'   => 'placeholder-pond.jpg',
-		'long-pond'      => 'placeholder-pond.jpg',
-		'quarry-lake'    => 'placeholder-pond.jpg',
-		'geese-lake'     => 'placeholder-pond.jpg',
-		'stock-tank'     => 'placeholder-dove.jpg',
-		'creek'          => 'hero-sunset.svg',
-		'creek-bottom'   => 'hero-sunset.svg',
-		'ranch-overview' => 'hero-sunset.svg',
-		'headquarters'   => 'hero-sunset.svg',
-	);
-	$file = 'assets/photos/' . sanitize_file_name( $slot ) . '.jpg';
-	if ( file_exists( get_theme_file_path( $file ) ) ) {
-		return esc_url( get_theme_file_uri( $file ) );
-	}
-	if ( ! $fallback ) {
-		$fallback = isset( $fallbacks[ $slot ] ) ? $fallbacks[ $slot ] : 'placeholder-pond.jpg';
+function fivef_photo( $slot, $fallback = 'hero-sunset.svg' ) {
+	$found = fivef_photo_slot( $slot );
+	if ( $found ) {
+		return esc_url( get_theme_file_uri( 'assets/photos/' . $found . '.jpg' ) );
 	}
 	return fivef_img( $fallback );
 }
@@ -202,3 +216,33 @@ function fivef_nav_ref() {
 	}
 	return $ref;
 }
+
+/**
+ * Alt text for whichever photo a slot resolves to.
+ *
+ * @param string $slot Photo slot name.
+ * @return string Escaped alt text.
+ */
+function fivef_photo_alt( $slot ) {
+	$alts  = array(
+		'aerial-ponds'   => __( 'Aerial view of the ranch ponds, pasture and a dirt ranch road', '5f-ranch' ),
+		'long-pond'      => __( 'Long brush-lined pond between open pastures', '5f-ranch' ),
+		'quarry-lake'    => __( 'Aerial view of the ranch lake with rock ledges and surrounding timber', '5f-ranch' ),
+		'geese-lake'     => __( 'Canada geese on the ranch lake below a rock bluff', '5f-ranch' ),
+		'doves-lake'     => __( 'Mourning doves flying over the tree line above a ranch lake', '5f-ranch' ),
+		'stock-tank'     => __( 'Open pasture and stock tank on the dove hunting area', '5f-ranch' ),
+		'creek'          => __( 'Creek winding through dense brush and timber', '5f-ranch' ),
+		'creek-bottom'   => __( 'Timbered creek bottom between open pastures', '5f-ranch' ),
+		'ranch-overview' => __( 'Aerial view across the ranch: pasture, tree lines and stock tanks', '5f-ranch' ),
+		'headquarters'   => __( 'Ranch headquarters with the 5F barn, pens and pond', '5f-ranch' ),
+	);
+	$found = fivef_photo_slot( $slot );
+	$key   = $found ? $found : $slot;
+	return esc_attr( isset( $alts[ $key ] ) ? $alts[ $key ] : __( '5F Ranch', '5f-ranch' ) );
+}
+
+/**
+ * Contact Form 7: keep the form markup exactly as written (no auto <p>/<br>),
+ * so the theme's form styles control the layout.
+ */
+add_filter( 'wpcf7_autop_or_not', '__return_false' );

@@ -13,22 +13,22 @@ $fivef_cards = array(
 	array(
 		'title' => __( 'Dove Hunting', '5f-ranch' ),
 		'url'   => '/hunting-fishing/dove-hunting/',
-		'img'   => fivef_photo( 'stock-tank' ),
-		'alt'   => __( 'Pasture and stock tank on the dove hunting area', '5f-ranch' ),
+		'img'   => fivef_photo( 'doves-lake' ),
+		'alt'   => fivef_photo_alt( 'doves-lake' ),
 		'text'  => __( 'Opening Day and weekends over roughly 500 acres of sunflowers, dove weed, roost trees and water.', '5f-ranch' ),
 	),
 	array(
 		'title' => __( 'Open Range Hunting', '5f-ranch' ),
 		'url'   => '/hunting-fishing/open-range-hunting/',
 		'img'   => fivef_photo( 'creek-bottom' ),
-		'alt'   => __( 'Wooded creek bottom running through open pasture', '5f-ranch' ),
+		'alt'   => fivef_photo_alt( 'creek-bottom' ),
 		'text'  => __( 'Room to roam across the wider 2,600-acre property, including guided thermal hog hunts.', '5f-ranch' ),
 	),
 	array(
 		'title' => __( 'Fishing', '5f-ranch' ),
 		'url'   => '/hunting-fishing/fishing/',
-		'img'   => fivef_photo( 'geese-lake' ),
-		'alt'   => __( 'Canada geese on the ranch lake', '5f-ranch' ),
+		'img'   => fivef_photo( 'aerial-ponds' ),
+		'alt'   => fivef_photo_alt( 'aerial-ponds' ),
 		'text'  => __( 'Bass, catfish and brim in ranch ponds on designated hunting days. Bring a rod for the afternoon.', '5f-ranch' ),
 	),
 );
@@ -46,7 +46,7 @@ $fivef_cards = array(
 <div class="wp-block-columns alignwide" style="margin-top:var(--wp--preset--spacing--50)"><?php foreach ( $fivef_cards as $fivef_card ) : ?><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:group {"className":"is-style-card","style":{"spacing":{"padding":{"bottom":"var:preset|spacing|40"},"blockGap":"var:preset|spacing|30"},"dimensions":{"minHeight":"100%"}},"layout":{"type":"default"}} -->
 <div class="wp-block-group is-style-card" style="min-height:100%;padding-bottom:var(--wp--preset--spacing--40)"><!-- wp:image {"sizeSlug":"full","linkDestination":"custom","style":{"border":{"radius":"0px"}}} -->
-<figure class="wp-block-image size-full has-custom-border"><a href="<?php echo esc_url( home_url( $fivef_card['url'] ) ); ?>"><img src="<?php echo $fivef_card['img']; ?>" alt="<?php echo esc_attr( $fivef_card['alt'] ); ?>" style="border-radius:0px"/></a></figure>
+<figure class="wp-block-image size-full has-custom-border"><a href="<?php echo esc_url( home_url( $fivef_card['url'] ) ); ?>"><img src="<?php echo $fivef_card['img']; ?>" alt="<?php echo $fivef_card['alt']; // phpcs:ignore -- escaped in fivef_photo_alt(). ?>" style="border-radius:0px"/></a></figure>
 <!-- /wp:image -->
 
 <!-- wp:group {"style":{"spacing":{"padding":{"left":"var:preset|spacing|40","right":"var:preset|spacing|40"},"blockGap":"var:preset|spacing|30"}},"layout":{"type":"default"}} -->

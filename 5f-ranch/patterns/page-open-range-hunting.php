@@ -18,7 +18,7 @@
 <!-- wp:columns {"verticalAlignment":"center","align":"wide","style":{"spacing":{"margin":{"top":"var:preset|spacing|60"},"blockGap":{"left":"var:preset|spacing|60"}}}} -->
 <div class="wp-block-columns alignwide are-vertically-aligned-center" style="margin-top:var(--wp--preset--spacing--60)"><!-- wp:column {"verticalAlignment":"center"} -->
 <div class="wp-block-column is-vertically-aligned-center"><!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"is-style-torn"} -->
-<figure class="wp-block-image size-full is-style-torn"><img src="<?php echo fivef_photo( 'creek-bottom', 'placeholder-pond.jpg' ); ?>" alt="<?php esc_attr_e( 'Timbered creek bottom winding between open pastures', '5f-ranch' ); ?>"/></figure>
+<figure class="wp-block-image size-full is-style-torn"><img src="<?php echo fivef_photo( 'creek-bottom', 'placeholder-pond.jpg' ); ?>" alt="<?php echo fivef_photo_alt( 'creek-bottom' ); ?>"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column -->
 

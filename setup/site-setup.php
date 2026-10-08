@@ -50,6 +50,7 @@ $fivef_photo_titles = array(
 	'quarry-lake'    => 'Ranch lake with rock ledges',
 	'geese-lake'     => 'Canada geese on the ranch lake',
 	'stock-tank'     => 'Pasture and stock tank',
+	'doves-lake'     => 'Mourning doves over the ranch lake',
 	'creek'          => 'Creek through the brush',
 	'creek-bottom'   => 'Timbered creek bottom',
 	'ranch-overview' => 'Aerial view across the ranch',
@@ -97,6 +98,12 @@ foreach ( $fivef_photo_titles as $slot => $title ) {
 	$fivef_log( "Imported photo: {$slot} (#{$id})" );
 }
 
+// A slot without its own photo borrows a related one (see fivef_photo_alternates()).
+$fivef_resolve = static function ( $slot ) use ( &$fivef_media ) {
+	$found = function_exists( 'fivef_photo_slot' ) ? fivef_photo_slot( $slot ) : $slot;
+	return ( $found && isset( $fivef_media[ $found ] ) ) ? $fivef_media[ $found ] : 0;
+};
+
 /*
  * 3. Pages. Content is the matching theme pattern; the editor expands it into
  *    normal, editable blocks the first time the page is opened.
@@ -105,8 +112,8 @@ $fivef_pages = array(
 	'home'               => array( 'Home', 'page-home', 0, 'page-landing', '' ),
 	'about-the-ranch'    => array( 'About the Ranch', 'page-about', 0, '', 'headquarters' ),
 	'hunting-fishing'    => array( 'Hunting & Fishing', 'page-hunting-fishing', 0, '', 'ranch-overview' ),
-	'dove-hunting'       => array( 'Dove Hunting', 'page-dove-hunting', 'hunting-fishing', '', 'stock-tank' ),
-	'open-range-hunting' => array( 'Open Range Hunting', 'page-open-range-hunting', 'hunting-fishing', '', 'creek' ),
+	'dove-hunting'       => array( 'Dove Hunting', 'page-dove-hunting', 'hunting-fishing', '', 'doves-lake' ),
+	'open-range-hunting' => array( 'Open Range Hunting', 'page-open-range-hunting', 'hunting-fishing', '', 'creek-bottom' ),
 	'fishing'            => array( 'Fishing', 'page-fishing', 'hunting-fishing', '', 'geese-lake' ),
 	'contact'            => array( 'Contact', 'page-contact', 0, '', 'aerial-ponds' ),
 );
@@ -160,8 +167,8 @@ foreach ( $fivef_pages as $slug => $def ) {
 	if ( $template ) {
 		update_post_meta( $id, '_wp_page_template', $template );
 	}
-	if ( $photo && isset( $fivef_media[ $photo ] ) ) {
-		set_post_thumbnail( $id, $fivef_media[ $photo ] );
+	if ( $photo && $fivef_resolve( $photo ) ) {
+		set_post_thumbnail( $id, $fivef_resolve( $photo ) );
 	}
 	$fivef_ids[ $slug ] = $id;
 	$fivef_created[]    = $slug;
@@ -172,8 +179,8 @@ update_option( 'fivef_setup_created', array_values( array_unique( $fivef_created
 // Add featured images to existing pages that still have none (never replaces one).
 foreach ( $fivef_pages as $slug => $def ) {
 	$photo = $def[4];
-	if ( $photo && isset( $fivef_ids[ $slug ], $fivef_media[ $photo ] ) && ! has_post_thumbnail( $fivef_ids[ $slug ] ) ) {
-		set_post_thumbnail( $fivef_ids[ $slug ], $fivef_media[ $photo ] );
+	if ( $photo && isset( $fivef_ids[ $slug ] ) && $fivef_resolve( $photo ) && ! has_post_thumbnail( $fivef_ids[ $slug ] ) ) {
+		set_post_thumbnail( $fivef_ids[ $slug ], $fivef_resolve( $photo ) );
 		$fivef_log( "Featured image set on {$slug}" );
 	}
 }
@@ -247,6 +254,73 @@ if ( ! $fivef_nav && ! get_option( 'fivef_setup_nav' ) ) {
 	} else {
 		update_option( 'fivef_setup_nav', $nav_id, false );
 		$fivef_log( "Created Main Menu (#{$nav_id})" );
+	}
+}
+
+/*
+ * 6. Contact form (Contact Form 7). The Contact page shows it automatically.
+ *    Messages go to the fivef_contact_email option (set from the CONTACT_EMAIL
+ *    deploy secret), or the site admin email until that is set.
+ */
+if ( class_exists( 'WPCF7_ContactForm' ) ) {
+	$fivef_recipient = get_option( 'fivef_contact_email' );
+	$fivef_recipient = is_email( $fivef_recipient ) ? $fivef_recipient : get_option( 'admin_email' );
+
+	$fivef_form_post = get_posts(
+		array(
+			'post_type'   => 'wpcf7_contact_form',
+			'title'       => '5F Ranch Contact',
+			'post_status' => 'any',
+			'numberposts' => 1,
+		)
+	);
+
+	if ( ! $fivef_form_post ) {
+		$fivef_form = WPCF7_ContactForm::get_template( array( 'title' => '5F Ranch Contact' ) );
+		$fivef_mail = $fivef_form->prop( 'mail' );
+
+		$fivef_form->set_properties(
+			array(
+				'form'     => implode(
+					"\n",
+					array(
+						'<div class="fivef-form-grid">',
+						'<p class="fivef-field"><label for="fivef-name">Your name <span class="fivef-req">*</span></label>[text* your-name id:fivef-name autocomplete:name]</p>',
+						'<p class="fivef-field"><label for="fivef-email">Email <span class="fivef-req">*</span></label>[email* your-email id:fivef-email autocomplete:email]</p>',
+						'<p class="fivef-field"><label for="fivef-phone">Phone</label>[tel your-phone id:fivef-phone autocomplete:tel]</p>',
+						'<p class="fivef-field"><label for="fivef-interest">I’m interested in</label>[select your-interest id:fivef-interest "Dove Hunting" "Open Range / Hog Hunting" "Fishing" "Memberships" "Something else"]</p>',
+						'</div>',
+						'<p class="fivef-field"><label for="fivef-message">Message <span class="fivef-req">*</span></label>[textarea* your-message id:fivef-message x5]</p>',
+						'<p class="fivef-submit">[submit "Send Message"]</p>',
+					)
+				),
+				'mail'     => array_merge(
+					$fivef_mail,
+					array(
+						'subject'            => '5F Ranch website: [your-interest] inquiry from [your-name]',
+						'recipient'          => $fivef_recipient,
+						'body'               => "Name: [your-name]\nEmail: [your-email]\nPhone: [your-phone]\nInterested in: [your-interest]\n\n[your-message]\n\n--\nSent from the contact form at [_site_url]",
+						'additional_headers' => 'Reply-To: [your-name] <[your-email]>',
+					)
+				),
+				'messages' => array_merge(
+					$fivef_form->prop( 'messages' ),
+					array( 'mail_sent_ok' => 'Thanks! Your message is on its way. We’ll be in touch soon.' )
+				),
+			)
+		);
+		$fivef_form->save();
+		update_option( 'fivef_contact_email_applied', $fivef_recipient, false );
+		$fivef_log( "Created contact form (messages go to {$fivef_recipient})" );
+	} elseif ( get_option( 'fivef_contact_email_applied' ) !== $fivef_recipient && get_option( 'fivef_contact_email' ) ) {
+		// The recipient secret changed: update just the recipient.
+		$fivef_form = WPCF7_ContactForm::get_instance( $fivef_form_post[0]->ID );
+		$fivef_mail = $fivef_form->prop( 'mail' );
+		$fivef_mail['recipient'] = $fivef_recipient;
+		$fivef_form->set_properties( array( 'mail' => $fivef_mail ) );
+		$fivef_form->save();
+		update_option( 'fivef_contact_email_applied', $fivef_recipient, false );
+		$fivef_log( "Contact form messages now go to {$fivef_recipient}" );
 	}
 }
 

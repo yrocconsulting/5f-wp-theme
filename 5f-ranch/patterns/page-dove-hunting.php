@@ -32,7 +32,7 @@
 
 <!-- wp:column {"verticalAlignment":"center"} -->
 <div class="wp-block-column is-vertically-aligned-center"><!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"is-style-torn"} -->
-<figure class="wp-block-image size-full is-style-torn"><img src="<?php echo fivef_photo( 'stock-tank', 'placeholder-dove.jpg' ); ?>" alt="<?php esc_attr_e( 'Open pasture and stock tank on the dove hunting area', '5f-ranch' ); ?>"/></figure>
+<figure class="wp-block-image size-full is-style-torn"><img src="<?php echo fivef_photo( 'doves-lake' ); ?>" alt="<?php echo fivef_photo_alt( 'doves-lake' ); ?>"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>

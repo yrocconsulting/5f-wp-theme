@@ -22,7 +22,7 @@ $fivef_species = array(
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"align":"wide","sizeSlug":"full","linkDestination":"none","className":"is-style-torn","style":{"spacing":{"margin":{"top":"var:preset|spacing|50"}}}} -->
-<figure class="wp-block-image alignwide size-full is-style-torn" style="margin-top:var(--wp--preset--spacing--50)"><img src="<?php echo fivef_photo( 'quarry-lake', 'placeholder-pond.jpg' ); ?>" alt="<?php esc_attr_e( 'Aerial view of the ranch lake with rock ledges and Canada geese', '5f-ranch' ); ?>"/></figure>
+<figure class="wp-block-image alignwide size-full is-style-torn" style="margin-top:var(--wp--preset--spacing--50)"><img src="<?php echo fivef_photo( 'quarry-lake', 'placeholder-pond.jpg' ); ?>" alt="<?php echo fivef_photo_alt( 'quarry-lake' ); ?>"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:group -->
 
@@ -56,13 +56,13 @@ $fivef_species = array(
 <div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:columns {"align":"wide","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|40"}}}} -->
 <div class="wp-block-columns alignwide"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"is-style-torn"} -->
-<figure class="wp-block-image size-full is-style-torn"><img src="<?php echo fivef_photo( 'geese-lake', 'placeholder-pond.jpg' ); ?>" alt="<?php esc_attr_e( 'Canada geese on the ranch lake below a rock bluff', '5f-ranch' ); ?>"/></figure>
+<figure class="wp-block-image size-full is-style-torn"><img src="<?php echo fivef_photo( 'geese-lake', 'placeholder-pond.jpg' ); ?>" alt="<?php echo fivef_photo_alt( 'geese-lake' ); ?>"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column -->
 
 <!-- wp:column -->
 <div class="wp-block-column"><!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"is-style-torn"} -->
-<figure class="wp-block-image size-full is-style-torn"><img src="<?php echo fivef_photo( 'long-pond', 'placeholder-pond.jpg' ); ?>" alt="<?php esc_attr_e( 'Long brush-lined pond between open pastures', '5f-ranch' ); ?>"/></figure>
+<figure class="wp-block-image size-full is-style-torn"><img src="<?php echo fivef_photo( 'long-pond', 'placeholder-pond.jpg' ); ?>" alt="<?php echo fivef_photo_alt( 'long-pond' ); ?>"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>

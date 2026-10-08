@@ -14,7 +14,7 @@ Staging: https://5f.yroc.host/
 | `5f-ranch/assets/photos/` | Ranch photos, one file per slot (see below) |
 | `setup/site-setup.php` | Creates pages, the main menu, front page and featured images (safe to re-run) |
 | `tools/process-photo.sh` | Resizes and colour-grades a photo into a slot |
-| `.github/workflows/deploy.yml` | Deploys to staging over SSH on every push |
+| `.github/workflows/deploy.yml` | Deploys to staging over SSH on every push (also installs Contact Form 7) |
 
 ## Brand
 
@@ -44,6 +44,9 @@ Repository secrets (Settings → Secrets and variables → Actions):
 | `SSH_PRIVATE_KEY` | Private key text |
 | `SSH_KEY_PASSPHRASE` | Only if the key has a passphrase (SiteGround-generated keys do) |
 | `WP_PATH` | `~/www/5f.yroc.host/public_html` |
+| `CONTACT_EMAIL` | Optional: where contact form messages go (defaults to the WordPress admin email) |
+
+No WordPress username or password is needed: the deploy runs WP-CLI on the server over SSH.
 
 The setup script only **creates** things that are missing. It never overwrites a page, menu or image edited in WordPress, and it won't re-create a page that was deleted.
 
@@ -55,16 +58,23 @@ Each slot is a file in `5f-ranch/assets/photos/<slot>.jpg`. Until a slot has a p
 tools/process-photo.sh ~/Downloads/DJI_0042.JPG aerial-ponds
 ```
 
-| Slot | Used for |
-| --- | --- |
-| `aerial-ponds` | Home hero, Contact banner |
-| `long-pond` | "Why weekends only" section, Fishing |
-| `quarry-lake` | Fishing (wide) |
-| `geese-lake` | Fishing card / Fishing banner |
-| `stock-tank` | Dove Hunting card and page |
-| `creek` | Open Range banner |
-| `creek-bottom` | Open Range card and page |
-| `ranch-overview` | About the Ranch, Hunting & Fishing banner |
-| `headquarters` | About the Ranch banner (the 5F barn) |
+| Slot | Used for | Until it has its own photo, uses |
+| --- | --- | --- |
+| `aerial-ponds` | Home hero, Fishing card, Contact banner | (photo in place) |
+| `long-pond` | "Why weekends only", Fishing | (photo in place) |
+| `quarry-lake` | Home intro, Fishing (wide) | (photo in place) |
+| `geese-lake` | Fishing, Fishing banner | (photo in place) |
+| `doves-lake` | Dove Hunting card, page and banner | (composite: doves added to `geese-lake`) |
+| `creek` | Open Range card | (photo in place) |
+| `creek-bottom` | Open Range page and banner | `creek` |
+| `stock-tank` | spare dove-habitat slot | `doves-lake` |
+| `ranch-overview` | About the Ranch, Hunting & Fishing banner | `aerial-ponds` |
+| `headquarters` | About the Ranch (the 5F barn) | `quarry-lake` |
+
+`doves-lake.jpg` is a composite: the dove silhouettes were added digitally to the lake photo. Replace it if a real dove photo becomes available.
 
 On the next deploy, new photos are imported into the Media Library once and set as featured images (page banners) on pages that don't have one yet.
+
+## Contact form
+
+The deploy installs **Contact Form 7** and the setup script creates a form named *5F Ranch Contact*, which the Contact page shows in a styled card. Change fields or messages in WordPress under **Contact → Contact Forms**. The theme styles any field wrapped in `<p class="fivef-field">`; put two fields side by side inside `<div class="fivef-form-grid">`.

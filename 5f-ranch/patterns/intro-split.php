@@ -37,7 +37,7 @@
 
 <!-- wp:column {"verticalAlignment":"center"} -->
 <div class="wp-block-column is-vertically-aligned-center"><!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"is-style-torn"} -->
-<figure class="wp-block-image size-full is-style-torn"><img src="<?php echo fivef_img( 'placeholder-dove.jpg' ); ?>" alt="<?php esc_attr_e( 'Mourning dove in flight over a sunflower fence line', '5f-ranch' ); ?>"/></figure>
+<figure class="wp-block-image size-full is-style-torn"><img src="<?php echo fivef_photo( 'quarry-lake' ); ?>" alt="<?php echo fivef_photo_alt( 'quarry-lake' ); ?>"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
