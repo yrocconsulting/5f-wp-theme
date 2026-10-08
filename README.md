@@ -61,8 +61,8 @@ tools/process-photo.sh ~/Downloads/DJI_0042.JPG aerial-ponds
 
 | Slot | Used for | Until it has its own photo, uses |
 | --- | --- | --- |
-| `hero-thermal` | Homepage hero: thermal-scope illustration of hogs (no people) | sunset illustration |
-| `thermal-banner` | Thermal Hog Hunts page banner (same illustration, centred) | (in place) |
+| `hero-thermal` | Homepage hero: the stock-tank pasture photo converted to a thermal night view, with illustrated hog heat signatures and a reticle (no people) | sunset illustration |
+| `thermal-ranch-banner` | Thermal Hog Hunts page banner (centred crop of the same) | (in place) |
 | `aerial-ponds` | Fishing card, Contact banner | (photo in place) |
 | `long-pond` | "Why weekends only", Fishing | (photo in place) |
 | `quarry-lake` | Home intro, Fishing (wide) | (photo in place) |

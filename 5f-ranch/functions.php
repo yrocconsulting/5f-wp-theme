@@ -244,8 +244,8 @@ function fivef_photo_alt( $slot ) {
 		'hog-hunt-2'     => __( 'Hunter with a thermal-scoped rifle and a feral hog taken at night', '5f-ranch' ),
 		'hog-hunt-3'     => __( 'Hunter kneeling beside a feral hog after a night hunt', '5f-ranch' ),
 		'hog-pair'       => __( 'Two feral hogs taken on a night hunt, with a thermal-scoped rifle', '5f-ranch' ),
-		'hero-thermal'   => __( 'Illustration: feral hogs glowing as heat signatures through a thermal riflescope at night', '5f-ranch' ),
-		'thermal-banner' => __( 'Illustration: feral hogs seen through a thermal riflescope at night', '5f-ranch' ),
+		'hero-thermal'         => __( 'Thermal-style night view of 5F Ranch pasture and stock tank with feral hogs in a riflescope reticle (illustrated)', '5f-ranch' ),
+		'thermal-ranch-banner' => __( 'Thermal-style night view of feral hogs crossing 5F Ranch pasture (illustrated)', '5f-ranch' ),
 	);
 	$found = fivef_photo_slot( $slot );
 	$key   = $found ? $found : $slot;
