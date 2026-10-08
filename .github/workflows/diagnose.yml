@@ -1,0 +1,45 @@
+name: Diagnose staging
+
+# Read-only checks on the staging server. Run from the Actions tab.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/diagnose.yml']
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SSH_HOST: ${{ secrets.SSH_HOST }}
+      SSH_USER: ${{ secrets.SSH_USER }}
+      SSH_PORT: ${{ secrets.SSH_PORT }}
+      WP_PATH: ${{ secrets.WP_PATH }}
+    steps:
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KEY_PASSPHRASE: ${{ secrets.SSH_KEY_PASSPHRASE }}
+        run: |
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/deploy_key && chmod 600 ~/.ssh/deploy_key
+          [ -z "$SSH_KEY_PASSPHRASE" ] || ssh-keygen -p -P "$SSH_KEY_PASSPHRASE" -N "" -f ~/.ssh/deploy_key > /dev/null
+          PORT="${SSH_PORT:-18765}"
+          ssh-keyscan -p "$PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2> /dev/null
+          printf 'Host staging\n  HostName %s\n  Port %s\n  User %s\n  IdentityFile ~/.ssh/deploy_key\n  IdentitiesOnly yes\n' "$SSH_HOST" "$PORT" "$SSH_USER" > ~/.ssh/config
+          dir="${WP_PATH#\~/}"; echo "WP_DIR=${dir%/}" >> "$GITHUB_ENV"
+
+      - name: Inspect server
+        run: |
+          ssh staging "cd '$WP_DIR'
+            echo '== CLI PHP'; php -v | head -1
+            echo '== Web PHP (.htaccess / php.ini hints)'; grep -i 'php' .htaccess 2>/dev/null | head -5; ls -la php.ini .user.ini 2>/dev/null
+            echo '== WP-CLI'; wp --version; wp cli info 2>/dev/null | grep -i 'php binary\|php version'
+            echo '== Plugins'; wp plugin list --fields=name,status,version
+            echo '== Theme'; wp theme list --status=active --fields=name,version
+            echo '== Composer platform checks requiring PHP >= 8.3'
+            grep -rl --include=platform_check.php '80300' . 2>/dev/null
+            echo '== Recent PHP errors'; tail -n 20 wp-content/debug.log 2>/dev/null; ls -t ../logs 2>/dev/null | head -3
+            true"
