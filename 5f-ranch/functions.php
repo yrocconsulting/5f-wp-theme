@@ -160,6 +160,10 @@ function fivef_photo_alternates() {
 		'creek-bottom'   => array( 'creek' ),
 		'ranch-overview' => array( 'aerial-ponds' ),
 		'headquarters'   => array( 'quarry-lake' ),
+		'hog-hunt-1'     => array( 'creek-bottom', 'creek' ),
+		'hog-hunt-2'     => array( 'creek-bottom', 'creek' ),
+		'hog-hunt-3'     => array( 'creek-bottom', 'creek' ),
+		'hog-pair'       => array( 'creek-bottom', 'creek' ),
 	);
 }
 
@@ -236,6 +240,10 @@ function fivef_photo_alt( $slot ) {
 		'creek-bottom'   => __( 'Timbered creek bottom between open pastures', '5f-ranch' ),
 		'ranch-overview' => __( 'Aerial view across the ranch: pasture, tree lines and stock tanks', '5f-ranch' ),
 		'headquarters'   => __( 'Ranch headquarters with the 5F barn, pens and pond', '5f-ranch' ),
+		'hog-hunt-1'     => __( 'Hunter with a large feral hog taken at night on 5F Ranch', '5f-ranch' ),
+		'hog-hunt-2'     => __( 'Hunter with a thermal-scoped rifle and a feral hog taken at night', '5f-ranch' ),
+		'hog-hunt-3'     => __( 'Hunter kneeling beside a feral hog after a night hunt', '5f-ranch' ),
+		'hog-pair'       => __( 'Two feral hogs taken on a night hunt, with a thermal-scoped rifle', '5f-ranch' ),
 	);
 	$found = fivef_photo_slot( $slot );
 	$key   = $found ? $found : $slot;
