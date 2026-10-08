@@ -61,7 +61,8 @@ tools/process-photo.sh ~/Downloads/DJI_0042.JPG aerial-ponds
 
 | Slot | Used for | Until it has its own photo, uses |
 | --- | --- | --- |
-| `hero-hogs` | Homepage hero (night hunt, subject on the right) | sunset illustration |
+| `hero-thermal` | Homepage hero: thermal-scope illustration of hogs (no people) | sunset illustration |
+| `thermal-banner` | Thermal Hog Hunts page banner (same illustration, centred) | (in place) |
 | `aerial-ponds` | Fishing card, Contact banner | (photo in place) |
 | `long-pond` | "Why weekends only", Fishing | (photo in place) |
 | `quarry-lake` | Home intro, Fishing (wide) | (photo in place) |
@@ -72,7 +73,7 @@ tools/process-photo.sh ~/Downloads/DJI_0042.JPG aerial-ponds
 | `stock-tank` | Dove Hunting banner | (photo in place) |
 | `ranch-overview` | About the Ranch, Hunting & Fishing banner | (photo in place; house cropped out) |
 | `headquarters` | About the Ranch banner (the 5F barn) | (photo in place) |
-| `hog-hunt-1` | Thermal Hog Hunts page and banner, hog cards, hog post banner | `creek-bottom` |
+| `hog-hunt-1` | Thermal Hog Hunts page, hog cards, hog post banner | `creek-bottom` |
 | `hog-hunt-2`, `hog-hunt-3`, `hog-pair` | Homepage hog feature, Thermal Hog Hunts "From the Field" (portrait versions `*-portrait.jpg`), hog post | `creek-bottom` |
 
 `doves-lake.jpg` is a composite: the dove silhouettes were added digitally to the lake photo. Replace it if a real dove photo becomes available.

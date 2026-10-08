@@ -67,7 +67,7 @@ $fivef_photo_titles = array(
 	'hog-hunt-2'     => 'Night hog hunt with thermal optics',
 	'hog-hunt-3'     => 'Feral hog after a night hunt',
 	'hog-pair'       => 'Two feral hogs from a night hunt',
-	'hero-hogs'      => 'Night hog hunt on 5F Ranch (homepage banner)',
+	'thermal-banner' => 'Thermal scope view of feral hogs (illustration)',
 	'creek'          => 'Creek through the brush',
 	'creek-bottom'   => 'Timbered creek bottom',
 	'ranch-overview' => 'Aerial view across the ranch',
@@ -148,7 +148,7 @@ if ( ! get_option( 'site_icon' ) && file_exists( get_theme_file_path( 'assets/im
  */
 $fivef_pages = array(
 	'home'               => array( 'Home', 'page-home', 0, 'page-landing', '' ),
-	'thermal-hog-hunts'  => array( 'Thermal Hog Hunts', 'page-hog-hunts', 0, '', 'hog-hunt-1' ),
+	'thermal-hog-hunts'  => array( 'Thermal Hog Hunts', 'page-hog-hunts', 0, '', 'thermal-banner' ),
 	'about-the-ranch'    => array( 'About the Ranch', 'page-about', 0, '', 'headquarters' ),
 	'hunting-fishing'    => array( 'Hunting & Fishing', 'page-hunting-fishing', 0, '', 'ranch-overview' ),
 	'dove-hunting'       => array( 'Dove Hunting', 'page-dove-hunting', 'hunting-fishing', '', 'stock-tank' ),
@@ -223,6 +223,15 @@ foreach ( $fivef_pages as $slug => $def ) {
 		set_post_thumbnail( $fivef_ids[ $slug ], $fivef_resolve( $photo ) );
 		$fivef_log( "Featured image set on {$slug}" );
 	}
+}
+
+// Thermal Hog Hunts banner: replace the earlier hunter photo with the thermal illustration (once).
+if ( ! get_option( 'fivef_setup_hogbanner_v2' ) && isset( $fivef_ids['thermal-hog-hunts'], $fivef_media['thermal-banner'], $fivef_media['hog-hunt-1'] ) ) {
+	if ( (int) get_post_thumbnail_id( $fivef_ids['thermal-hog-hunts'] ) === (int) $fivef_media['hog-hunt-1'] ) {
+		set_post_thumbnail( $fivef_ids['thermal-hog-hunts'], $fivef_media['thermal-banner'] );
+		$fivef_log( 'Thermal Hog Hunts banner set to the thermal scope illustration' );
+	}
+	update_option( 'fivef_setup_hogbanner_v2', 1, false );
 }
 
 /*
