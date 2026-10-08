@@ -7,7 +7,7 @@ Description: Custom block theme for 5F Ranch, a private hunting and fishing ranc
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Version: 1.0.0
+Version: 1.1.0
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: 5f-ranch
@@ -454,4 +454,145 @@ html {
 .wpcf7 form.failed .wpcf7-response-output {
 	border-color: #9a3b1e;
 	background: rgba(154, 59, 30, 0.08);
+}
+
+/* ---------- Blog: category pills ---------- */
+
+.fivef-cat-pills > p,
+.fivef-cat-pills .wp-block-categories {
+	margin: 0;
+}
+
+.fivef-cat-pills .wp-block-categories {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 0;
+	list-style: none;
+}
+
+.fivef-cat-pills a {
+	display: inline-block;
+	padding: 0.45em 1.1em;
+	border: 1px solid rgba(217, 200, 169, 0.35);
+	border-radius: 999px;
+	font-size: var(--wp--preset--font-size--x-small);
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: var(--wp--preset--color--bone);
+	transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.fivef-cat-pills a:hover,
+.fivef-cat-pills .current-cat a,
+body.blog .fivef-cat-pills > p a {
+	background: var(--wp--preset--color--sunset-gold);
+	border-color: var(--wp--preset--color--sunset-gold);
+	color: var(--wp--preset--color--charcoal);
+}
+
+/* ---------- Blog: cards ---------- */
+
+.fivef-post-card .wp-block-post-featured-image img {
+	aspect-ratio: 16 / 10;
+	object-fit: cover;
+	width: 100%;
+}
+
+.fivef-post-card .wp-block-post-featured-image:not(:has(img)) {
+	aspect-ratio: 16 / 10;
+	background: var(--wp--preset--gradient--pine-fade);
+}
+
+.fivef-post-card .wp-block-post-title a {
+	color: var(--wp--preset--color--texas-tan);
+	text-decoration: none;
+}
+
+.fivef-post-card .wp-block-post-title a:hover {
+	color: var(--wp--preset--color--sunset-gold);
+}
+
+.fivef-post-card .wp-block-post-excerpt__more-text {
+	margin-top: 0.6rem;
+	font-size: var(--wp--preset--font-size--x-small);
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+}
+
+.fivef-post-card .wp-block-post-excerpt__more-link {
+	text-decoration: none;
+}
+
+.fivef-post-cats a {
+	color: var(--wp--preset--color--sunset-gold);
+	text-decoration: none;
+}
+
+.fivef-post-cats .wp-block-post-terms__separator {
+	color: var(--wp--preset--color--texas-tan);
+}
+
+/* ---------- Blog: article ---------- */
+
+.fivef-article .wp-block-post-content {
+	font-size: 1.0625rem;
+	line-height: 1.8;
+}
+
+.fivef-article .wp-block-post-content h2 {
+	font-size: var(--wp--preset--font-size--x-large);
+	color: var(--wp--preset--color--texas-tan);
+	margin-top: var(--wp--preset--spacing--50);
+}
+
+.fivef-article .wp-block-post-content h3 {
+	font-size: var(--wp--preset--font-size--large);
+	color: var(--wp--preset--color--texas-tan);
+	margin-top: var(--wp--preset--spacing--40);
+}
+
+.fivef-article .wp-block-post-content > p:first-child {
+	font-size: var(--wp--preset--font-size--large);
+	color: var(--wp--preset--color--texas-tan);
+	line-height: 1.6;
+}
+
+.fivef-article .wp-block-post-content ul:not(.is-style-checks),
+.fivef-article .wp-block-post-content ol {
+	padding-left: 1.3em;
+}
+
+.fivef-article .wp-block-post-content li + li {
+	margin-top: 0.35em;
+}
+
+.fivef-article .wp-block-post-content li::marker {
+	color: var(--wp--preset--color--sunset-gold);
+}
+
+.fivef-article .wp-block-post-content .wp-block-image img {
+	border-radius: 4px;
+}
+
+.fivef-post-tags a {
+	color: var(--wp--preset--color--texas-tan);
+}
+
+.fivef-article .wp-block-post-navigation-link a {
+	color: var(--wp--preset--color--texas-tan);
+	text-decoration: none;
+}
+
+.fivef-article .wp-block-post-navigation-link a:hover {
+	color: var(--wp--preset--color--sunset-gold);
+}
+
+/* Article banners lean toward the top of the photo (sky, tree lines, birds). */
+.single-post .fivef-page-hero .wp-block-cover__image-background {
+	object-position: 50% 22%;
 }

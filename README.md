@@ -81,3 +81,14 @@ On the next deploy, new photos are imported into the Media Library once and set 
 The deploy installs **Contact Form 7** and the setup script creates a form named *5F Ranch Contact*, which the Contact page shows in a styled card. Change fields or messages in WordPress under **Contact → Contact Forms**. The theme styles any field wrapped in `<p class="fivef-field">`; put two fields side by side inside `<div class="fivef-form-grid">`.
 
 **Version pin:** Contact Form 7 6.2 and newer need PHP 8.3+ on the website. The site's PHP is older, so the deploy pins 6.1.7 and turns off auto-updates for the plugin. Don't click "Update" on Contact Form 7 until the site's PHP (SiteGround → Devs → PHP Manager) is 8.3 or newer. After that, change `CF7_VERSION` in `deploy.yml`.
+
+## Blog: Field Notes
+
+The blog lives at `/field-notes/` and is in the main menu. Write posts in WordPress under **Posts → Add New**:
+
+- Give each post a **category** (such as *Game Birds* or *Big Game*). Categories appear as filter buttons on the blog page; a new category shows up once it has a post.
+- Set a **featured image**. It's used for the card on the blog page and the banner on the post.
+- The first paragraph is shown slightly larger as an intro, and the excerpt (or the first lines) appears on the card.
+- The homepage shows the three newest posts automatically.
+
+The starter posts come from `setup/posts/*.html`. Each file starts with a `<!-- fivef-post {...} -->` header (title, slug, category, tags, photo slot, excerpt). New files there are published on the next deploy. Posts already created are never overwritten, and deleted ones aren't re-created.

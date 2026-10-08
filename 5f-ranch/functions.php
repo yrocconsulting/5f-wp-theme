@@ -26,7 +26,8 @@ add_action( 'after_setup_theme', 'fivef_setup' );
  * Front-end stylesheet.
  */
 function fivef_enqueue_assets() {
-	wp_enqueue_style( 'fivef-style', get_stylesheet_uri(), array(), FIVEF_VERSION );
+	// Version by file time so every deploy busts browser and CDN caches.
+	wp_enqueue_style( 'fivef-style', get_stylesheet_uri(), array(), (string) filemtime( get_stylesheet_directory() . '/style.css' ) );
 }
 add_action( 'wp_enqueue_scripts', 'fivef_enqueue_assets' );
 

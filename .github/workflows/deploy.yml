@@ -87,7 +87,7 @@ jobs:
         run: |
           rsync -rlz --delete --exclude '.DS_Store' --exclude '.gitkeep' \
             5f-ranch/ "staging:$WP_DIR/wp-content/themes/5f-ranch/"
-          rsync -z setup/site-setup.php "staging:5f-site-setup.php"
+          rsync -rz --delete setup/ "staging:5f-setup/"
 
       - name: Activate theme, plugins and run site setup
         env:
@@ -103,12 +103,12 @@ jobs:
           ssh staging "cd '$WP_DIR' \
             && wp theme activate 5f-ranch \
             && test \"\$(wp option get stylesheet)\" = 5f-ranch \
+            && wp eval 'if ( method_exists( wp_get_theme(), \"delete_pattern_cache\" ) ) { wp_get_theme()->delete_pattern_cache(); }' \
             && ( [ \"\$(wp plugin get contact-form-7 --field=version 2>/dev/null)\" = '$CF7_VERSION' ] \
                  || wp plugin install contact-form-7 --version='$CF7_VERSION' --force ) \
             && wp plugin activate contact-form-7 \
             && (wp plugin auto-updates disable contact-form-7 > /dev/null 2>&1 || true) \
-            && wp eval-file ~/5f-site-setup.php \
-            && rm -f ~/5f-site-setup.php \
+            && wp eval-file ~/5f-setup/site-setup.php \
             && wp cache flush \
             && (wp sg purge > /dev/null 2>&1 || true)"
 

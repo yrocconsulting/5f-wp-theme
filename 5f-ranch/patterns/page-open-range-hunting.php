@@ -12,7 +12,7 @@
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|50"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--50)"><!-- wp:paragraph {"align":"center","textColor":"texas-tan","fontSize":"large"} -->
-<p class="has-text-align-center has-texas-tan-color has-text-color has-large-font-size"><?php esc_html_e( 'Beyond the dove fields, 5F Ranch spans roughly 2,600 acres of North Texas pasture, timbered creek bottoms and water. That’s room to hunt the way it should feel: wide open and unhurried.', '5f-ranch' ); ?></p>
+<p class="has-text-align-center has-texas-tan-color has-text-color has-large-font-size"><?php esc_html_e( 'Beyond the dove fields, 5F Ranch spans roughly 2,600 acres of North Texas pasture, ponds and the timbered bottoms of Big Sandy Creek. That’s room to hunt the way it should feel: wide open and unhurried.', '5f-ranch' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:columns {"verticalAlignment":"center","align":"wide","style":{"spacing":{"margin":{"top":"var:preset|spacing|60"},"blockGap":{"left":"var:preset|spacing|60"}}}} -->
@@ -28,7 +28,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'Feral hogs are fair game year-round in Texas, and after dark is when they move. Our all-inclusive guided thermal hog hunts put you in the field at night with an experienced guide and thermal optics, working the creek bottoms, tree lines and feeding areas hogs use most.', '5f-ranch' ); ?></p>
+<p><?php esc_html_e( 'Feral hogs are fair game year-round in Texas, and after dark is when they move. Our all-inclusive guided thermal hog hunts put you in the field at night with an experienced guide and thermal optics, working the Big Sandy Creek bottoms, tree lines and feeding areas hogs use most.', '5f-ranch' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:list {"className":"is-style-checks"} -->

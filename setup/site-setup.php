@@ -148,6 +148,7 @@ $fivef_pages = array(
 	'dove-hunting'       => array( 'Dove Hunting', 'page-dove-hunting', 'hunting-fishing', '', 'stock-tank' ),
 	'open-range-hunting' => array( 'Open Range Hunting', 'page-open-range-hunting', 'hunting-fishing', '', 'creek-bottom' ),
 	'fishing'            => array( 'Fishing', 'page-fishing', 'hunting-fishing', '', 'geese-lake' ),
+	'field-notes'        => array( 'Field Notes', '', 0, '', 'creek-bottom' ),
 	'contact'            => array( 'Contact', 'page-contact', 0, '', 'aerial-ponds' ),
 );
 
@@ -188,7 +189,7 @@ foreach ( $fivef_pages as $slug => $def ) {
 			'post_name'    => $slug,
 			'post_parent'  => $parent_id,
 			'menu_order'   => $fivef_order,
-			'post_content' => '<!-- wp:pattern {"slug":"5f-ranch/' . $pattern . '"} /-->',
+			'post_content' => $pattern ? '<!-- wp:pattern {"slug":"5f-ranch/' . $pattern . '"} /-->' : '',
 		),
 		true
 	);
@@ -226,6 +227,13 @@ if ( isset( $fivef_ids['home'] ) && ! get_option( 'fivef_setup_front' ) ) {
 	update_option( 'page_on_front', $fivef_ids['home'] );
 	update_option( 'fivef_setup_front', 1, false );
 	$fivef_log( 'Front page set to Home' );
+}
+
+// Blog: Field Notes lists the posts (set once, so you can change it in Settings → Reading).
+if ( isset( $fivef_ids['field-notes'] ) && ! get_option( 'fivef_setup_blog' ) ) {
+	update_option( 'page_for_posts', $fivef_ids['field-notes'] );
+	update_option( 'fivef_setup_blog', 1, false );
+	$fivef_log( 'Blog page set to Field Notes' );
 }
 
 /*
@@ -271,6 +279,7 @@ if ( ! $fivef_nav && ! get_option( 'fivef_setup_nav' ) ) {
 	}
 	$parent   = $link( 'hunting-fishing' );
 	$blocks[] = '<!-- wp:navigation-submenu ' . wp_json_encode( $parent, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . ' -->' . $sub . '<!-- /wp:navigation-submenu -->';
+	$blocks[] = $item( $link( 'field-notes' ) );
 	$blocks[] = $item( $link( 'contact' ) );
 
 	$nav_id = wp_insert_post(
@@ -286,8 +295,100 @@ if ( ! $fivef_nav && ! get_option( 'fivef_setup_nav' ) ) {
 		$fivef_log( 'Could not create menu: ' . $nav_id->get_error_message() );
 	} else {
 		update_option( 'fivef_setup_nav', $nav_id, false );
+		update_option( 'fivef_setup_nav_blog', 1, false );
 		$fivef_log( "Created Main Menu (#{$nav_id})" );
 	}
+} elseif ( $fivef_nav && ! get_option( 'fivef_setup_nav_blog' ) && isset( $fivef_ids['field-notes'] ) ) {
+	// Existing menu: add Field Notes once, before Contact. Removing it later is respected.
+	$blog_id = (int) $fivef_ids['field-notes'];
+	$content = $fivef_nav[0]->post_content;
+	if ( false === strpos( $content, '"id":' . $blog_id . ',' ) ) {
+		$blog_link = '<!-- wp:navigation-link ' . wp_json_encode(
+			array(
+				'label' => get_the_title( $blog_id ),
+				'type'  => 'page',
+				'id'    => $blog_id,
+				'url'   => get_permalink( $blog_id ),
+				'kind'  => 'post-type',
+			),
+			JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+		) . ' /-->';
+		$contact_pos = isset( $fivef_ids['contact'] ) ? strpos( $content, '<!-- wp:navigation-link {"label":"Contact"' ) : false;
+		$content     = false === $contact_pos
+			? $content . "\n" . $blog_link
+			: substr( $content, 0, $contact_pos ) . $blog_link . "\n" . substr( $content, $contact_pos );
+		wp_update_post(
+			array(
+				'ID'           => $fivef_nav[0]->ID,
+				'post_content' => $content,
+			)
+		);
+		$fivef_log( 'Added Field Notes to Main Menu' );
+	}
+	update_option( 'fivef_setup_nav_blog', 1, false );
+}
+
+/*
+ * 5b. Blog: categories and starter posts from setup/posts/*.html.
+ *     Each file starts with <!-- fivef-post {json} -->. Posts are created once;
+ *     edits and deletions in WordPress are left alone.
+ */
+foreach ( glob( __DIR__ . '/posts/*.html' ) as $fivef_file ) {
+	$raw = file_get_contents( $fivef_file ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+	if ( ! preg_match( '/^<!-- fivef-post (\{.*?\}) -->\s*/s', $raw, $m ) ) {
+		continue;
+	}
+	$meta = json_decode( $m[1], true );
+	$key  = 'post:' . $meta['slug'];
+	if ( get_page_by_path( $meta['slug'], OBJECT, 'post' ) ) {
+		continue;
+	}
+	if ( in_array( $key, $fivef_created, true ) ) {
+		continue;
+	}
+
+	$cat = term_exists( $meta['category'], 'category' );
+	if ( ! $cat ) {
+		$cat = wp_insert_term( $meta['category'], 'category' );
+	}
+	$cat_id = is_array( $cat ) ? (int) $cat['term_id'] : 0;
+
+	$post_id = wp_insert_post(
+		array(
+			'post_type'     => 'post',
+			'post_status'   => 'publish',
+			'post_title'    => $meta['title'],
+			'post_name'     => $meta['slug'],
+			'post_excerpt'  => $meta['excerpt'],
+			'post_content'  => substr( $raw, strlen( $m[0] ) ),
+			'post_category' => $cat_id ? array( $cat_id ) : array(),
+			'tags_input'    => $meta['tags'],
+			'post_date'     => wp_date( 'Y-m-d H:i:s', time() - DAY_IN_SECONDS * (int) $meta['days_ago'] ),
+		),
+		true
+	);
+	if ( is_wp_error( $post_id ) ) {
+		$fivef_log( "Could not create post {$meta['slug']}: " . $post_id->get_error_message() );
+		continue;
+	}
+	if ( $fivef_resolve( $meta['photo'] ) ) {
+		set_post_thumbnail( $post_id, $fivef_resolve( $meta['photo'] ) );
+	}
+	$fivef_created[] = $key;
+	$fivef_log( "Created post: {$meta['title']} (#{$post_id})" );
+}
+update_option( 'fivef_setup_created', array_values( array_unique( $fivef_created ) ), false );
+
+// WordPress's default "Hello world!" post and "Sample Page": move to Trash once if never edited.
+if ( ! get_option( 'fivef_setup_defaults_trashed' ) ) {
+	foreach ( array( array( 'hello-world', 'post' ), array( 'sample-page', 'page' ) ) as $fivef_default ) {
+		$d = get_page_by_path( $fivef_default[0], OBJECT, $fivef_default[1] );
+		if ( $d && 'publish' === $d->post_status && $d->post_modified_gmt === $d->post_date_gmt ) {
+			wp_trash_post( $d->ID );
+			$fivef_log( "Moved default {$fivef_default[1]} '{$d->post_title}' to Trash" );
+		}
+	}
+	update_option( 'fivef_setup_defaults_trashed', 1, false );
 }
 
 /*

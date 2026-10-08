@@ -12,6 +12,6 @@
  */
 
 // Sections are separate patterns so each can also be inserted on its own.
-foreach ( array( 'hero', 'tagline-band', 'intro-split', 'stats-strip', 'why-weekends', 'experiences-grid', 'expectations', 'cta-band' ) as $fivef_slug ) {
+foreach ( array( 'hero', 'tagline-band', 'intro-split', 'stats-strip', 'why-weekends', 'experiences-grid', 'expectations', 'latest-posts', 'cta-band' ) as $fivef_slug ) {
 	echo fivef_section( $fivef_slug ) . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside each pattern.
 }
