@@ -39,6 +39,8 @@ jobs:
             echo '== WP-CLI'; wp --version; wp cli info 2>/dev/null | grep -i 'php binary\|php version'
             echo '== Plugins'; wp plugin list --fields=name,status,version
             echo '== Theme'; wp theme list --status=active --fields=name,version
+            echo '== Site title / tagline'; wp option get blogname; wp option get blogdescription; wp option get site_icon
+            echo '== Database rows mentioning My WordPress'; wp db search 'My WordPress' --all-tables --stats 2>/dev/null | tail -15
             echo '== Composer platform checks requiring PHP >= 8.3'
             grep -rl --include=platform_check.php '80300' . 2>/dev/null
             echo '== Recent PHP errors'; tail -n 20 wp-content/debug.log 2>/dev/null; ls -t ../logs 2>/dev/null | head -3
