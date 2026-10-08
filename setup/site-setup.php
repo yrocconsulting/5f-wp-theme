@@ -391,6 +391,16 @@ if ( ! get_option( 'fivef_setup_defaults_trashed' ) ) {
 	update_option( 'fivef_setup_defaults_trashed', 1, false );
 }
 
+// Hosts like SiteGround touch "Hello world!" during install, so also match its default text.
+if ( ! get_option( 'fivef_setup_hello_trashed' ) ) {
+	$hello = get_page_by_path( 'hello-world', OBJECT, 'post' );
+	if ( $hello && 'publish' === $hello->post_status && false !== strpos( $hello->post_content, 'Welcome to WordPress' ) ) {
+		wp_trash_post( $hello->ID );
+		$fivef_log( "Moved default post 'Hello world!' to Trash" );
+	}
+	update_option( 'fivef_setup_hello_trashed', 1, false );
+}
+
 /*
  * 6. Contact form (Contact Form 7). The Contact page shows it automatically.
  *    Messages go to the fivef_contact_email option (set from the CONTACT_EMAIL
