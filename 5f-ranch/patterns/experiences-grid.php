@@ -11,25 +11,32 @@
 
 $fivef_cards = array(
 	array(
+		'title' => __( 'Thermal Hog Hunts', '5f-ranch' ),
+		'url'   => '/thermal-hog-hunts/',
+		'img'   => fivef_photo( 'hog-hunt-1' ),
+		'alt'   => fivef_photo_alt( 'hog-hunt-1' ),
+		'text'  => __( 'Guided night hunts for feral hogs with thermal optics on private ground along Big Sandy Creek.', '5f-ranch' ),
+	),
+	array(
 		'title' => __( 'Dove Hunting', '5f-ranch' ),
 		'url'   => '/hunting-fishing/dove-hunting/',
 		'img'   => fivef_photo( 'doves-lake' ),
 		'alt'   => fivef_photo_alt( 'doves-lake' ),
-		'text'  => __( 'Opening Day and weekends over roughly 500 acres of sunflowers, dove weed, roost trees and water.', '5f-ranch' ),
+		'text'  => __( 'Opening Day and weekends over roughly 500 acres of managed dove habitat.', '5f-ranch' ),
 	),
 	array(
 		'title' => __( 'Open Range Hunting', '5f-ranch' ),
 		'url'   => '/hunting-fishing/open-range-hunting/',
 		'img'   => fivef_photo( 'creek-bottom' ),
 		'alt'   => fivef_photo_alt( 'creek-bottom' ),
-		'text'  => __( 'White-tailed deer and feral hogs across the wider 2,600-acre property, including guided thermal night hunts.', '5f-ranch' ),
+		'text'  => __( 'White-tailed deer and seasonal opportunities across the wider 2,600-acre property.', '5f-ranch' ),
 	),
 	array(
 		'title' => __( 'Fishing', '5f-ranch' ),
 		'url'   => '/hunting-fishing/fishing/',
 		'img'   => fivef_photo( 'aerial-ponds' ),
 		'alt'   => fivef_photo_alt( 'aerial-ponds' ),
-		'text'  => __( 'Bass, catfish and brim in ranch ponds on designated hunting days. Bring a rod for the afternoon.', '5f-ranch' ),
+		'text'  => __( 'Bass, catfish and brim in ranch ponds on designated hunting days.', '5f-ranch' ),
 	),
 );
 ?>

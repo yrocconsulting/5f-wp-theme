@@ -12,7 +12,7 @@
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"0"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:0"><!-- wp:paragraph {"align":"center","textColor":"texas-tan","fontSize":"large"} -->
-<p class="has-text-align-center has-texas-tan-color has-text-color has-large-font-size"><?php esc_html_e( 'From fast dove shoots over sunflower fields to quiet afternoons on the ponds, 5F Ranch is built for days outdoors. Hunts are limited, habitat is rested, and the drive from Fort Worth is less than an hour.', '5f-ranch' ); ?></p>
+<p class="has-text-align-center has-texas-tan-color has-text-color has-large-font-size"><?php esc_html_e( 'From thermal hog hunts after dark to fast dove shoots over sunflower fields and quiet afternoons on the ponds, 5F Ranch is built for time outdoors. Hunts are limited, habitat is rested, and the drive from Fort Worth is less than an hour.', '5f-ranch' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 

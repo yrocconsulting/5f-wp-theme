@@ -614,3 +614,88 @@ body.blog .fivef-cat-pills > p a {
 .fivef-article .wp-element-caption {
 	text-align: center;
 }
+
+/* ---------- Home hero: copy block on the left ---------- */
+
+.fivef-hero-copy {
+	max-width: 640px;
+}
+
+.fivef-hero-copy h1 {
+	line-height: 1.05;
+}
+
+.fivef-hero-copy a:where(:not(.wp-element-button)) {
+	color: var(--wp--preset--color--sunset-gold);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.2em;
+}
+
+@media (max-width: 781px) {
+	.fivef-hero .wp-block-cover__image-background {
+		object-position: 78% 50% !important;
+	}
+
+	.fivef-hero .wp-block-cover__background {
+		background: linear-gradient(180deg, rgba(14, 13, 11, 0.55) 0%, rgba(14, 13, 11, 0.85) 60%, rgba(14, 13, 11, 0.95) 100%) !important;
+	}
+}
+
+/* ---------- Header: keep the menu on one line ---------- */
+
+.fivef-header .wp-block-navigation {
+	gap: clamp(0.9rem, 1.4vw, 1.6rem) !important;
+	letter-spacing: 0.1em;
+	white-space: nowrap;
+}
+
+.fivef-header .wp-block-navigation .wp-block-navigation__container {
+	gap: inherit !important;
+}
+
+.fivef-header .fivef-header-cta .wp-block-button__link {
+	white-space: nowrap;
+}
+
+.fivef-header .fivef-header-logo {
+	flex-shrink: 0;
+}
+
+@media (max-width: 1240px) {
+	.fivef-header .fivef-header-cta {
+		display: none;
+	}
+}
+
+@media (min-width: 782px) and (max-width: 1000px) {
+	.fivef-header .fivef-header-logo img {
+		width: 170px !important;
+	}
+
+	.fivef-header .wp-block-navigation {
+		font-size: 0.72rem;
+	}
+}
+
+@media (min-width: 600px) {
+	.fivef-header .wp-block-navigation,
+	.fivef-header .wp-block-navigation__responsive-container-content,
+	.fivef-header .wp-block-navigation .wp-block-navigation__container {
+		flex-wrap: nowrap !important;
+	}
+
+	.fivef-header .wp-block-navigation-item {
+		white-space: nowrap;
+	}
+}
+
+/* Tablets: use the menu button + overlay up to 1080px (core switches at 600px). */
+@media (min-width: 600px) and (max-width: 1080px) {
+	.fivef-header .wp-block-navigation__responsive-container-open:not(.always-shown) {
+		display: flex;
+	}
+
+	.fivef-header .wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
+		display: none;
+	}
+}

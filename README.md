@@ -61,7 +61,8 @@ tools/process-photo.sh ~/Downloads/DJI_0042.JPG aerial-ponds
 
 | Slot | Used for | Until it has its own photo, uses |
 | --- | --- | --- |
-| `aerial-ponds` | Home hero, Fishing card, Contact banner | (photo in place) |
+| `hero-hogs` | Homepage hero (night hunt, subject on the right) | sunset illustration |
+| `aerial-ponds` | Fishing card, Contact banner | (photo in place) |
 | `long-pond` | "Why weekends only", Fishing | (photo in place) |
 | `quarry-lake` | Home intro, Fishing (wide) | (photo in place) |
 | `geese-lake` | Fishing, Fishing banner | (photo in place) |
@@ -71,8 +72,8 @@ tools/process-photo.sh ~/Downloads/DJI_0042.JPG aerial-ponds
 | `stock-tank` | Dove Hunting banner | (photo in place) |
 | `ranch-overview` | About the Ranch, Hunting & Fishing banner | (photo in place; house cropped out) |
 | `headquarters` | About the Ranch banner (the 5F barn) | (photo in place) |
-| `hog-hunt-1` | Open Range "Feral Hogs" card, hog post banner | `creek-bottom` |
-| `hog-hunt-2`, `hog-hunt-3`, `hog-pair` | Open Range "From the Field" (portrait versions `*-portrait.jpg`), hog post | `creek-bottom` |
+| `hog-hunt-1` | Thermal Hog Hunts page and banner, hog cards, hog post banner | `creek-bottom` |
+| `hog-hunt-2`, `hog-hunt-3`, `hog-pair` | Homepage hog feature, Thermal Hog Hunts "From the Field" (portrait versions `*-portrait.jpg`), hog post | `creek-bottom` |
 
 `doves-lake.jpg` is a composite: the dove silhouettes were added digitally to the lake photo. Replace it if a real dove photo becomes available.
 
@@ -94,3 +95,10 @@ The blog lives at `/field-notes/` and is in the main menu. Write posts in WordPr
 - The homepage shows the three newest posts automatically.
 
 The starter posts come from `setup/posts/*.html`. Each file starts with a `<!-- fivef-post {...} -->` header (title, slug, category, tags, photo slot, excerpt). New files there are published on the next deploy. Posts already created are never overwritten, and deleted ones aren't re-created.
+
+## Site structure
+
+Hog hunting leads, dove hunting second:
+
+- **Home:** night thermal hog hunt hero, hog feature, ranch stats, dove feature, all hunting & fishing options, about the ranch, latest Field Notes.
+- **Menu:** Home · Thermal Hog Hunts · Hunting & Fishing ▾ (Dove Hunting, Open Range Hunting, Fishing) · About the Ranch · Field Notes · Contact. The setup script applied this order once; later menu edits in WordPress are kept.
