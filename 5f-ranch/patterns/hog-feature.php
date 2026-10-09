@@ -38,6 +38,10 @@
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
+<li><?php echo wp_kses_post( __( '<strong>Predators</strong> like coyotes and bobcats are a bonus when the chance comes', '5f-ranch' ) ); ?></li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
 <li><?php echo wp_kses_post( __( '<strong>Less than an hour</strong> from Fort Worth', '5f-ranch' ) ); ?></li>
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->

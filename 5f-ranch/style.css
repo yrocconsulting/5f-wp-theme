@@ -753,3 +753,18 @@ body.blog .fivef-cat-pills > p a {
 		transform: none;
 	}
 }
+
+/* The Land: 2x2 grid of property photos. */
+.fivef-land-grid .wp-block-image {
+	margin: 0;
+	border-radius: 6px;
+	overflow: hidden;
+	box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+}
+
+.fivef-land-grid .wp-block-image img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+}

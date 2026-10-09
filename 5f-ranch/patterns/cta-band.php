@@ -17,7 +17,7 @@ $fivef_c = fivef_contacts();
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","textColor":"texas-tan"} -->
-<p class="has-text-align-center has-texas-tan-color has-text-color"><?php esc_html_e( 'Call for availability, memberships and booking. We’re happy to answer questions about the ranch.', '5f-ranch' ); ?></p>
+<p class="has-text-align-center has-texas-tan-color has-text-color"><?php esc_html_e( 'Call for hog hunt availability and booking. We’re happy to answer questions about the ranch.', '5f-ranch' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"margin":{"top":"var:preset|spacing|40"}}}} -->

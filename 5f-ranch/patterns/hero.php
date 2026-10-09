@@ -4,13 +4,13 @@
  * Slug: 5f-ranch/hero
  * Categories: 5f-ranch, banner
  * Keywords: hero, banner, cover, hog, thermal, night
- * Description: Full-width night hero for thermal hog hunts, with the dove season as a secondary link.
+ * Description: Full-width night hero for thermal hog hunts, on a real trail-camera photo from the ranch.
  *
  * @package 5f-ranch
  */
 
 $fivef_c    = fivef_contacts();
-$fivef_hero = fivef_photo( 'hero-thermal', 'hero-sunset.svg' );
+$fivef_hero = fivef_photo( 'hero-trailcam', 'hero-sunset.svg' );
 ?>
 <!-- wp:cover {"url":"<?php echo $fivef_hero; // phpcs:ignore ?>","dimRatio":60,"customGradient":"linear-gradient(90deg,rgba(14,13,11,0.92) 0%,rgba(14,13,11,0.7) 38%,rgba(14,13,11,0.15) 70%,rgba(14,13,11,0.35) 100%)","focalPoint":{"x":0.7,"y":0.5},"minHeight":84,"minHeightUnit":"vh","contentPosition":"center left","isDark":true,"align":"full","className":"fivef-hero","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"clamp(1rem, 6vw, 6rem)","right":"clamp(1rem, 4vw, 2.5rem)"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"default"}} -->
 <div class="wp-block-cover alignfull has-custom-content-position is-position-center-left is-dark fivef-hero" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-right:clamp(1rem, 4vw, 2.5rem);padding-bottom:var(--wp--preset--spacing--60);padding-left:clamp(1rem, 6vw, 6rem);min-height:84vh"><img class="wp-block-cover__image-background" alt="" src="<?php echo $fivef_hero; // phpcs:ignore ?>" style="object-position:70% 50%" data-object-fit="cover" data-object-position="70% 50%"/><span aria-hidden="true" class="wp-block-cover__background has-background-dim-60 has-background-dim wp-block-cover__gradient-background has-background-gradient" style="background:linear-gradient(90deg,rgba(14,13,11,0.92) 0%,rgba(14,13,11,0.7) 38%,rgba(14,13,11,0.15) 70%,rgba(14,13,11,0.35) 100%)"></span><div class="wp-block-cover__inner-container"><!-- wp:group {"className":"fivef-hero-copy","style":{"spacing":{"blockGap":"var:preset|spacing|30"}},"layout":{"type":"default"}} -->
@@ -41,7 +41,7 @@ $fivef_hero = fivef_photo( 'hero-thermal', 'hero-sunset.svg' );
 <!-- /wp:buttons -->
 
 <!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"var:preset|spacing|40"}}},"textColor":"texas-tan","fontSize":"small"} -->
-<p class="has-texas-tan-color has-text-color has-small-font-size" style="margin-top:var(--wp--preset--spacing--40)"><?php esc_html_e( 'Also at the ranch:', '5f-ranch' ); ?> <a href="<?php echo esc_url( home_url( '/hunting-fishing/dove-hunting/' ) ); ?>"><?php esc_html_e( 'Dove hunting on Opening Day & weekends →', '5f-ranch' ); ?></a></p>
+<p class="has-texas-tan-color has-text-color has-small-font-size" style="margin-top:var(--wp--preset--spacing--40)"><?php esc_html_e( 'Bonus:', '5f-ranch' ); ?> <a href="<?php echo esc_url( home_url( '/thermal-hog-hunts/#predators' ) ); ?>"><?php esc_html_e( 'coyotes and bobcats are often taken on the same night →', '5f-ranch' ); ?></a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div></div>
 <!-- /wp:cover -->

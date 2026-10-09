@@ -22,11 +22,11 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'The ranch covers approximately 2,600 acres of North Texas country. The active hunting area is roughly 500 rolling acres planted and managed with sunflowers and dove weed, broken up by roosting and shade trees, with several ponds for water.', '5f-ranch' ); ?></p>
+<p><?php esc_html_e( 'The ranch covers approximately 2,600 acres of North Texas country. It’s a mix of open pasture, tree lines, stock tanks and lakes, the kind of cover, food and water that keeps hogs and other wildlife on the property.', '5f-ranch' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'Big Sandy Creek runs through the property, and its timbered bottoms give wildlife cover and travel corridors. It’s the kind of country doves love, and the kind of place you’ll want to bring a rod on hunting days, too.', '5f-ranch' ); ?></p>
+<p><?php esc_html_e( 'Big Sandy Creek runs through the property, and its timbered bottoms give wildlife cover and travel corridors. Those bottoms are where the hogs travel and feed after dark, and the ponds are worth bringing a rod for before the sun goes down.', '5f-ranch' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column -->
 

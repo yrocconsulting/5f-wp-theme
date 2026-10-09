@@ -25,7 +25,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'The active hunting area covers roughly 500 rolling acres of sunflowers, dove weed, roosting and shade trees, and several ponds, all managed with one goal: a better day in the field for the people who hunt it.', '5f-ranch' ); ?></p>
+<p><?php esc_html_e( 'Big Sandy Creek runs through timbered bottoms, open pasture, stock tanks and lakes: prime hog country, managed with one goal: a better night in the field for the people who hunt it.', '5f-ranch' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons -->

@@ -12,14 +12,14 @@
 
 $fivef_c     = fivef_contacts();
 $fivef_lines = array(
-	array( $fivef_c['booking']['label'], $fivef_c['booking']['phone'], __( 'Availability, memberships and booking', '5f-ranch' ) ),
+	array( $fivef_c['booking']['label'], $fivef_c['booking']['phone'], __( 'Hog hunt availability and booking', '5f-ranch' ) ),
 	array( $fivef_c['management']['label'], $fivef_c['management']['phone'], __( 'On-property questions and access', '5f-ranch' ) ),
 	array( __( 'Emergency', '5f-ranch' ), '911', __( 'Call 911 for any immediate emergency', '5f-ranch' ) ),
 );
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|50"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--50)"><!-- wp:paragraph {"align":"center","textColor":"texas-tan","fontSize":"large"} -->
-<p class="has-text-align-center has-texas-tan-color has-text-color has-large-font-size"><?php esc_html_e( 'Questions about the ranch, memberships or booking a hunt? Give us a call. We’re happy to help.', '5f-ranch' ); ?></p>
+<p class="has-text-align-center has-texas-tan-color has-text-color has-large-font-size"><?php esc_html_e( 'Questions about the ranch or booking a hog hunt? Give us a call. We’re happy to help.', '5f-ranch' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:columns {"align":"wide","style":{"spacing":{"margin":{"top":"var:preset|spacing|50"},"blockGap":{"left":"var:preset|spacing|40"}}}} -->

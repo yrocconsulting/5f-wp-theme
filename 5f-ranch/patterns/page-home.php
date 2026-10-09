@@ -11,7 +11,8 @@
  * @package 5f-ranch
  */
 
+// Hog hunts are the focus; the land and the other options follow.
 // Sections are separate patterns so each can also be inserted on its own.
-foreach ( array( 'hero', 'tagline-band', 'hog-feature', 'stats-strip', 'dove-feature', 'experiences-grid', 'intro-split', 'latest-posts', 'cta-band' ) as $fivef_slug ) {
+foreach ( array( 'hero', 'tagline-band', 'hog-feature', 'stats-strip', 'trailcam-strip', 'predator-feature', 'land-showcase', 'experiences-grid', 'latest-posts', 'cta-band' ) as $fivef_slug ) {
 	echo fivef_section( $fivef_slug ) . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside each pattern.
 }

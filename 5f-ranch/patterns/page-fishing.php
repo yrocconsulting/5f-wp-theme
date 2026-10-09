@@ -18,7 +18,7 @@ $fivef_species = array(
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|50"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--50)"><!-- wp:paragraph {"align":"center","textColor":"texas-tan","fontSize":"large"} -->
-<p class="has-text-align-center has-texas-tan-color has-text-color has-large-font-size"><?php esc_html_e( 'More than a dove hunt. Members can fish the ranch ponds on designated hunting days, so bring a rod for the middle of the day.', '5f-ranch' ); ?></p>
+<p class="has-text-align-center has-texas-tan-color has-text-color has-large-font-size"><?php esc_html_e( 'Make a day of it. Guests can fish the ranch ponds on hunt days, so bring a rod for the afternoon before the night hunt.', '5f-ranch' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"align":"wide","sizeSlug":"full","linkDestination":"none","className":"is-style-torn","style":{"spacing":{"margin":{"top":"var:preset|spacing|50"}}}} -->

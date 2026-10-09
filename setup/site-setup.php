@@ -36,7 +36,7 @@ $fivef_log(
  * 1. Site basics.
  */
 if ( 'Just another WordPress site' === get_option( 'blogdescription' ) || '' === get_option( 'blogdescription' ) ) {
-	update_option( 'blogdescription', 'Thermal hog hunts & dove hunting in Alvord, Texas' );
+	update_option( 'blogdescription', 'Guided thermal hog hunts in Alvord, Texas' );
 }
 // Replace installer defaults such as "My WordPress" (SiteGround) or "My WordPress Website".
 if ( preg_match( '/^\s*(my (wordpress|blog|site|website)\b.*)?$/i', (string) get_option( 'blogname' ) ) ) {
@@ -69,6 +69,8 @@ $fivef_photo_titles = array(
 	'hog-pair'       => 'Two feral hogs from a night hunt',
 	'thermal-ranch-banner' => 'Thermal-style view of hogs on 5F Ranch pasture (illustrated)',
 	'gallery-banner' => 'Trail camera: feral hogs at a feeder on 5F Ranch',
+	'hero-trailcam'      => 'Trail camera: a sounder of feral hogs at night on 5F Ranch',
+	'hog-boar-banner' => 'Trail camera: a big feral boar on 5F Ranch',
 	'creek'          => 'Creek through the brush',
 	'creek-bottom'   => 'Timbered creek bottom',
 	'ranch-overview' => 'Aerial view across the ranch',
@@ -149,7 +151,7 @@ if ( ! get_option( 'site_icon' ) && file_exists( get_theme_file_path( 'assets/im
  */
 $fivef_pages = array(
 	'home'               => array( 'Home', 'page-home', 0, 'page-landing', '' ),
-	'thermal-hog-hunts'  => array( 'Thermal Hog Hunts', 'page-hog-hunts', 0, '', 'thermal-ranch-banner' ),
+	'thermal-hog-hunts'  => array( 'Thermal Hog Hunts', 'page-hog-hunts', 0, '', 'hog-boar-banner' ),
 	'about-the-ranch'    => array( 'About the Ranch', 'page-about', 0, '', 'headquarters' ),
 	'hunting-fishing'    => array( 'Hunting & Fishing', 'page-hunting-fishing', 0, '', 'ranch-overview' ),
 	'dove-hunting'       => array( 'Dove Hunting', 'page-dove-hunting', 'hunting-fishing', '', 'stock-tank' ),
@@ -304,14 +306,15 @@ $fivef_link = static function ( $slug, $block = 'navigation-link', $inner = '' )
 		: "<!-- wp:navigation-link {$attrs} /-->";
 };
 
-// Hog hunts first; dove (with open range and fishing) in the Hunting & Fishing dropdown.
+// Hog hunts first; open range and fishing in the Hunting & Fishing dropdown. Dove Hunting is kept
+// as a hidden draft (see below), so it isn't in the menu.
 $fivef_menu = implode(
 	"\n",
 	array_filter(
 		array(
 			$fivef_link( 'home' ),
 			$fivef_link( 'thermal-hog-hunts' ),
-			$fivef_link( 'hunting-fishing', 'navigation-submenu', $fivef_link( 'dove-hunting' ) . $fivef_link( 'open-range-hunting' ) . $fivef_link( 'fishing' ) ),
+			$fivef_link( 'hunting-fishing', 'navigation-submenu', $fivef_link( 'open-range-hunting' ) . $fivef_link( 'fishing' ) ),
 			$fivef_link( 'about-the-ranch' ),
 			$fivef_link( 'field-notes' ),
 			$fivef_link( 'gallery' ),
@@ -348,7 +351,7 @@ if ( ! $fivef_nav && ! get_option( 'fivef_setup_nav' ) ) {
 	);
 	update_option( 'fivef_setup_nav_v2', 1, false );
 	update_option( 'fivef_setup_nav_gallery', 1, false );
-	$fivef_log( 'Main Menu reorganised: Home, Thermal Hog Hunts, Hunting & Fishing (Dove, Open Range, Fishing), About, Field Notes, Contact' );
+	$fivef_log( 'Main Menu reorganised: Home, Thermal Hog Hunts, Hunting & Fishing (Open Range, Fishing), About, Field Notes, Gallery, Contact' );
 }
 
 // Gallery: add to an existing menu once, before Contact. Removing it later is respected.
@@ -375,10 +378,104 @@ if ( $fivef_nav && ! get_option( 'fivef_setup_nav_gallery' ) && isset( $fivef_id
 // Tagline (shown in the homepage's browser title): lead with hog hunts, once, if still our earlier wording.
 if ( ! get_option( 'fivef_setup_tagline_v2' ) ) {
 	if ( in_array( wp_specialchars_decode( get_option( 'blogdescription' ) ), array( 'Private ranch hunting & fishing in Alvord, Texas', 'Just another WordPress site', '' ), true ) ) {
-		update_option( 'blogdescription', 'Thermal hog hunts & dove hunting in Alvord, Texas' );
-		$fivef_log( 'Tagline set to: Thermal hog hunts & dove hunting in Alvord, Texas' );
+		update_option( 'blogdescription', 'Guided thermal hog hunts in Alvord, Texas' );
+		$fivef_log( 'Tagline set to: Guided thermal hog hunts in Alvord, Texas' );
 	}
 	update_option( 'fivef_setup_tagline_v2', 1, false );
+}
+
+/*
+ * 5c. Hog-first focus (client, Oct 2026): hog hunts are the focus of the whole site,
+ *     predators are a bonus, and dove hunting may not run next year, so its page is
+ *     kept but hidden. Runs once; anything changed in WordPress afterwards is kept.
+ *     To bring dove back: publish the Dove Hunting page (Pages → Drafts) and add it
+ *     to the menu in Appearance → Editor → Navigation.
+ */
+if ( ! get_option( 'fivef_setup_hog_focus' ) ) {
+	// Dove Hunting page: unpublish (kept as a draft, nothing is lost).
+	if ( isset( $fivef_ids['dove-hunting'] ) && 'publish' === get_post_status( $fivef_ids['dove-hunting'] ) ) {
+		wp_update_post(
+			array(
+				'ID'          => $fivef_ids['dove-hunting'],
+				'post_status' => 'draft',
+			)
+		);
+		$fivef_log( 'Dove Hunting page hidden (moved to Drafts)' );
+	}
+
+	// Main Menu: drop the Dove Hunting link.
+	if ( $fivef_nav && isset( $fivef_ids['dove-hunting'] ) ) {
+		$fivef_nav_post = get_post( $fivef_nav[0]->ID );
+		$content        = preg_replace( '/<!-- wp:navigation-link \{[^}]*"id":' . (int) $fivef_ids['dove-hunting'] . ',[^}]*\} \/-->\s*/', '', $fivef_nav_post->post_content );
+		if ( $content !== $fivef_nav_post->post_content ) {
+			wp_update_post(
+				array(
+					'ID'           => $fivef_nav_post->ID,
+					'post_content' => $content,
+				)
+			);
+			$fivef_log( 'Removed Dove Hunting from the Main Menu' );
+		}
+	}
+
+	// Tagline, if it's still our earlier wording.
+	if ( 'Thermal hog hunts & dove hunting in Alvord, Texas' === wp_specialchars_decode( get_option( 'blogdescription' ) ) ) {
+		update_option( 'blogdescription', 'Guided thermal hog hunts in Alvord, Texas' );
+		$fivef_log( 'Tagline set to: Guided thermal hog hunts in Alvord, Texas' );
+	}
+
+	// Thermal Hog Hunts banner: the illustrated thermal image becomes the real trail-cam boar.
+	if ( isset( $fivef_ids['thermal-hog-hunts'], $fivef_media['thermal-ranch-banner'], $fivef_media['hog-boar-banner'] )
+		&& (int) get_post_thumbnail_id( $fivef_ids['thermal-hog-hunts'] ) === (int) $fivef_media['thermal-ranch-banner'] ) {
+		set_post_thumbnail( $fivef_ids['thermal-hog-hunts'], $fivef_media['hog-boar-banner'] );
+		$fivef_log( 'Thermal Hog Hunts banner set to the trail-camera boar photo' );
+	}
+
+	// Mourning dove post: point its closing link at the hog hunts instead of the hidden page.
+	$fivef_dove_post = get_page_by_path( 'mourning-dove-texas-guide', OBJECT, 'post' );
+	if ( $fivef_dove_post && false !== strpos( $fivef_dove_post->post_content, 'href="/hunting-fishing/dove-hunting/"' ) ) {
+		wp_update_post(
+			array(
+				'ID'           => $fivef_dove_post->ID,
+				'post_content' => preg_replace(
+					'#<p><strong>Dove hunting at 5F Ranch:</strong>.*?</p>#s',
+					'<p><strong>Hunting at 5F Ranch:</strong> our focus is guided thermal hog hunts after dark along Big Sandy Creek. <a href="/thermal-hog-hunts/">See how a night hunt works</a>.</p>',
+					$fivef_dove_post->post_content
+				),
+			)
+		);
+		$fivef_log( 'Mourning dove post now links to Thermal Hog Hunts' );
+	}
+
+	// Contact form: hog-first "I'm interested in" options, if still our original list.
+	if ( class_exists( 'WPCF7_ContactForm' ) ) {
+		$fivef_form_post = get_posts(
+			array(
+				'post_type'   => 'wpcf7_contact_form',
+				'title'       => '5F Ranch Contact',
+				'post_status' => 'any',
+				'numberposts' => 1,
+			)
+		);
+		if ( $fivef_form_post ) {
+			$fivef_form = WPCF7_ContactForm::get_instance( $fivef_form_post[0]->ID );
+			$fivef_old  = '"Dove Hunting" "Open Range / Hog Hunting" "Fishing" "Memberships" "Something else"';
+			if ( $fivef_form && false !== strpos( $fivef_form->prop( 'form' ), $fivef_old ) ) {
+				$fivef_form->set_properties( array( 'form' => str_replace( $fivef_old, '"Thermal Hog Hunt" "Open Range / Deer Hunting" "Fishing" "Something else"', $fivef_form->prop( 'form' ) ) ) );
+				$fivef_form->save();
+				$fivef_log( 'Contact form options updated for hog hunts' );
+			}
+		}
+	}
+
+	update_option( 'fivef_setup_hog_focus', 1, false );
+}
+
+// Pages still showing the theme layout pick up theme updates; pages saved in the editor keep their own copy.
+foreach ( array( 'home', 'thermal-hog-hunts', 'about-the-ranch', 'hunting-fishing', 'open-range-hunting', 'fishing', 'gallery', 'contact' ) as $fivef_slug ) {
+	if ( isset( $fivef_ids[ $fivef_slug ] ) && false === strpos( (string) get_post_field( 'post_content', $fivef_ids[ $fivef_slug ] ), '<!-- wp:pattern ' ) ) {
+		$fivef_log( "Note: page '{$fivef_slug}' has been edited in WordPress, so theme content updates don't reach it." );
+	}
 }
 
 /*
@@ -485,7 +582,7 @@ if ( class_exists( 'WPCF7_ContactForm' ) ) {
 						'<p class="fivef-field"><label for="fivef-name">Your name <span class="fivef-req">*</span></label>[text* your-name id:fivef-name autocomplete:name]</p>',
 						'<p class="fivef-field"><label for="fivef-email">Email <span class="fivef-req">*</span></label>[email* your-email id:fivef-email autocomplete:email]</p>',
 						'<p class="fivef-field"><label for="fivef-phone">Phone</label>[tel your-phone id:fivef-phone autocomplete:tel]</p>',
-						'<p class="fivef-field"><label for="fivef-interest">I’m interested in</label>[select your-interest id:fivef-interest "Dove Hunting" "Open Range / Hog Hunting" "Fishing" "Memberships" "Something else"]</p>',
+						'<p class="fivef-field"><label for="fivef-interest">I’m interested in</label>[select your-interest id:fivef-interest "Thermal Hog Hunt" "Open Range / Deer Hunting" "Fishing" "Something else"]</p>',
 						'</div>',
 						'<p class="fivef-field"><label for="fivef-message">Message <span class="fivef-req">*</span></label>[textarea* your-message id:fivef-message x5]</p>',
 						'<p class="fivef-submit">[submit "Send Message"]</p>',

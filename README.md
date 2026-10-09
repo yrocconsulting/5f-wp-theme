@@ -61,8 +61,9 @@ tools/process-photo.sh ~/Downloads/DJI_0042.JPG aerial-ponds
 
 | Slot | Used for | Until it has its own photo, uses |
 | --- | --- | --- |
-| `hero-thermal` | Homepage hero: the stock-tank pasture photo converted to a thermal night view, with illustrated hog heat signatures and a reticle (no people) | sunset illustration |
-| `thermal-ranch-banner` | Thermal Hog Hunts page banner (centred crop of the same) | (in place) |
+| `hero-trailcam` | Homepage hero: real infrared trail-camera photo of a sounder at night (no people) | sunset illustration |
+| `hog-boar-banner` | Thermal Hog Hunts page banner and hog card: trail-camera photo of a big boar | (in place) |
+| `hero-thermal`, `thermal-ranch-banner` | Earlier illustrated thermal versions, no longer used | |
 | `aerial-ponds` | Fishing card, Contact banner | (photo in place) |
 | `long-pond` | "Why weekends only", Fishing | (photo in place) |
 | `quarry-lake` | Home intro, Fishing (wide) | (photo in place) |
@@ -99,10 +100,12 @@ The starter posts come from `setup/posts/*.html`. Each file starts with a `<!-- 
 
 ## Site structure
 
-Hog hunting leads, dove hunting second:
+Hog hunting is the focus of the whole site. Predators (coyotes, bobcats) are a bonus, usually taken on hog hunts when the chance comes.
 
-- **Home:** night thermal hog hunt hero, hog feature, ranch stats, dove feature, all hunting & fishing options, about the ranch, latest Field Notes.
-- **Menu:** Home · Thermal Hog Hunts · Hunting & Fishing ▾ (Dove Hunting, Open Range Hunting, Fishing) · About the Ranch · Field Notes · Contact. The setup script applied this order once; later menu edits in WordPress are kept.
+- **Home:** trail-camera hog hero, hog feature, ranch stats, "On the Trail Cams" photos, predators, the land (property photos), hunting & fishing options, latest Field Notes.
+- **Menu:** Home · Thermal Hog Hunts · Hunting & Fishing ▾ (Open Range Hunting, Fishing) · About the Ranch · Field Notes · Gallery · Contact. Later menu edits in WordPress are kept.
+- **Dove Hunting (hidden):** the page is kept as a draft because dove hunts may not run next year. To bring it back, publish it from Pages → Drafts, add it to the menu (Appearance → Editor → Navigation), and insert the *Dove hunting feature* pattern on the home page if wanted.
+- Pages still built from the theme pattern update automatically with each deploy. If a page is opened and saved in the editor, it keeps its own copy, and the deploy log notes it.
 
 ## Gallery
 

@@ -3,8 +3,8 @@
  * Title: Hunting & fishing cards
  * Slug: 5f-ranch/experiences-grid
  * Categories: 5f-ranch, featured
- * Keywords: services, hunts, cards, grid, dove, fishing
- * Description: Three linked cards for Dove Hunting, Open Range Hunting and Fishing.
+ * Keywords: services, hunts, cards, grid, hogs, predators, fishing
+ * Description: Linked cards for Thermal Hog Hunts, Predators, Open Range Hunting and Fishing.
  *
  * @package 5f-ranch
  */
@@ -13,16 +13,16 @@ $fivef_cards = array(
 	array(
 		'title' => __( 'Thermal Hog Hunts', '5f-ranch' ),
 		'url'   => '/thermal-hog-hunts/',
-		'img'   => fivef_photo( 'hog-hunt-1' ),
-		'alt'   => fivef_photo_alt( 'hog-hunt-1' ),
+		'img'   => fivef_photo( 'hog-boar-banner' ),
+		'alt'   => fivef_photo_alt( 'hog-boar-banner' ),
 		'text'  => __( 'Guided night hunts for feral hogs with thermal optics on private ground along Big Sandy Creek.', '5f-ranch' ),
 	),
 	array(
-		'title' => __( 'Dove Hunting', '5f-ranch' ),
-		'url'   => '/hunting-fishing/dove-hunting/',
-		'img'   => fivef_photo( 'doves-lake' ),
-		'alt'   => fivef_photo_alt( 'doves-lake' ),
-		'text'  => __( 'Opening Day and weekends over roughly 500 acres of managed dove habitat.', '5f-ranch' ),
+		'title' => __( 'Predators', '5f-ranch' ),
+		'url'   => '/thermal-hog-hunts/#predators',
+		'img'   => esc_url( get_theme_file_uri( 'assets/gallery/featured-03-bobcat.jpg' ) ),
+		'alt'   => esc_attr__( 'Bobcat taken on 5F Ranch, laid on the rack of a ranch truck at dusk', '5f-ranch' ),
+		'text'  => __( 'Coyotes and bobcats are often taken on hog hunts when the opportunity comes up.', '5f-ranch' ),
 	),
 	array(
 		'title' => __( 'Open Range Hunting', '5f-ranch' ),

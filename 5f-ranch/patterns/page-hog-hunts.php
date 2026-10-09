@@ -95,6 +95,8 @@ $fivef_steps = array(
 <!-- /wp:columns --></div>
 <!-- /wp:group -->
 
+<?php echo fivef_section( 'predator-feature' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+
 <?php echo fivef_section( 'hunt-photos' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained","contentSize":"860px"}} -->

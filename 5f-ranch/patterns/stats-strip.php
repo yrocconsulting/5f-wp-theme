@@ -13,7 +13,7 @@ $fivef_stats = array(
 	array( 'Alvord, TX', __( 'Less than an hour from Fort Worth', '5f-ranch' ) ),
 	array( '2,600', __( 'Private ranch acres', '5f-ranch' ) ),
 	array( __( 'Thermal', '5f-ranch' ), __( 'Guided night hog hunts', '5f-ranch' ) ),
-	array( '~500', __( 'Acres of managed dove habitat', '5f-ranch' ) ),
+	array( __( 'Bonus', '5f-ranch' ), __( 'Coyotes & bobcats on hog hunts', '5f-ranch' ) ),
 	array( '18+', __( 'Hunters only. No exceptions.', '5f-ranch' ) ),
 );
 ?>
