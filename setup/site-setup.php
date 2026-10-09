@@ -68,6 +68,7 @@ $fivef_photo_titles = array(
 	'hog-hunt-3'     => 'Feral hog after a night hunt',
 	'hog-pair'       => 'Two feral hogs from a night hunt',
 	'thermal-ranch-banner' => 'Thermal-style view of hogs on 5F Ranch pasture (illustrated)',
+	'gallery-banner' => 'Trail camera: feral hogs at a feeder on 5F Ranch',
 	'creek'          => 'Creek through the brush',
 	'creek-bottom'   => 'Timbered creek bottom',
 	'ranch-overview' => 'Aerial view across the ranch',
@@ -155,6 +156,7 @@ $fivef_pages = array(
 	'open-range-hunting' => array( 'Open Range Hunting', 'page-open-range-hunting', 'hunting-fishing', '', 'creek-bottom' ),
 	'fishing'            => array( 'Fishing', 'page-fishing', 'hunting-fishing', '', 'geese-lake' ),
 	'field-notes'        => array( 'Field Notes', '', 0, '', 'creek-bottom' ),
+	'gallery'            => array( 'Gallery', 'page-gallery', 0, '', 'gallery-banner' ),
 	'contact'            => array( 'Contact', 'page-contact', 0, '', 'aerial-ponds' ),
 );
 
@@ -312,6 +314,7 @@ $fivef_menu = implode(
 			$fivef_link( 'hunting-fishing', 'navigation-submenu', $fivef_link( 'dove-hunting' ) . $fivef_link( 'open-range-hunting' ) . $fivef_link( 'fishing' ) ),
 			$fivef_link( 'about-the-ranch' ),
 			$fivef_link( 'field-notes' ),
+			$fivef_link( 'gallery' ),
 			$fivef_link( 'contact' ),
 		)
 	)
@@ -332,6 +335,7 @@ if ( ! $fivef_nav && ! get_option( 'fivef_setup_nav' ) ) {
 	} else {
 		update_option( 'fivef_setup_nav', $nav_id, false );
 		update_option( 'fivef_setup_nav_v2', 1, false );
+		update_option( 'fivef_setup_nav_gallery', 1, false );
 		$fivef_log( "Created Main Menu (#{$nav_id})" );
 	}
 } elseif ( $fivef_nav && ! get_option( 'fivef_setup_nav_v2' ) ) {
@@ -343,7 +347,29 @@ if ( ! $fivef_nav && ! get_option( 'fivef_setup_nav' ) ) {
 		)
 	);
 	update_option( 'fivef_setup_nav_v2', 1, false );
+	update_option( 'fivef_setup_nav_gallery', 1, false );
 	$fivef_log( 'Main Menu reorganised: Home, Thermal Hog Hunts, Hunting & Fishing (Dove, Open Range, Fishing), About, Field Notes, Contact' );
+}
+
+// Gallery: add to an existing menu once, before Contact. Removing it later is respected.
+if ( $fivef_nav && ! get_option( 'fivef_setup_nav_gallery' ) && isset( $fivef_ids['gallery'] ) ) {
+	$fivef_nav_post = get_post( $fivef_nav[0]->ID );
+	$content        = $fivef_nav_post->post_content;
+	if ( false === strpos( $content, '"id":' . (int) $fivef_ids['gallery'] . ',' ) ) {
+		$fivef_gallery_link = $fivef_link( 'gallery' );
+		$contact_pos        = strpos( $content, '<!-- wp:navigation-link {"label":"Contact"' );
+		$content            = false === $contact_pos
+			? $content . "\n" . $fivef_gallery_link
+			: substr( $content, 0, $contact_pos ) . $fivef_gallery_link . "\n" . substr( $content, $contact_pos );
+		wp_update_post(
+			array(
+				'ID'           => $fivef_nav_post->ID,
+				'post_content' => $content,
+			)
+		);
+		$fivef_log( 'Added Gallery to Main Menu' );
+	}
+	update_option( 'fivef_setup_nav_gallery', 1, false );
 }
 
 // Tagline (shown in the homepage's browser title): lead with hog hunts, once, if still our earlier wording.

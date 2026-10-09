@@ -1,0 +1,20 @@
+[
+  {
+    "file": "featured-01-trail-cam-feeder.jpg",
+    "alt": "Trail camera photo of a sounder of feral hogs feeding at a feeder at night on 5F Ranch",
+    "caption": "Trail camera: a sounder working the feeder after dark",
+    "featured": true
+  },
+  {
+    "file": "featured-02-hogs-at-barrel.jpg",
+    "alt": "Feral hogs rooting around a barrel feeder at night",
+    "caption": "Hogs at the barrel feeder",
+    "featured": true
+  },
+  {
+    "file": "featured-03-bobcat.jpg",
+    "alt": "Bobcat taken on 5F Ranch, laid on the rack of a ranch truck at dusk",
+    "caption": "A ranch bobcat at dusk",
+    "featured": true
+  }
+]

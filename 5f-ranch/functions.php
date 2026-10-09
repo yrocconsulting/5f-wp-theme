@@ -245,6 +245,7 @@ function fivef_photo_alt( $slot ) {
 		'hog-hunt-3'     => __( 'Hunter kneeling beside a feral hog after a night hunt', '5f-ranch' ),
 		'hog-pair'       => __( 'Two feral hogs taken on a night hunt, with a thermal-scoped rifle', '5f-ranch' ),
 		'hero-thermal'         => __( 'Thermal-style night view of 5F Ranch pasture and stock tank with feral hogs in a riflescope reticle (illustrated)', '5f-ranch' ),
+		'gallery-banner'       => __( 'Trail camera photo of feral hogs at a feeder on 5F Ranch', '5f-ranch' ),
 		'thermal-ranch-banner' => __( 'Thermal-style night view of feral hogs crossing 5F Ranch pasture (illustrated)', '5f-ranch' ),
 	);
 	$found = fivef_photo_slot( $slot );
@@ -272,3 +273,49 @@ function fivef_favicons() {
 	printf( '<link rel="apple-touch-icon" href="%s">' . "\n", esc_url( get_theme_file_uri( 'assets/images/apple-touch-icon.png' ) ) );
 }
 add_action( 'wp_head', 'fivef_favicons', 2 );
+
+/**
+ * Gallery photos, listed in assets/gallery/gallery.json:
+ * [{ "file": "...jpg", "alt": "...", "caption": "...", "featured": true }]
+ *
+ * @param bool|null $featured true = featured only, false = the rest, null = all.
+ * @return array
+ */
+function fivef_gallery_items( $featured = null ) {
+	$file  = get_theme_file_path( 'assets/gallery/gallery.json' );
+	$items = file_exists( $file ) ? json_decode( (string) file_get_contents( $file ), true ) : array(); // phpcs:ignore WordPress.WP.AlternativeFunctions
+	$items = is_array( $items ) ? $items : array();
+	return array_values(
+		array_filter(
+			$items,
+			static function ( $item ) use ( $featured ) {
+				if ( empty( $item['file'] ) || ! file_exists( get_theme_file_path( 'assets/gallery/' . $item['file'] ) ) ) {
+					return false;
+				}
+				return null === $featured || (bool) ( ! empty( $item['featured'] ) ) === $featured;
+			}
+		)
+	);
+}
+
+/**
+ * Gallery block markup (core/gallery with click-to-enlarge images).
+ *
+ * @param array $items   Items from fivef_gallery_items().
+ * @param int   $columns Columns on desktop.
+ * @return string
+ */
+function fivef_gallery_markup( $items, $columns = 3 ) {
+	if ( ! $items ) {
+		return '';
+	}
+	$out = '<!-- wp:gallery {"columns":' . (int) $columns . ',"linkTo":"none","sizeSlug":"full","align":"wide","className":"fivef-gallery"} -->' . "\n"
+		. '<figure class="wp-block-gallery alignwide has-nested-images columns-' . (int) $columns . ' is-cropped fivef-gallery">';
+	foreach ( $items as $item ) {
+		$caption = ! empty( $item['caption'] ) ? '<figcaption class="wp-element-caption">' . esc_html( $item['caption'] ) . '</figcaption>' : '';
+		$out    .= '<!-- wp:image {"lightbox":{"enabled":true},"sizeSlug":"full","linkDestination":"none"} -->' . "\n"
+			. '<figure class="wp-block-image size-full"><img src="' . esc_url( get_theme_file_uri( 'assets/gallery/' . $item['file'] ) ) . '" alt="' . esc_attr( isset( $item['alt'] ) ? $item['alt'] : '' ) . '"/>' . $caption . '</figure>' . "\n"
+			. '<!-- /wp:image -->' . "\n\n";
+	}
+	return $out . '</figure>' . "\n" . '<!-- /wp:gallery -->';
+}

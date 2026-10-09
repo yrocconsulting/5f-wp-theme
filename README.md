@@ -103,3 +103,7 @@ Hog hunting leads, dove hunting second:
 
 - **Home:** night thermal hog hunt hero, hog feature, ranch stats, dove feature, all hunting & fishing options, about the ranch, latest Field Notes.
 - **Menu:** Home · Thermal Hog Hunts · Hunting & Fishing ▾ (Dove Hunting, Open Range Hunting, Fishing) · About the Ranch · Field Notes · Contact. The setup script applied this order once; later menu edits in WordPress are kept.
+
+## Gallery
+
+The Gallery page (`/gallery/`) is built from `5f-ranch/assets/gallery/gallery.json`. Each entry has a `file` (in the same folder), `alt` text, an optional `caption`, and `featured: true` for the top row. Everything else goes into the "From the Ranch" grid. Click any photo to enlarge it. Add a photo by dropping the file in that folder and adding an entry; it appears on the next deploy.
