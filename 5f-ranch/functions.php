@@ -135,6 +135,17 @@ function fivef_tel( $phone ) {
 }
 
 /**
+ * Link to the contact form with the "I'm interested in" choice preselected
+ * (the form's select uses default:get, so it reads ?your-interest=).
+ *
+ * @param string $interest One of the form's options, e.g. "Private / group weekend".
+ * @return string Unescaped URL.
+ */
+function fivef_inquiry_url( $interest ) {
+	return add_query_arg( 'your-interest', rawurlencode( $interest ), home_url( '/contact/' ) ) . '#message';
+}
+
+/**
  * Render another pattern file's markup so full-page patterns can reuse sections.
  *
  * @param string $slug Pattern file name without extension.

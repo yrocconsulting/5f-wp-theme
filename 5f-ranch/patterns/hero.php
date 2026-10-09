@@ -4,12 +4,11 @@
  * Slug: 5f-ranch/hero
  * Categories: 5f-ranch, banner
  * Keywords: hero, banner, cover, hog, thermal, night
- * Description: Full-width night hero for thermal hog hunts, on a real trail-camera photo from the ranch.
+ * Description: Full-width night hero for the private thermal hog-hunting weekend, on a real trail-camera photo from the ranch.
  *
  * @package 5f-ranch
  */
 
-$fivef_c    = fivef_contacts();
 $fivef_hero = fivef_photo( 'hero-trailcam', 'hero-sunset.svg' );
 ?>
 <!-- wp:cover {"url":"<?php echo $fivef_hero; // phpcs:ignore ?>","dimRatio":60,"customGradient":"linear-gradient(90deg,rgba(14,13,11,0.92) 0%,rgba(14,13,11,0.7) 38%,rgba(14,13,11,0.15) 70%,rgba(14,13,11,0.35) 100%)","focalPoint":{"x":0.7,"y":0.5},"minHeight":84,"minHeightUnit":"vh","contentPosition":"center left","isDark":true,"align":"full","className":"fivef-hero","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"clamp(1rem, 6vw, 6rem)","right":"clamp(1rem, 4vw, 2.5rem)"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"default"}} -->
@@ -19,20 +18,20 @@ $fivef_hero = fivef_photo( 'hero-trailcam', 'hero-sunset.svg' );
 <!-- /wp:image -->
 
 <!-- wp:paragraph {"className":"is-style-tracked","style":{"typography":{"fontWeight":"700"},"spacing":{"margin":{"top":"var:preset|spacing|40"}}},"textColor":"sunset-gold","fontSize":"x-small"} -->
-<p class="is-style-tracked has-sunset-gold-color has-text-color has-x-small-font-size" style="margin-top:var(--wp--preset--spacing--40);font-weight:700"><?php esc_html_e( 'Guided Night Hunts · Alvord, Texas', '5f-ranch' ); ?></p>
+<p class="is-style-tracked has-sunset-gold-color has-text-color has-x-small-font-size" style="margin-top:var(--wp--preset--spacing--40);font-weight:700"><?php esc_html_e( 'Premium Guided Thermal Hog Hunts at 5F Ranch', '5f-ranch' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":1,"className":"fivef-text-shadow","textColor":"bone","fontSize":"huge"} -->
-<h1 class="wp-block-heading fivef-text-shadow has-bone-color has-text-color has-huge-font-size"><?php esc_html_e( 'Thermal Hog Hunts After Dark', '5f-ranch' ); ?></h1>
+<h1 class="wp-block-heading fivef-text-shadow has-bone-color has-text-color has-huge-font-size"><?php esc_html_e( 'Escape the Office. Own the Weekend.', '5f-ranch' ); ?></h1>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph {"className":"fivef-text-shadow","textColor":"bone","fontSize":"large"} -->
-<p class="fivef-text-shadow has-bone-color has-text-color has-large-font-size"><?php esc_html_e( 'Hunt feral hogs at night with thermal optics on 2,600 private acres along Big Sandy Creek, less than an hour from Fort Worth.', '5f-ranch' ); ?></p>
+<!-- wp:paragraph {"className":"fivef-text-shadow","textColor":"bone","fontSize":"medium"} -->
+<p class="fivef-text-shadow has-bone-color has-text-color has-medium-font-size"><?php esc_html_e( 'Bring your friends, best customers or business partners for a private thermal hog-hunting weekend built around great hunting, overnight lodging and authentic Texas hospitality. Across approximately 2,600 acres of private ranch, we keep it personal by limiting each weekend to just four hunters.', '5f-ranch' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|40"}}}} -->
 <div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--40)"><!-- wp:button -->
-<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="<?php echo fivef_tel( $fivef_c['booking']['phone'] ); ?>"><?php esc_html_e( 'Book a Hog Hunt', '5f-ranch' ); ?></a></div>
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( fivef_inquiry_url( 'Thermal Hog Hunt weekend' ) ); ?>"><?php esc_html_e( 'Plan Your Hunt', '5f-ranch' ); ?></a></div>
 <!-- /wp:button -->
 
 <!-- wp:button {"className":"is-style-outline"} -->
@@ -41,7 +40,7 @@ $fivef_hero = fivef_photo( 'hero-trailcam', 'hero-sunset.svg' );
 <!-- /wp:buttons -->
 
 <!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"var:preset|spacing|40"}}},"textColor":"texas-tan","fontSize":"small"} -->
-<p class="has-texas-tan-color has-text-color has-small-font-size" style="margin-top:var(--wp--preset--spacing--40)"><?php esc_html_e( 'Bonus:', '5f-ranch' ); ?> <a href="<?php echo esc_url( home_url( '/thermal-hog-hunts/#predators' ) ); ?>"><?php esc_html_e( 'coyotes and bobcats are often taken on the same night →', '5f-ranch' ); ?></a></p>
+<p class="has-texas-tan-color has-text-color has-small-font-size" style="margin-top:var(--wp--preset--spacing--40)"><?php esc_html_e( 'Alvord, Texas • Less than an hour west of Fort Worth', '5f-ranch' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div></div>
 <!-- /wp:cover -->

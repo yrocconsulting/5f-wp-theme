@@ -768,3 +768,15 @@ body.blog .fivef-cat-pills > p a {
 	aspect-ratio: 4 / 3;
 	object-fit: cover;
 }
+
+/* Weekend at a glance: 2 x 2 on phones and tablets instead of a tall stack. */
+@media (max-width: 781px) {
+	.wp-block-columns.fivef-glance:not(.is-not-stacked-on-mobile) {
+		flex-wrap: wrap !important;
+		row-gap: var(--wp--preset--spacing--40);
+	}
+
+	.wp-block-columns.fivef-glance:not(.is-not-stacked-on-mobile) > .wp-block-column {
+		flex-basis: calc(50% - 1rem) !important;
+	}
+}

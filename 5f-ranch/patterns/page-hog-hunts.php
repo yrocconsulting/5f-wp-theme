@@ -40,7 +40,7 @@ $fivef_steps = array(
 
 <!-- wp:list {"className":"is-style-checks"} -->
 <ul class="wp-block-list is-style-checks"><!-- wp:list-item -->
-<li><?php esc_html_e( 'All-inclusive, multi-day guided hunt packages', '5f-ranch' ); ?></li>
+<li><?php esc_html_e( 'Weekend hunts with overnight lodging and hearty ranch meals', '5f-ranch' ); ?></li>
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
@@ -52,7 +52,11 @@ $fivef_steps = array(
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
-<li><?php esc_html_e( 'A limited number of hunters per night', '5f-ranch' ); ?></li>
+<li><?php esc_html_e( 'Just four hunters per weekend', '5f-ranch' ); ?></li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><?php esc_html_e( 'No harvest limit on feral hogs, subject to applicable laws and safe hunting practices', '5f-ranch' ); ?></li>
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 

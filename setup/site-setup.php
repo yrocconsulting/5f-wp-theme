@@ -582,7 +582,7 @@ if ( class_exists( 'WPCF7_ContactForm' ) ) {
 						'<p class="fivef-field"><label for="fivef-name">Your name <span class="fivef-req">*</span></label>[text* your-name id:fivef-name autocomplete:name]</p>',
 						'<p class="fivef-field"><label for="fivef-email">Email <span class="fivef-req">*</span></label>[email* your-email id:fivef-email autocomplete:email]</p>',
 						'<p class="fivef-field"><label for="fivef-phone">Phone</label>[tel your-phone id:fivef-phone autocomplete:tel]</p>',
-						'<p class="fivef-field"><label for="fivef-interest">I’m interested in</label>[select your-interest id:fivef-interest "Thermal Hog Hunt" "Open Range / Deer Hunting" "Fishing" "Something else"]</p>',
+						'<p class="fivef-field"><label for="fivef-interest">I’m interested in</label>[select your-interest id:fivef-interest default:get "Thermal Hog Hunt weekend" "Private / group weekend" "Open Range / Deer Hunting" "Fishing" "Something else"]</p>',
 						'</div>',
 						'<p class="fivef-field"><label for="fivef-message">Message <span class="fivef-req">*</span></label>[textarea* your-message id:fivef-message x5]</p>',
 						'<p class="fivef-submit">[submit "Send Message"]</p>',
@@ -616,6 +616,27 @@ if ( class_exists( 'WPCF7_ContactForm' ) ) {
 		update_option( 'fivef_contact_email_applied', $fivef_recipient, false );
 		$fivef_log( "Contact form messages now go to {$fivef_recipient}" );
 	}
+}
+
+// Weekend inquiries (client home page copy, Oct 2026): add "Private / group weekend" and let
+// links preselect the option (?your-interest=...). Once, and only if the form still has our list.
+if ( ! get_option( 'fivef_setup_weekend_form' ) && class_exists( 'WPCF7_ContactForm' ) ) {
+	$fivef_form_post = get_posts(
+		array(
+			'post_type'   => 'wpcf7_contact_form',
+			'title'       => '5F Ranch Contact',
+			'post_status' => 'any',
+			'numberposts' => 1,
+		)
+	);
+	$fivef_form      = $fivef_form_post ? WPCF7_ContactForm::get_instance( $fivef_form_post[0]->ID ) : null;
+	$fivef_old       = '[select your-interest id:fivef-interest "Thermal Hog Hunt" "Open Range / Deer Hunting" "Fishing" "Something else"]';
+	if ( $fivef_form && false !== strpos( $fivef_form->prop( 'form' ), $fivef_old ) ) {
+		$fivef_form->set_properties( array( 'form' => str_replace( $fivef_old, '[select your-interest id:fivef-interest default:get "Thermal Hog Hunt weekend" "Private / group weekend" "Open Range / Deer Hunting" "Fishing" "Something else"]', $fivef_form->prop( 'form' ) ) ) );
+		$fivef_form->save();
+		$fivef_log( 'Contact form: added "Private / group weekend" and link preselection' );
+	}
+	update_option( 'fivef_setup_weekend_form', 1, false );
 }
 
 flush_rewrite_rules( false );
