@@ -94,6 +94,60 @@ $fivef_dogs   = array(
 <!-- /wp:columns --></div>
 <!-- /wp:group -->
 
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|40"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--40)"><!-- wp:columns {"align":"wide","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|50"}}}} -->
+<div class="wp-block-columns alignwide"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:group {"className":"is-style-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|50","right":"var:preset|spacing|50"}},"dimensions":{"minHeight":"100%"}},"layout":{"type":"default"}} -->
+<div class="wp-block-group is-style-card" style="min-height:100%;padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)"><!-- wp:heading {"level":2,"className":"is-style-ruled","textColor":"texas-tan","fontSize":"x-large"} -->
+<h2 class="wp-block-heading is-style-ruled has-texas-tan-color has-text-color has-x-large-font-size"><?php esc_html_e( 'What’s Included', '5f-ranch' ); ?></h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"className":"is-style-checks"} -->
+<ul class="wp-block-list is-style-checks"><!-- wp:list-item -->
+<li><?php echo wp_kses_post( __( '<strong>Your guide</strong>, with 30+ years of experience', '5f-ranch' ) ); ?></li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><?php echo wp_kses_post( __( '<strong>Decoys</strong>', '5f-ranch' ) ); ?></li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><?php echo wp_kses_post( __( '<strong>Blinds</strong>', '5f-ranch' ) ); ?></li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><?php echo wp_kses_post( __( '<strong>Dogs:</strong> the guide’s own trained retrievers', '5f-ranch' ) ); ?></li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph {"textColor":"texas-tan","fontSize":"small"} -->
+<p class="has-texas-tan-color has-text-color has-small-font-size"><?php esc_html_e( 'Meals and lodging are not included.', '5f-ranch' ); ?></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:group {"className":"is-style-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|50","right":"var:preset|spacing|50"}},"dimensions":{"minHeight":"100%"}},"layout":{"type":"default"}} -->
+<div class="wp-block-group is-style-card" style="min-height:100%;padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)"><!-- wp:heading {"level":2,"className":"is-style-ruled","textColor":"texas-tan","fontSize":"x-large"} -->
+<h2 class="wp-block-heading is-style-ruled has-texas-tan-color has-text-color has-x-large-font-size"><?php esc_html_e( 'Hunt Hours &amp; Deposit', '5f-ranch' ); ?></h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><?php echo wp_kses_post( __( 'Each guided duck hunt is a <strong>one-morning hunt</strong>. It starts <strong>30 minutes before sunrise</strong> and ends at <strong>10 a.m.</strong>', '5f-ranch' ) ); ?></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><?php echo wp_kses_post( __( 'A <strong>50% deposit</strong> is required to book your hunt.', '5f-ranch' ) ); ?></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"textColor":"texas-tan","fontSize":"small"} -->
+<p class="has-texas-tan-color has-text-color has-small-font-size"><?php esc_html_e( 'Bring your own shotgun, ammunition and the licenses listed below.', '5f-ranch' ); ?></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></div>
+<!-- /wp:group -->
+
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|60"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:columns {"verticalAlignment":"center","align":"wide","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|60"}}}} -->
 <div class="wp-block-columns alignwide are-vertically-aligned-center"><!-- wp:column {"verticalAlignment":"center"} -->
@@ -192,7 +246,7 @@ $fivef_dogs   = array(
 <!-- /wp:heading -->
 
 <!-- wp:table {"className":"fivef-price-table"} -->
-<figure class="wp-block-table fivef-price-table"><table><thead><tr><th><?php esc_html_e( 'Booking details', '5f-ranch' ); ?></th><th><?php esc_html_e( 'Rate', '5f-ranch' ); ?></th></tr></thead><tbody><tr><td><strong><?php esc_html_e( 'Guided duck hunt', '5f-ranch' ); ?></strong></td><td><strong><?php esc_html_e( '$300 per person', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Minimum group size', '5f-ranch' ); ?></td><td><?php esc_html_e( '4 hunters', '5f-ranch' ); ?></td></tr><tr><td><?php esc_html_e( 'Maximum standard group size', '5f-ranch' ); ?></td><td><?php esc_html_e( '6 hunters', '5f-ranch' ); ?></td></tr><tr><td><?php esc_html_e( 'Larger groups', '5f-ranch' ); ?></td><td><a href="<?php echo fivef_tel( $fivef_phone ); ?>"><?php echo esc_html( sprintf( /* translators: %s: phone number */ __( 'Call %s', '5f-ranch' ), $fivef_phone ) ); ?></a></td></tr></tbody></table></figure>
+<figure class="wp-block-table fivef-price-table"><table><thead><tr><th><?php esc_html_e( 'Booking details', '5f-ranch' ); ?></th><th><?php esc_html_e( 'Rate', '5f-ranch' ); ?></th></tr></thead><tbody><tr><td><strong><?php esc_html_e( 'Guided duck hunt', '5f-ranch' ); ?></strong></td><td><strong><?php esc_html_e( '$300 per person', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Minimum group size', '5f-ranch' ); ?></td><td><?php esc_html_e( '4 hunters', '5f-ranch' ); ?></td></tr><tr><td><?php esc_html_e( 'Maximum standard group size', '5f-ranch' ); ?></td><td><?php esc_html_e( '6 hunters', '5f-ranch' ); ?></td></tr><tr><td><?php esc_html_e( 'Deposit to book', '5f-ranch' ); ?></td><td><?php esc_html_e( '50% ($150 per person)', '5f-ranch' ); ?></td></tr><tr><td><?php esc_html_e( 'Hunt hours', '5f-ranch' ); ?></td><td><?php esc_html_e( '30 minutes before sunrise to 10 a.m.', '5f-ranch' ); ?></td></tr><tr><td><?php esc_html_e( 'Larger groups', '5f-ranch' ); ?></td><td><a href="<?php echo fivef_tel( $fivef_phone ); ?>"><?php echo esc_html( sprintf( /* translators: %s: phone number */ __( 'Call %s', '5f-ranch' ), $fivef_phone ) ); ?></a></td></tr></tbody></table></figure>
 <!-- /wp:table -->
 
 <!-- wp:paragraph {"align":"center","textColor":"texas-tan","fontSize":"small"} -->
@@ -200,9 +254,63 @@ $fivef_dogs   = array(
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"},"margin":{"top":"0","bottom":"0"}}},"backgroundColor":"charcoal-soft","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull has-charcoal-soft-background-color has-background" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:heading {"textAlign":"center","level":2,"className":"is-style-eyebrow"} -->
+<h2 class="wp-block-heading has-text-align-center is-style-eyebrow"><?php esc_html_e( 'Before You Book', '5f-ranch' ); ?></h2>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"textAlign":"center","level":3,"textColor":"texas-tan","fontSize":"xx-large"} -->
+<h3 class="wp-block-heading has-text-align-center has-texas-tan-color has-text-color has-xx-large-font-size"><?php esc_html_e( 'Season Dates & Licenses', '5f-ranch' ); ?></h3>
+<!-- /wp:heading -->
+
+<!-- wp:columns {"align":"wide","style":{"spacing":{"margin":{"top":"var:preset|spacing|50"},"blockGap":{"left":"var:preset|spacing|50"}}}} -->
+<div class="wp-block-columns alignwide" style="margin-top:var(--wp--preset--spacing--50)"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:heading {"level":4,"textColor":"texas-tan"} -->
+<h4 class="wp-block-heading has-texas-tan-color has-text-color"><?php esc_html_e( '2026–2027 North Texas Duck Season', '5f-ranch' ); ?></h4>
+<!-- /wp:heading -->
+
+<!-- wp:table {"className":"fivef-price-table"} -->
+<figure class="wp-block-table fivef-price-table"><table><tbody><tr><td><?php esc_html_e( 'Early teal (statewide)', '5f-ranch' ); ?></td><td><?php esc_html_e( 'Sept. 19 – Sept. 27, 2026', '5f-ranch' ); ?></td></tr><tr><td><?php esc_html_e( 'Youth, veteran & active duty', '5f-ranch' ); ?></td><td><?php esc_html_e( 'Nov. 7 – Nov. 8, 2026', '5f-ranch' ); ?></td></tr><tr><td><?php esc_html_e( 'Regular season, first segment', '5f-ranch' ); ?></td><td><?php esc_html_e( 'Nov. 14 – Nov. 29, 2026', '5f-ranch' ); ?></td></tr><tr><td><?php esc_html_e( 'Closed (season split)', '5f-ranch' ); ?></td><td><?php esc_html_e( 'Nov. 30 – Dec. 4, 2026', '5f-ranch' ); ?></td></tr><tr><td><?php esc_html_e( 'Regular season, second segment', '5f-ranch' ); ?></td><td><?php esc_html_e( 'Dec. 5, 2026 – Jan. 31, 2027', '5f-ranch' ); ?></td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:paragraph {"textColor":"texas-tan","fontSize":"small"} -->
+<p class="has-texas-tan-color has-text-color has-small-font-size"><?php echo wp_kses_post( sprintf( /* translators: %s: TPWD URL */ __( 'Shooting hours are one-half hour before sunrise to sunset. Federal and Texas bag limits apply; see <a href="%s" target="_blank" rel="noopener">Texas Parks &amp; Wildlife</a> for current dates and limits.', '5f-ranch' ), 'https://tpwd.texas.gov/regulations/outdoor-annual/hunting/migratory-game-bird-regulations' ) ); ?></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:heading {"level":4,"textColor":"texas-tan"} -->
+<h4 class="wp-block-heading has-texas-tan-color has-text-color"><?php esc_html_e( 'What Every Hunter Must Carry', '5f-ranch' ); ?></h4>
+<!-- /wp:heading -->
+
+<!-- wp:list {"className":"is-style-checks"} -->
+<ul class="wp-block-list is-style-checks"><!-- wp:list-item -->
+<li><?php esc_html_e( 'A valid Texas hunting license', '5f-ranch' ); ?></li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><?php esc_html_e( 'Texas Migratory Game Bird Endorsement', '5f-ranch' ); ?></li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><?php esc_html_e( 'HIP (Harvest Information Program) certification', '5f-ranch' ); ?></li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><?php esc_html_e( 'Federal Duck Stamp (hunters 16 and older)', '5f-ranch' ); ?></li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><?php esc_html_e( 'Proof of hunter education, if born on or after September 2, 1971', '5f-ranch' ); ?></li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></div>
+<!-- /wp:group -->
+
 <?php if ( $fivef_photos ) : ?>
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|50"},"margin":{"top":"0","bottom":"0"}}},"backgroundColor":"charcoal-soft","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull has-charcoal-soft-background-color has-background" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--50)"><!-- wp:heading {"textAlign":"center","level":2,"className":"is-style-eyebrow"} -->
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|50"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--50)"><!-- wp:heading {"textAlign":"center","level":2,"className":"is-style-eyebrow"} -->
 <h2 class="wp-block-heading has-text-align-center is-style-eyebrow"><?php esc_html_e( 'Duck Season at 5F Ranch', '5f-ranch' ); ?></h2>
 <!-- /wp:heading -->
 

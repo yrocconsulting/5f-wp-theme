@@ -823,5 +823,15 @@ if ( ! get_option( 'fivef_setup_duck_banner' ) && isset( $fivef_ids['duck-huntin
 	update_option( 'fivef_setup_duck_banner', 1, false );
 }
 
+// Duck hunts take a 50% deposit ($150 of $300); replace the earlier $100 placeholder once.
+if ( ! get_option( 'fivef_setup_duck_deposit' ) ) {
+	$fivef_dd = get_option( 'fivef_bk_duck_deposit', false );
+	if ( false === $fivef_dd || 100 === (int) $fivef_dd ) {
+		update_option( 'fivef_bk_duck_deposit', 150 );
+		$fivef_log( 'Duck deposit set to $150 per person (50%)' );
+	}
+	update_option( 'fivef_setup_duck_deposit', 1, false );
+}
+
 flush_rewrite_rules( false );
 $fivef_log( '5F Ranch setup complete.' );

@@ -107,7 +107,7 @@ function fivef_bk_stripe_checkout( $id ) {
 						'product_data' => array(
 							/* translators: %s: hunt name */
 							'name'        => sprintf( __( 'Deposit: %s', '5f-booking' ), $t['label'] ),
-							'description' => $desc . ' · ' . __( 'Non-refundable, applied to the total price.', '5f-booking' ),
+							'description' => $desc . ' · ' . $t['deposit_note'],
 						),
 					),
 				),

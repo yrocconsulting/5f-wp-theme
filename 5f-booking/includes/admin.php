@@ -359,8 +359,8 @@ function fivef_bk_settings_screen() {
 				</tr>
 				<tr>
 					<th><label for="fivef_bk_duck_deposit"><?php esc_html_e( 'Deposit per hunter ($)', '5f-booking' ); ?></label></th>
-					<td><input type="number" min="0" max="300" step="1" id="fivef_bk_duck_deposit" name="fivef_bk_duck_deposit" value="<?php echo esc_attr( (int) get_option( 'fivef_bk_duck_deposit', 100 ) ); ?>">
-					<p class="description"><?php esc_html_e( 'Duck hunts are $300 per person. Enter 300 to take full payment online.', '5f-booking' ); ?></p></td>
+					<td><input type="number" min="0" max="300" step="1" id="fivef_bk_duck_deposit" name="fivef_bk_duck_deposit" value="<?php echo esc_attr( (int) get_option( 'fivef_bk_duck_deposit', 150 ) ); ?>">
+					<p class="description"><?php esc_html_e( 'Duck hunts are $300 per person with a 50% deposit ($150). Enter 300 to take full payment online.', '5f-booking' ); ?></p></td>
 				</tr>
 			</table>
 			<?php submit_button(); ?>

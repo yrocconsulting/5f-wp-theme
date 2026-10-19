@@ -27,7 +27,7 @@ function fivef_bk_send_emails( $id, $kind ) {
 		__( 'Total:', '5f-booking' ) . ' ' . fivef_bk_money( $b['total'] ),
 	);
 	if ( 'paid' === $kind ) {
-		$lines[] = __( 'Deposit paid:', '5f-booking' ) . ' ' . fivef_bk_money( $b['deposit'] ) . ' ' . __( '(non-refundable, applied to the total)', '5f-booking' );
+		$lines[] = __( 'Deposit paid:', '5f-booking' ) . ' ' . fivef_bk_money( $b['deposit'] ) . ' (' . rtrim( $t['deposit_note'], '.' ) . ')';
 		$lines[] = __( 'Balance due:', '5f-booking' ) . ' ' . fivef_bk_money( $b['balance'] );
 	} else {
 		$lines[] = __( 'Deposit due to confirm:', '5f-booking' ) . ' ' . fivef_bk_money( $b['deposit'] );

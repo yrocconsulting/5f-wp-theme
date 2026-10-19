@@ -83,6 +83,7 @@ function fivef_bk_shortcode( $atts ) {
 			'price'      => $t['price'],
 			'groupPrice' => $t['group_price'],
 			'deposit'    => $t['deposit'],
+			'terms'      => $t['terms'],
 		);
 	}
 	$start = isset( $_GET['type'] ) ? sanitize_key( wp_unslash( $_GET['type'] ) ) : sanitize_key( $atts['type'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended

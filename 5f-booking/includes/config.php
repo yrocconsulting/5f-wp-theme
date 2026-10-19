@@ -32,6 +32,8 @@ function fivef_bk_types() {
 			'deposit'     => 1000, // Per hunter.
 			'enabled'     => true,
 			'summary'     => __( 'Two-day guided weekend · 4 hunters max · $2,000 per hunter, or $7,200 when you book all four spots · $1,000 deposit per hunter', '5f-booking' ),
+			'terms'       => __( 'I understand the deposit is non-refundable and is applied to the total price. Hunters must be 18 or older.', '5f-booking' ),
+			'deposit_note' => __( 'Non-refundable, applied to the total price.', '5f-booking' ),
 		),
 		'duck' => array(
 			'label'       => __( 'Guided Duck Hunt', '5f-booking' ),
@@ -43,9 +45,11 @@ function fivef_bk_types() {
 			'max'         => 6,
 			'price'       => 300,
 			'group_price' => 300,
-			'deposit'     => (int) get_option( 'fivef_bk_duck_deposit', 100 ),
+			'deposit'     => (int) get_option( 'fivef_bk_duck_deposit', 150 ), // 50% of $300.
 			'enabled'     => (bool) get_option( 'fivef_bk_duck_enabled', 0 ),
-			'summary'     => __( 'Guided hunt for one group per morning · 4 to 6 hunters · $300 per person · larger groups, call 817-703-3689', '5f-booking' ),
+			'summary'     => __( 'One-morning guided hunt, 30 minutes before sunrise to 10 a.m. · 4 to 6 hunters · $300 per person · 50% deposit to book · larger groups, call 817-703-3689', '5f-booking' ),
+			'terms'       => __( 'I understand the deposit is applied to the total price. Hunters must be 18 or older.', '5f-booking' ),
+			'deposit_note' => __( 'Applied to the total price.', '5f-booking' ),
 		),
 	);
 	return apply_filters( 'fivef_bk_types', $types );

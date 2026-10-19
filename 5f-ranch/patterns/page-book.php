@@ -48,7 +48,7 @@ echo wp_kses_post(
 <div class="wp-block-columns alignwide" style="margin-top:var(--wp--preset--spacing--40)"><?php
 $fivef_steps = array(
 	array( '1', __( 'Pick Your Date', '5f-ranch' ), __( 'Highlighted dates are open. Each hog hunt weekend takes up to four hunters; book a spot or the whole weekend.', '5f-ranch' ) ),
-	array( '2', __( 'Pay Your Deposit', '5f-ranch' ), __( 'A $1,000 non-refundable deposit per hunter holds your spots and is applied to your total. You pay securely on Stripe’s checkout page.', '5f-ranch' ) ),
+	array( '2', __( 'Pay Your Deposit', '5f-ranch' ), __( 'A deposit holds your spots and is applied to your total: $1,000 per hunter (non-refundable) for hog hunt weekends. You pay securely on Stripe’s checkout page.', '5f-ranch' ) ),
 	array( '3', __( 'We’ll Be in Touch', '5f-ranch' ), __( 'You’ll get a confirmation email right away. Before your hunt we’ll send gate access, a property map and everything you need.', '5f-ranch' ) ),
 );
 foreach ( $fivef_steps as $fivef_step ) :

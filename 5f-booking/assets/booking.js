@@ -222,7 +222,7 @@
 			el('input', { type: 'text', name: 'company', tabindex: '-1', autocomplete: 'off', class: 'fivef-bk-hp', 'aria-hidden': 'true' }),
 			el('label', { class: 'fivef-bk-check' }, [
 				el('input', { type: 'checkbox', name: 'agree', value: '1', required: true }),
-				el('span', { text: 'I understand the deposit is non-refundable and is applied to the total price. Hunters must be 18 or older.' })
+				el('span', { text: t.terms })
 			]),
 			errorBox,
 			submit,
