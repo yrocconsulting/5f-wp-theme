@@ -894,5 +894,31 @@ if ( ! get_option( 'fivef_setup_duck_launch' ) && isset( $fivef_ids['duck-huntin
 	update_option( 'fivef_setup_duck_launch', 1, false );
 }
 
+// Open the 2026-27 booking calendar (client, Oct 2026), once. Dates already on the calendar,
+// including ones the ranch closed, are left as they are; change any date in Bookings → Hunt Dates.
+// Hog hunts: every Friday–Saturday weekend, Oct 23, 2026 – end of March 2027.
+// Duck hunts: Saturday and Sunday mornings in the regular season (Nov 14–29, Dec 5 – Jan 31).
+if ( ! get_option( 'fivef_setup_dates_2026' ) && function_exists( 'fivef_bk_set_date' ) ) {
+	$fivef_open = static function ( $type, $from, $to, $days ) {
+		$have  = fivef_bk_dates( $type );
+		$count = 0;
+		$d     = new DateTime( $from, new DateTimeZone( 'UTC' ) );
+		$end   = new DateTime( $to, new DateTimeZone( 'UTC' ) );
+		while ( $d <= $end ) {
+			$key = $d->format( 'Y-m-d' );
+			if ( in_array( (int) $d->format( 'w' ), $days, true ) && ! isset( $have[ $key ] ) && $key > fivef_bk_today() ) {
+				fivef_bk_set_date( $type, $key, 1 );
+				$count++;
+			}
+			$d->modify( '+1 day' );
+		}
+		return $count;
+	};
+	$fivef_n = $fivef_open( 'hog', '2026-10-23', '2027-03-31', array( 5 ) );
+	$fivef_n2 = $fivef_open( 'duck', '2026-11-14', '2026-11-29', array( 0, 6 ) ) + $fivef_open( 'duck', '2026-12-05', '2027-01-31', array( 0, 6 ) );
+	$fivef_log( "Booking calendar opened: {$fivef_n} hog weekends, {$fivef_n2} duck mornings" );
+	update_option( 'fivef_setup_dates_2026', 1, false );
+}
+
 flush_rewrite_rules( false );
 $fivef_log( '5F Ranch setup complete.' );
