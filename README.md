@@ -64,7 +64,7 @@ tools/process-photo.sh ~/Downloads/DJI_0042.JPG aerial-ponds
 | `hero-trailcam` | Homepage hero: real infrared trail-camera photo of a sounder at night (no people) | sunset illustration |
 | `hog-boar-banner` | Thermal Hog Hunts page banner, hog cards, Pricing: trail-camera photo of a big boar | (in place) |
 | `pricing-banner` | Pricing page banner: trail-camera sounder | (in place) |
-| `dove-sunflowers` | Mourning dove post and Open Range dove card. **An illustration** (doves over sunflowers), not a photo; replace with a real photo when one is available | (in place) |
+| `dove-fields` | Dove Hunting page, mourning dove post, Open Range dove card: real aerial of the ranch fields and tree lines (cropped from `ranch-overview`). Replace with a real dove photo when one is available | (in place) |
 | `hero-thermal`, `thermal-ranch-banner` | Earlier illustrated thermal versions, no longer used | |
 | `aerial-ponds` | Fishing card, Contact banner | (photo in place) |
 | `long-pond` | "Why weekends only", Fishing | (photo in place) |

@@ -71,7 +71,7 @@ $fivef_photo_titles = array(
 	'gallery-banner' => 'Trail camera: feral hogs at a feeder on 5F Ranch',
 	'hero-trailcam'      => 'Trail camera: a sounder of feral hogs at night on 5F Ranch',
 	'hog-boar-banner' => 'Trail camera: a big feral boar on 5F Ranch',
-	'dove-sunflowers' => 'Illustration: mourning doves over a sunflower field',
+	'dove-fields'    => 'Ranch fields and tree lines on the dove hunting area',
 	'pricing-banner' => 'Trail camera: a big sounder of feral hogs at night',
 	'creek'          => 'Creek through the brush',
 	'creek-bottom'   => 'Timbered creek bottom',
@@ -675,10 +675,10 @@ if ( ! get_option( 'fivef_setup_oct19' ) ) {
 	}
 
 	$fivef_p = get_page_by_path( 'mourning-dove-texas-guide', OBJECT, 'post' );
-	if ( $fivef_p && isset( $fivef_media['dove-sunflowers'] )
+	if ( $fivef_p && isset( $fivef_media['dove-fields'] )
 		&& ( ! has_post_thumbnail( $fivef_p ) || ( isset( $fivef_media['doves-lake'] ) && (int) get_post_thumbnail_id( $fivef_p ) === (int) $fivef_media['doves-lake'] ) ) ) {
-		set_post_thumbnail( $fivef_p->ID, $fivef_media['dove-sunflowers'] );
-		$fivef_log( 'Mourning dove post image set to doves over sunflowers' );
+		set_post_thumbnail( $fivef_p->ID, $fivef_media['dove-fields'] );
+		$fivef_log( 'Mourning dove post image set to the ranch fields photo' );
 	}
 
 	if ( class_exists( 'WPCF7_ContactForm' ) ) {
@@ -743,6 +743,31 @@ if ( ! get_option( 'fivef_setup_dove_return' ) && isset( $fivef_ids['dove-huntin
 		}
 	}
 	update_option( 'fivef_setup_dove_return', 1, false );
+}
+
+// The doves-over-sunflowers illustration is replaced by a real ranch photo (client, Oct 2026), once:
+// the mourning dove post gets the fields photo and the illustration leaves the Media Library.
+if ( ! get_option( 'fivef_setup_no_dove_illustration' ) ) {
+	$fivef_ill = get_posts(
+		array(
+			'post_type'   => 'attachment',
+			'post_status' => 'inherit',
+			'meta_key'    => '_fivef_photo_slot', // phpcs:ignore WordPress.DB.SlowDBQuery
+			'meta_value'  => 'dove-sunflowers', // phpcs:ignore WordPress.DB.SlowDBQuery
+			'numberposts' => 1,
+			'fields'      => 'ids',
+		)
+	);
+	$fivef_p   = get_page_by_path( 'mourning-dove-texas-guide', OBJECT, 'post' );
+	if ( $fivef_p && $fivef_ill && isset( $fivef_media['dove-fields'] ) && (int) get_post_thumbnail_id( $fivef_p ) === (int) $fivef_ill[0] ) {
+		set_post_thumbnail( $fivef_p->ID, $fivef_media['dove-fields'] );
+		$fivef_log( 'Mourning dove post image set to the ranch fields photo' );
+	}
+	if ( $fivef_ill ) {
+		wp_delete_attachment( $fivef_ill[0], true );
+		$fivef_log( 'Removed the doves-over-sunflowers illustration from the Media Library' );
+	}
+	update_option( 'fivef_setup_no_dove_illustration', 1, false );
 }
 
 flush_rewrite_rules( false );

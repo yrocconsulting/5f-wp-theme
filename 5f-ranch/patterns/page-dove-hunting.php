@@ -32,7 +32,7 @@
 
 <!-- wp:column {"verticalAlignment":"center"} -->
 <div class="wp-block-column is-vertically-aligned-center"><!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"is-style-torn"} -->
-<figure class="wp-block-image size-full is-style-torn"><img src="<?php echo fivef_photo( 'dove-sunflowers' ); ?>" alt="<?php echo fivef_photo_alt( 'dove-sunflowers' ); ?>"/></figure>
+<figure class="wp-block-image size-full is-style-torn"><img src="<?php echo fivef_photo( 'dove-fields' ); ?>" alt="<?php echo fivef_photo_alt( 'dove-fields' ); ?>"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>

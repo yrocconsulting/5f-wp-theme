@@ -57,7 +57,7 @@ $fivef_dove = ( $fivef_dove && 'publish' === $fivef_dove->post_status )
 $fivef_species = array(
 	array(
 		'title' => __( 'Dove', '5f-ranch' ),
-		'slot'  => 'dove-sunflowers',
+		'slot'  => 'dove-fields',
 		'text'  => __( 'Mourning doves work the fields and tree lines in early fall. Dove hunts run on Opening Day and weekends during the 1st season, with a limited number of hunters.', '5f-ranch' ),
 		'link'  => $fivef_dove[0],
 		'label' => $fivef_dove[1],
