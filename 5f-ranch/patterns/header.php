@@ -9,7 +9,6 @@
  * @package 5f-ranch
  */
 
-$fivef_c = fivef_contacts();
 ?>
 <!-- wp:group {"className":"fivef-header","style":{"spacing":{"padding":{"top":"0.85rem","bottom":"0.85rem"}},"elements":{"link":{"color":{"text":"var:preset|color|bone"}}}},"backgroundColor":"charcoal","textColor":"bone","layout":{"type":"constrained"}} -->
 <div class="wp-block-group fivef-header has-bone-color has-charcoal-background-color has-text-color has-background has-link-color" style="padding-top:0.85rem;padding-bottom:0.85rem"><!-- wp:group {"align":"wide","layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between"}} -->
@@ -22,7 +21,7 @@ $fivef_c = fivef_contacts();
 
 <!-- wp:buttons {"className":"fivef-header-cta"} -->
 <div class="wp-block-buttons fivef-header-cta"><!-- wp:button {"style":{"spacing":{"padding":{"top":"0.7em","bottom":"0.7em","left":"1.3em","right":"1.3em"}}},"fontSize":"x-small"} -->
-<div class="wp-block-button has-custom-font-size has-x-small-font-size"><a class="wp-block-button__link wp-element-button" href="<?php echo fivef_tel( $fivef_c['booking']['phone'] ); ?>" style="padding-top:0.7em;padding-right:1.3em;padding-bottom:0.7em;padding-left:1.3em"><?php esc_html_e( 'Book a Hunt', '5f-ranch' ); ?></a></div>
+<div class="wp-block-button has-custom-font-size has-x-small-font-size"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( fivef_book_url( 'hog' ) ); ?>" style="padding-top:0.7em;padding-right:1.3em;padding-bottom:0.7em;padding-left:1.3em"><?php esc_html_e( 'Book a Hunt', '5f-ranch' ); ?></a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:group --></div>

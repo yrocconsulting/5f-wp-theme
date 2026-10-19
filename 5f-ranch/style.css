@@ -661,11 +661,28 @@ body.blog .fivef-cat-pills > p a {
 	flex-shrink: 0;
 }
 
-/* The header button only fits beside the full menu on wide screens. */
-@media (max-width: 1719px) {
-	.fivef-header .fivef-header-cta {
-		display: none;
-	}
+/* "Book a Hunt" is the last menu item, styled as a button (class fivef-nav-book),
+   so the separate header button is no longer shown. */
+.fivef-header .fivef-header-cta {
+	display: none;
+}
+
+.fivef-header .wp-block-navigation .fivef-nav-book > .wp-block-navigation-item__content {
+	background: var(--wp--preset--color--sunset-gold);
+	color: var(--wp--preset--color--charcoal) !important;
+	border-radius: 4px;
+	padding: 0.55em 1.1em;
+	font-weight: 700;
+}
+
+.fivef-header .wp-block-navigation .fivef-nav-book > .wp-block-navigation-item__content:hover,
+.fivef-header .wp-block-navigation .fivef-nav-book > .wp-block-navigation-item__content:focus-visible {
+	background: var(--wp--preset--color--bone);
+}
+
+.fivef-footer .fivef-nav-book > .wp-block-navigation-item__content {
+	color: var(--wp--preset--color--sunset-gold) !important;
+	font-weight: 700;
 }
 
 @media (min-width: 782px) and (max-width: 1000px) {
@@ -833,4 +850,17 @@ body.blog .fivef-cat-pills > p a {
 
 .fivef-price-table td strong {
 	color: var(--wp--preset--color--bone);
+}
+
+/* Laptops: tighten the full menu (with the Book a Hunt button) so it stays on one line. */
+@media (min-width: 1300px) and (max-width: 1679px) {
+	.fivef-header .wp-block-navigation {
+		font-size: 0.72rem;
+		letter-spacing: 0.05em;
+		gap: 0.9rem !important;
+	}
+
+	.fivef-header .fivef-header-logo img {
+		width: 176px !important;
+	}
 }

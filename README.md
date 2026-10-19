@@ -14,6 +14,7 @@ Staging: https://5f.yroc.host/
 | `5f-ranch/assets/photos/` | Ranch photos, one file per slot (see below) |
 | `setup/site-setup.php` | Creates pages, the main menu, front page and featured images (safe to re-run) |
 | `tools/process-photo.sh` | Resizes and colour-grades a photo into a slot |
+| `5f-booking/` | Booking calendar plugin (open dates, bookings, Stripe deposits) |
 | `.github/workflows/deploy.yml` | Deploys to staging over SSH on every push (also installs Contact Form 7, pinned to 6.1.7 because 6.2+ needs PHP 8.3) |
 | `.github/workflows/diagnose.yml` | Read-only server checks (PHP, plugins, theme); run from the Actions tab |
 
@@ -111,6 +112,18 @@ Hog hunting is the focus of the whole site. Predators (coyotes, bobcats) are a b
 - **Open Range Hunting:** dove and feral hogs only (no deer). The dove card links to the Dove Hunting page while it's published, otherwise to the contact form.
 - **Dove Hunting:** published again (Oct 2026) and first in the Hunting & Fishing dropdown. Its photo is the doves-over-sunflowers illustration.
 - Pages still built from the theme pattern update automatically with each deploy. If a page is opened and saved in the editor, it keeps its own copy, and the deploy log notes it.
+
+## Booking calendar (5F Ranch Booking plugin)
+
+`5f-booking/` is a small plugin, deployed and activated with the theme. The **Book a Hunt** page (`/book/`, last item in the menu) shows the calendar.
+
+- **Open dates:** WordPress → Bookings → **Hunt Dates**. Only dates opened here can be booked. Hog hunts: open the first day of each weekend (up to 4 hunters, booked individually or all four for $7,200). Duck hunts: one private group of 4–6 per morning at $300 per person.
+- **Bookings:** Bookings → All Bookings. Each one shows the guest, hunters, deposit, balance and status. Changing the status to Cancelled frees the spots (refunds are done in Stripe).
+- **Online deposits (Stripe Checkout):** Bookings → **Settings**. Paste the Stripe secret key and the webhook signing secret (the screen shows the webhook URL and the events to send). Or add `STRIPE_SECRET_KEY` / `STRIPE_WEBHOOK_SECRET` repository secrets and deploy. Use `sk_test_...` keys first and pay with Stripe's test card 4242 4242 4242 4242. Without keys, the calendar takes **requests**: the dates are held and the ranch collects the deposit itself.
+- Spots are held for 35 minutes while a guest pays; unpaid holds are released automatically.
+- Emails go to the guest and to the booking address in Settings (default: the contact form address).
+- **Duck hunts** stay off the calendar until "Show duck hunts on the booking calendar" is ticked in Settings. Set the duck deposit there too. The Duck Hunting page (Pages → Drafts) is a placeholder until the ranch's copy and photos arrive.
+- Prices live in `5f-booking/includes/config.php`.
 
 ## Gallery
 

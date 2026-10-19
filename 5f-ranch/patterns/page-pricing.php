@@ -21,7 +21,7 @@ $fivef_includes = array(
 	__( 'Access to approximately 2,600 acres of private ranch property', '5f-ranch' ),
 	__( 'No harvest limit on feral hogs', '5f-ranch' ),
 );
-$fivef_book  = fivef_inquiry_url( 'Thermal Hog Hunt weekend' );
+$fivef_book  = fivef_book_url( 'hog' );
 $fivef_group = fivef_inquiry_url( 'Private / group weekend' );
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|50"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained","contentSize":"820px"}} -->

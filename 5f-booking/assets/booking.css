@@ -1,0 +1,354 @@
+/* 5F Ranch booking calendar. Uses the theme's colour and font presets, with fallbacks. */
+.fivef-bk {
+	--bk-gold: var(--wp--preset--color--sunset-gold, #c8963e);
+	--bk-bone: var(--wp--preset--color--bone, #f3ead8);
+	--bk-tan: var(--wp--preset--color--texas-tan, #d9c8a9);
+	--bk-card: var(--wp--preset--color--charcoal-soft, #22201b);
+	--bk-line: rgba(217, 200, 169, 0.18);
+	--bk-green: var(--wp--preset--color--field-green, #4f6b3e);
+	color: var(--bk-bone);
+}
+
+.fivef-bk-loading,
+.fivef-bk-empty {
+	color: var(--bk-tan);
+}
+
+.fivef-bk-tabs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	justify-content: center;
+	margin-bottom: 1rem;
+}
+
+.fivef-bk-tab {
+	font: inherit;
+	font-size: var(--wp--preset--font-size--x-small, 0.8rem);
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--bk-tan);
+	background: transparent;
+	border: 1px solid var(--bk-line);
+	border-radius: 999px;
+	padding: 0.6rem 1.2rem;
+	cursor: pointer;
+}
+
+.fivef-bk-tab[aria-selected="true"] {
+	background: var(--bk-gold);
+	border-color: var(--bk-gold);
+	color: #1a1712;
+}
+
+.fivef-bk-summary {
+	text-align: center;
+	color: var(--bk-tan);
+	font-size: var(--wp--preset--font-size--small, 0.9rem);
+	margin: 0 auto 1.75rem;
+	max-width: 760px;
+}
+
+.fivef-bk-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+	gap: clamp(1.25rem, 3vw, 2.5rem);
+	align-items: start;
+}
+
+@media (max-width: 899px) {
+	.fivef-bk-grid {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+.fivef-bk-cal,
+.fivef-bk-panel {
+	background: var(--bk-card);
+	border: 1px solid var(--bk-line);
+	border-radius: 10px;
+	padding: clamp(1rem, 2.5vw, 1.75rem);
+	box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
+}
+
+.fivef-bk-cal-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 1rem;
+}
+
+.fivef-bk-month,
+.fivef-bk-panel-title {
+	font-family: var(--wp--preset--font-family--cinzel, serif);
+	color: var(--bk-tan);
+	margin: 0;
+	font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+}
+
+.fivef-bk-nav {
+	font-size: 1.6rem;
+	line-height: 1;
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 50%;
+	border: 1px solid var(--bk-line);
+	background: transparent;
+	color: var(--bk-bone);
+	cursor: pointer;
+}
+
+.fivef-bk-nav:disabled {
+	opacity: 0.3;
+	cursor: default;
+}
+
+.fivef-bk-days {
+	display: grid;
+	grid-template-columns: repeat(7, minmax(0, 1fr));
+	gap: 0.35rem;
+}
+
+.fivef-bk-dow {
+	text-align: center;
+	font-size: 0.7rem;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--bk-tan);
+	opacity: 0.75;
+	padding-bottom: 0.35rem;
+}
+
+.fivef-bk-day {
+	min-height: 3.6rem;
+	border-radius: 6px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.9rem;
+	color: rgba(243, 234, 216, 0.35);
+	background: rgba(255, 255, 255, 0.02);
+	border: 1px solid transparent;
+	padding: 0.2rem;
+}
+
+.fivef-bk-day.is-blank {
+	background: none;
+}
+
+button.fivef-bk-day {
+	font: inherit;
+	cursor: pointer;
+	color: var(--bk-bone);
+	background: rgba(200, 150, 62, 0.14);
+	border-color: rgba(200, 150, 62, 0.55);
+}
+
+button.fivef-bk-day:hover,
+button.fivef-bk-day:focus-visible {
+	background: rgba(200, 150, 62, 0.28);
+	outline: none;
+}
+
+button.fivef-bk-day.is-selected {
+	background: var(--bk-gold);
+	border-color: var(--bk-gold);
+	color: #1a1712;
+}
+
+button.fivef-bk-day.is-full {
+	background: rgba(255, 255, 255, 0.04);
+	border-color: var(--bk-line);
+	color: rgba(243, 234, 216, 0.4);
+	cursor: not-allowed;
+	text-decoration: line-through;
+}
+
+.fivef-bk-num {
+	font-weight: 700;
+	font-size: 1rem;
+}
+
+.fivef-bk-left {
+	font-size: 0.62rem;
+	letter-spacing: 0.04em;
+	line-height: 1.2;
+	text-align: center;
+}
+
+.fivef-bk-legend {
+	font-size: 0.75rem;
+	color: var(--bk-tan);
+	margin: 1rem 0 0;
+}
+
+.fivef-bk-key {
+	display: inline-block;
+	width: 0.8rem;
+	height: 0.8rem;
+	border-radius: 3px;
+	vertical-align: -0.1rem;
+	border: 1px solid rgba(200, 150, 62, 0.55);
+	background: rgba(200, 150, 62, 0.14);
+}
+
+.fivef-bk-key.is-full {
+	border-color: var(--bk-line);
+	background: rgba(255, 255, 255, 0.04);
+}
+
+.fivef-bk-eyebrow {
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--bk-gold);
+	margin: 0 0 0.35rem;
+}
+
+.fivef-bk-panel-title {
+	margin-bottom: 1rem;
+}
+
+.fivef-bk-form {
+	display: grid;
+	gap: 0.9rem;
+}
+
+.fivef-bk-field {
+	display: grid;
+	gap: 0.35rem;
+	font-size: 0.82rem;
+	color: var(--bk-tan);
+}
+
+.fivef-bk-field input,
+.fivef-bk-field select,
+.fivef-bk-field textarea {
+	font: inherit;
+	font-size: 1rem;
+	color: var(--bk-bone);
+	background: rgba(0, 0, 0, 0.25);
+	border: 1px solid var(--bk-line);
+	border-radius: 6px;
+	padding: 0.7rem 0.8rem;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.fivef-bk-field select option {
+	color: #1a1712;
+}
+
+.fivef-bk-field input:focus,
+.fivef-bk-field select:focus,
+.fivef-bk-field textarea:focus {
+	outline: 2px solid var(--bk-gold);
+	outline-offset: 1px;
+}
+
+.fivef-bk-two {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0.9rem;
+}
+
+@media (max-width: 520px) {
+	.fivef-bk-two {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+.fivef-bk-price {
+	border-top: 1px solid var(--bk-line);
+	border-bottom: 1px solid var(--bk-line);
+	padding: 0.6rem 0;
+}
+
+.fivef-bk-row {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 0.3rem 0;
+	font-size: 0.9rem;
+}
+
+.fivef-bk-row.is-due {
+	color: var(--bk-gold);
+	font-size: 1.05rem;
+}
+
+.fivef-bk-tip {
+	font-size: 0.78rem;
+	color: var(--bk-tan);
+	margin: 0.4rem 0 0;
+}
+
+.fivef-bk-check {
+	display: flex;
+	gap: 0.6rem;
+	align-items: flex-start;
+	font-size: 0.8rem;
+	color: var(--bk-tan);
+}
+
+.fivef-bk-check input {
+	margin-top: 0.2rem;
+	accent-color: var(--bk-gold);
+	width: 1.05rem;
+	height: 1.05rem;
+	flex: none;
+}
+
+.fivef-bk-hp {
+	position: absolute !important;
+	left: -9999px !important;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+}
+
+.fivef-bk-submit {
+	width: 100%;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.fivef-bk-submit:disabled {
+	opacity: 0.6;
+	cursor: wait;
+}
+
+.fivef-bk-fine {
+	font-size: 0.75rem;
+	color: var(--bk-tan);
+	margin: 0;
+	text-align: center;
+}
+
+.fivef-bk-error {
+	color: #ffb4a2;
+	font-size: 0.85rem;
+	margin: 0;
+}
+
+.fivef-bk-notice {
+	border-radius: 8px;
+	padding: 1rem 1.2rem;
+	margin: 0 0 1.5rem;
+	border: 1px solid var(--bk-line);
+	background: rgba(255, 255, 255, 0.04);
+	color: var(--wp--preset--color--bone, #f3ead8);
+}
+
+.fivef-bk-notice.is-success {
+	border-color: rgba(120, 170, 90, 0.6);
+	background: rgba(79, 107, 62, 0.25);
+}
+
+.fivef-bk-notice.is-warning {
+	border-color: rgba(200, 150, 62, 0.6);
+	background: rgba(200, 150, 62, 0.12);
+}

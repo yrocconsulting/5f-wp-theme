@@ -135,6 +135,20 @@ function fivef_tel( $phone ) {
 }
 
 /**
+ * Link to the booking calendar (5F Ranch Booking plugin) for a hunt type, or to
+ * the contact form when the plugin isn't active.
+ *
+ * @param string $type Hunt type: hog or duck.
+ * @return string Unescaped URL.
+ */
+function fivef_book_url( $type = 'hog' ) {
+	if ( ! function_exists( 'fivef_bk_types' ) ) {
+		return fivef_inquiry_url( 'duck' === $type ? 'Something else' : 'Thermal Hog Hunt weekend' );
+	}
+	return add_query_arg( 'type', $type, home_url( '/book/' ) );
+}
+
+/**
  * Link to the contact form with the "I'm interested in" choice preselected
  * (the form's select uses default:get, so it reads ?your-interest=).
  *

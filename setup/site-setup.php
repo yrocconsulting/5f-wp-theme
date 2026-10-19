@@ -160,9 +160,12 @@ $fivef_pages = array(
 	'dove-hunting'       => array( 'Dove Hunting', 'page-dove-hunting', 'hunting-fishing', '', 'stock-tank' ),
 	'open-range-hunting' => array( 'Open Range Hunting', 'page-open-range-hunting', 'hunting-fishing', '', 'creek-bottom' ),
 	'fishing'            => array( 'Fishing', 'page-fishing', 'hunting-fishing', '', 'geese-lake' ),
+	// Hidden (draft) until the ranch's duck content and photos arrive.
+	'duck-hunting'       => array( 'Duck Hunting', 'page-duck-hunting', 'hunting-fishing', '', 'geese-lake', 'draft' ),
 	'field-notes'        => array( 'Field Notes', '', 0, '', 'creek-bottom' ),
 	'gallery'            => array( 'Gallery', 'page-gallery', 0, '', 'gallery-banner' ),
 	'contact'            => array( 'Contact', 'page-contact', 0, '', 'aerial-ponds' ),
+	'book'               => array( 'Book a Hunt', 'page-book', 0, '', 'hero-trailcam' ),
 );
 
 // Slugs this script has created before. A page you later delete is NOT re-created.
@@ -171,6 +174,7 @@ $fivef_ids     = array();
 $fivef_order   = 0;
 foreach ( $fivef_pages as $slug => $def ) {
 	list( $title, $pattern, $parent_slug, $template, $photo ) = $def;
+	$status = isset( $def[5] ) ? $def[5] : 'publish';
 	$fivef_order++;
 	$parent_id = $parent_slug ? ( isset( $fivef_ids[ $parent_slug ] ) ? $fivef_ids[ $parent_slug ] : 0 ) : 0;
 
@@ -197,7 +201,7 @@ foreach ( $fivef_pages as $slug => $def ) {
 	$id = wp_insert_post(
 		array(
 			'post_type'    => 'page',
-			'post_status'  => 'publish',
+			'post_status'  => $status,
 			'post_title'   => $title,
 			'post_name'    => $slug,
 			'post_parent'  => $parent_id,
@@ -289,7 +293,7 @@ $fivef_nav = get_posts(
 	)
 );
 
-$fivef_link = static function ( $slug, $block = 'navigation-link', $inner = '' ) use ( $fivef_ids ) {
+$fivef_link = static function ( $slug, $block = 'navigation-link', $inner = '', $class = '' ) use ( $fivef_ids ) {
 	if ( empty( $fivef_ids[ $slug ] ) ) {
 		return '';
 	}
@@ -301,7 +305,7 @@ $fivef_link = static function ( $slug, $block = 'navigation-link', $inner = '' )
 			'id'    => $id,
 			'url'   => get_permalink( $id ),
 			'kind'  => 'post-type',
-		),
+		) + ( $class ? array( 'className' => $class ) : array() ),
 		JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
 	);
 	return 'navigation-submenu' === $block
@@ -323,6 +327,7 @@ $fivef_menu = implode(
 			$fivef_link( 'field-notes' ),
 			$fivef_link( 'gallery' ),
 			$fivef_link( 'contact' ),
+			$fivef_link( 'book', 'navigation-link', '', 'fivef-nav-book' ),
 		)
 	)
 );
@@ -344,6 +349,7 @@ if ( ! $fivef_nav && ! get_option( 'fivef_setup_nav' ) ) {
 		update_option( 'fivef_setup_nav_v2', 1, false );
 		update_option( 'fivef_setup_nav_gallery', 1, false );
 		update_option( 'fivef_setup_nav_pricing', 1, false );
+		update_option( 'fivef_setup_nav_book', 1, false );
 		$fivef_log( "Created Main Menu (#{$nav_id})" );
 	}
 } elseif ( $fivef_nav && ! get_option( 'fivef_setup_nav_v2' ) ) {
@@ -768,6 +774,28 @@ if ( ! get_option( 'fivef_setup_no_dove_illustration' ) ) {
 		$fivef_log( 'Removed the doves-over-sunflowers illustration from the Media Library' );
 	}
 	update_option( 'fivef_setup_no_dove_illustration', 1, false );
+}
+
+// Book a Hunt (booking calendar, Oct 2026): add to the end of an existing menu once, styled as a button.
+if ( ! get_option( 'fivef_setup_nav_book' ) && isset( $fivef_ids['book'] ) ) {
+	$fivef_nav = get_posts(
+		array(
+			'post_type'   => 'wp_navigation',
+			'title'       => 'Main Menu',
+			'post_status' => 'publish',
+			'numberposts' => 1,
+		)
+	);
+	if ( $fivef_nav && false === strpos( $fivef_nav[0]->post_content, '"id":' . (int) $fivef_ids['book'] . ',' ) ) {
+		wp_update_post(
+			array(
+				'ID'           => $fivef_nav[0]->ID,
+				'post_content' => rtrim( $fivef_nav[0]->post_content ) . "\n" . $fivef_link( 'book', 'navigation-link', '', 'fivef-nav-book' ),
+			)
+		);
+		$fivef_log( 'Added Book a Hunt to the Main Menu' );
+	}
+	update_option( 'fivef_setup_nav_book', 1, false );
 }
 
 flush_rewrite_rules( false );

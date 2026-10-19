@@ -9,6 +9,7 @@ on:
     branches: [main, 'claude/**']
     paths:
       - '5f-ranch/**'
+      - '5f-booking/**'
       - 'setup/**'
       - '.github/workflows/deploy.yml'
   workflow_dispatch:
@@ -30,7 +31,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Lint PHP
-        run: find 5f-ranch setup -name '*.php' -print0 | xargs -0 -n1 php -l > /dev/null
+        run: find 5f-ranch 5f-booking setup -name '*.php' -print0 | xargs -0 -n1 php -l > /dev/null
 
       - name: Check secrets
         env:
@@ -88,6 +89,8 @@ jobs:
           rsync -rlz --delete --exclude '.DS_Store' --exclude '.gitkeep' \
             5f-ranch/ "staging:$WP_DIR/wp-content/themes/5f-ranch/"
           rsync -rz --delete setup/ "staging:5f-setup/"
+          rsync -rlz --delete --exclude '.DS_Store' \
+            5f-booking/ "staging:$WP_DIR/wp-content/plugins/5f-booking/"
 
       - name: Activate theme, plugins and run site setup
         env:
@@ -95,7 +98,19 @@ jobs:
           CF7_VERSION: '6.1.7'
           # Testing default; set a CONTACT_EMAIL secret to change it.
           CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL || 'bradley@yrocconsulting.com' }}
+          # Optional: online deposits. Can also be entered in WordPress → Bookings → Settings.
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
         run: |
+          for v in STRIPE_SECRET_KEY STRIPE_WEBHOOK_SECRET; do
+            case "${!v}" in *"'"*|*" "*) echo "::error::$v looks invalid"; exit 1;; esac
+          done
+          if [ -n "$STRIPE_SECRET_KEY" ]; then
+            ssh staging "cd '$WP_DIR' && wp option update fivef_bk_stripe_secret '$STRIPE_SECRET_KEY' > /dev/null"
+          fi
+          if [ -n "$STRIPE_WEBHOOK_SECRET" ]; then
+            ssh staging "cd '$WP_DIR' && wp option update fivef_bk_stripe_webhook '$STRIPE_WEBHOOK_SECRET' > /dev/null"
+          fi
           if [ -n "$CONTACT_EMAIL" ]; then
             case "$CONTACT_EMAIL" in *"'"*|*" "*) echo "::error::CONTACT_EMAIL looks invalid"; exit 1;; esac
             ssh staging "cd '$WP_DIR' && wp option update fivef_contact_email '$CONTACT_EMAIL' > /dev/null"
@@ -107,6 +122,7 @@ jobs:
             && ( [ \"\$(wp plugin get contact-form-7 --field=version 2>/dev/null)\" = '$CF7_VERSION' ] \
                  || wp plugin install contact-form-7 --version='$CF7_VERSION' --force ) \
             && wp plugin activate contact-form-7 \
+            && wp plugin activate 5f-booking \
             && (wp plugin auto-updates disable contact-form-7 > /dev/null 2>&1 || true) \
             && wp eval-file ~/5f-setup/site-setup.php \
             && wp cache flush \
