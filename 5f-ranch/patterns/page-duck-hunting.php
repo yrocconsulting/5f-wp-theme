@@ -1,63 +1,171 @@
 <?php
 /**
- * Title: Duck Hunting page
+ * Title: Guided Duck Hunting page
  * Slug: 5f-ranch/page-duck-hunting
  * Categories: 5f-ranch-pages
- * Keywords: duck, waterfowl, hunting, group
+ * Keywords: duck, waterfowl, guided, ponds, retrievers, group
  * Post Types: page
- * Description: Duck hunting: one private group of 4 to 6 per morning at $300 per person, with the hunt video and photos. Copy is a placeholder until the ranch's content arrives.
+ * Description: Guided duck hunts: experienced guide, HRCH retrievers, ten ponds, $300 per person for groups of 4 to 6, with the hunt video and photos.
  *
  * @package 5f-ranch
  */
 
-$fivef_c     = fivef_contacts();
+$fivef_c      = fivef_contacts();
+$fivef_phone  = $fivef_c['booking']['phone'];
 $fivef_photos = fivef_gallery_items( true, 'duck' );
 $fivef_video  = file_exists( get_theme_file_path( 'assets/duck/duck-hunt.mp4' ) );
+// "Check Availability" opens the booking calendar once duck hunts are bookable online; until then it calls the ranch.
+$fivef_online = function_exists( 'fivef_bk_type' ) && fivef_bk_type( 'duck' ) && fivef_bk_type( 'duck' )['enabled'];
+$fivef_book   = $fivef_online ? esc_url( fivef_book_url( 'duck' ) ) : fivef_tel( $fivef_phone );
+$fivef_duck   = static function ( $file ) {
+	return esc_url( get_theme_file_uri( 'assets/duck/' . $file ) );
+};
+$fivef_facts  = array(
+	array( '$300', __( 'Per person', '5f-ranch' ) ),
+	array( '4', __( 'Hunter minimum', '5f-ranch' ) ),
+	array( '6', __( 'Hunter maximum per standard booking', '5f-ranch' ) ),
+	array( '10', __( 'Huntable ponds', '5f-ranch' ) ),
+);
+$fivef_dogs   = array(
+	array( 'duck-08-two-labs-and-the-limit.jpg', __( 'Two black labs sitting behind a row of ducks laid out on the bank', '5f-ranch' ) ),
+	array( 'duck-16-labs-under-the-cedar.jpg', __( 'A yellow lab and a black lab beside ducks and duck calls hung on a cedar', '5f-ranch' ) ),
+	array( 'duck-12-two-labs-at-sunrise.jpg', __( 'A yellow lab and a black lab on a duck boat with mallards and shovelers at sunrise', '5f-ranch' ) ),
+);
 ?>
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|50"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--50)"><!-- wp:paragraph {"align":"center","textColor":"texas-tan","fontSize":"large"} -->
-<p class="has-text-align-center has-texas-tan-color has-text-color has-large-font-size"><?php esc_html_e( 'Private morning duck hunts on the ranch ponds and lakes of 5F Ranch, less than an hour from Fort Worth. One group per morning, so the water is yours.', '5f-ranch' ); ?></p>
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:columns {"verticalAlignment":"center","align":"wide","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|60"}}}} -->
+<div class="wp-block-columns alignwide are-vertically-aligned-center"><!-- wp:column {"verticalAlignment":"center","width":"54%"} -->
+<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:54%"><!-- wp:paragraph {"className":"is-style-tracked","style":{"typography":{"fontWeight":"700"}},"textColor":"sunset-gold","fontSize":"x-small"} -->
+<p class="is-style-tracked has-sunset-gold-color has-text-color has-x-small-font-size" style="font-weight:700"><?php esc_html_e( 'Ten Ponds. Experienced Guiding. A Texas Waterfowl Experience.', '5f-ranch' ); ?></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:columns {"verticalAlignment":"center","align":"wide","style":{"spacing":{"margin":{"top":"var:preset|spacing|60"},"blockGap":{"left":"var:preset|spacing|60"}}}} -->
-<div class="wp-block-columns alignwide are-vertically-aligned-center" style="margin-top:var(--wp--preset--spacing--60)"><!-- wp:column {"verticalAlignment":"center"} -->
-<div class="wp-block-column is-vertically-aligned-center"><!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"is-style-torn"} -->
-<figure class="wp-block-image size-full is-style-torn"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/duck/duck-01-crew-on-the-boat.jpg' ) ); ?>" alt="<?php esc_attr_e( 'Three hunters and two black labs behind a limit of diving ducks laid on a boat at the edge of a 5F Ranch pond', '5f-ranch' ); ?>"/></figure>
-<!-- /wp:image --></div>
-<!-- /wp:column -->
-
-<!-- wp:column {"verticalAlignment":"center"} -->
-<div class="wp-block-column is-vertically-aligned-center"><!-- wp:heading {"className":"is-style-ruled","textColor":"texas-tan"} -->
-<h2 class="wp-block-heading is-style-ruled has-texas-tan-color has-text-color"><?php esc_html_e( 'Your Group, Your Morning', '5f-ranch' ); ?></h2>
+<!-- wp:heading {"level":2,"textColor":"texas-tan","fontSize":"xx-large"} -->
+<h2 class="wp-block-heading has-texas-tan-color has-text-color has-xx-large-font-size"><?php esc_html_e( 'Guided Duck Hunts at 5F Ranch', '5f-ranch' ); ?></h2>
 <!-- /wp:heading -->
 
-<!-- wp:list {"className":"is-style-checks"} -->
-<ul class="wp-block-list is-style-checks"><!-- wp:list-item -->
-<li><?php echo wp_kses_post( __( '<strong>$300 per person</strong>', '5f-ranch' ) ); ?></li>
-<!-- /wp:list-item -->
+<!-- wp:paragraph -->
+<p><?php esc_html_e( 'Hunt with a guide who brings more than 30 years of experience to the blind. With 10 huntable ponds across our private ranch property near Alvord, Texas, 5F Ranch offers groups the opportunity to enjoy a guided waterfowl hunt in a welcoming, authentic Texas setting.', '5f-ranch' ); ?></p>
+<!-- /wp:paragraph -->
 
-<!-- wp:list-item -->
-<li><?php echo wp_kses_post( __( '<strong>4 hunters minimum, 6 maximum</strong> per group', '5f-ranch' ) ); ?></li>
-<!-- /wp:list-item -->
+<!-- wp:paragraph -->
+<p><?php esc_html_e( 'Conveniently located about one hour west of Fort Worth, 5F Ranch makes it easy to get out of the city and into the field for a day of guided waterfowl hunting.', '5f-ranch' ); ?></p>
+<!-- /wp:paragraph -->
 
-<!-- wp:list-item -->
-<li><?php esc_html_e( 'One private group per morning', '5f-ranch' ); ?></li>
-<!-- /wp:list-item -->
+<!-- wp:paragraph {"style":{"typography":{"fontWeight":"700"}},"textColor":"bone"} -->
+<p class="has-bone-color has-text-color" style="font-weight:700"><?php esc_html_e( 'Hunts start at $300 per person · 4-hunter minimum · 6-hunter maximum per standard booking', '5f-ranch' ); ?></p>
+<!-- /wp:paragraph -->
 
-<!-- wp:list-item -->
-<li><?php esc_html_e( 'Valid Texas hunting license, waterfowl endorsements and federal duck stamp required', '5f-ranch' ); ?></li>
-<!-- /wp:list-item --></ul>
-<!-- /wp:list -->
+<!-- wp:paragraph {"textColor":"texas-tan","fontSize":"small"} -->
+<p class="has-texas-tan-color has-text-color has-small-font-size"><?php esc_html_e( 'Have a larger group?', '5f-ranch' ); ?> <a href="<?php echo fivef_tel( $fivef_phone ); ?>"><?php echo esc_html( sprintf( /* translators: %s: phone number */ __( 'Call %s', '5f-ranch' ), $fivef_phone ) ); ?></a> <?php esc_html_e( 'to discuss arrangements.', '5f-ranch' ); ?></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|40"}}}} -->
 <div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--40)"><!-- wp:button -->
-<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( fivef_book_url( 'duck' ) ); ?>"><?php esc_html_e( 'Check Dates & Book', '5f-ranch' ); ?></a></div>
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="<?php echo $fivef_book; // phpcs:ignore -- escaped above. ?>"><?php esc_html_e( 'Check Availability', '5f-ranch' ); ?></a></div>
 <!-- /wp:button -->
 
 <!-- wp:button {"className":"is-style-outline"} -->
-<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo fivef_tel( $fivef_c['booking']['phone'] ); ?>"><?php echo esc_html( sprintf( /* translators: %s: phone number */ __( 'Call %s', '5f-ranch' ), $fivef_c['booking']['phone'] ) ); ?></a></div>
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo fivef_tel( $fivef_phone ); ?>"><?php echo esc_html( sprintf( /* translators: %s: phone number */ __( 'Call %s', '5f-ranch' ), $fivef_phone ) ); ?></a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"verticalAlignment":"center"} -->
+<div class="wp-block-column is-vertically-aligned-center"><!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"is-style-torn"} -->
+<figure class="wp-block-image size-full is-style-torn"><img src="<?php echo $fivef_duck( 'duck-01-crew-on-the-boat.jpg' ); // phpcs:ignore ?>" alt="<?php esc_attr_e( 'Three hunters and two black labs behind a limit of diving ducks laid on a boat at the edge of a 5F Ranch pond', '5f-ranch' ); ?>"/></figure>
+<!-- /wp:image --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50"},"margin":{"top":"0","bottom":"0"}},"border":{"top":{"color":"var:preset|color|sunset-gold","width":"1px"},"bottom":{"color":"#d9c8a926","width":"1px"}}},"backgroundColor":"charcoal-soft","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull has-charcoal-soft-background-color has-background" style="border-top-color:var(--wp--preset--color--sunset-gold);border-top-width:1px;border-bottom-color:#d9c8a926;border-bottom-width:1px;margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50)"><!-- wp:columns {"align":"wide","className":"fivef-stats fivef-glance"} -->
+<div class="wp-block-columns alignwide fivef-stats fivef-glance"><?php foreach ( $fivef_facts as $fivef_fact ) : ?><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:paragraph {"align":"center","className":"fivef-stat-number","style":{"typography":{"fontWeight":"700"}},"fontSize":"x-large"} -->
+<p class="has-text-align-center fivef-stat-number has-x-large-font-size" style="font-weight:700"><?php echo esc_html( $fivef_fact[0] ); ?></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"align":"center","className":"is-style-tracked","style":{"typography":{"lineHeight":"1.5"}},"textColor":"bone","fontSize":"x-small"} -->
+<p class="has-text-align-center is-style-tracked has-bone-color has-text-color has-x-small-font-size" style="line-height:1.5"><?php echo esc_html( $fivef_fact[1] ); ?></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column -->
+
+<?php endforeach; ?></div>
+<!-- /wp:columns --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|60"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:columns {"verticalAlignment":"center","align":"wide","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|60"}}}} -->
+<div class="wp-block-columns alignwide are-vertically-aligned-center"><!-- wp:column {"verticalAlignment":"center"} -->
+<div class="wp-block-column is-vertically-aligned-center"><!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"fivef-photo-portrait"} -->
+<figure class="wp-block-image size-full fivef-photo-portrait"><img src="<?php echo $fivef_duck( 'duck-18-strap-full-of-ducks.jpg' ); // phpcs:ignore ?>" alt="<?php esc_attr_e( 'Hunter in waders carrying a full strap of ducks along the edge of a ranch pond', '5f-ranch' ); ?>"/></figure>
+<!-- /wp:image --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"verticalAlignment":"center","width":"55%"} -->
+<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:55%"><!-- wp:heading {"level":2,"className":"is-style-eyebrow"} -->
+<h2 class="wp-block-heading is-style-eyebrow"><?php esc_html_e( 'Your Guide', '5f-ranch' ); ?></h2>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":3,"textColor":"texas-tan","fontSize":"xx-large"} -->
+<h3 class="wp-block-heading has-texas-tan-color has-text-color has-xx-large-font-size"><?php esc_html_e( 'A Guide with 30+ Years of Experience', '5f-ranch' ); ?></h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><?php esc_html_e( 'Good waterfowl hunting takes experience, preparation, and an understanding of the conditions that shape a hunt. With more than three decades of guiding experience, your guide brings years of knowledge to help make your time in the field rewarding, safe, and enjoyable.', '5f-ranch' ); ?></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"textColor":"texas-tan","fontSize":"small"} -->
+<p class="has-texas-tan-color has-text-color has-small-font-size"><?php esc_html_e( 'Every hunt depends on natural conditions and wild birds, so harvests can never be guaranteed. Our focus is to provide a quality guided experience on private ranch property.', '5f-ranch' ); ?></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"},"margin":{"top":"0","bottom":"0"}}},"backgroundColor":"charcoal-soft","layout":{"type":"constrained","contentSize":"820px"}} -->
+<div class="wp-block-group alignfull has-charcoal-soft-background-color has-background" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:heading {"textAlign":"center","level":2,"className":"is-style-eyebrow"} -->
+<h2 class="wp-block-heading has-text-align-center is-style-eyebrow"><?php esc_html_e( 'The Dogs', '5f-ranch' ); ?></h2>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"textAlign":"center","level":3,"textColor":"texas-tan","fontSize":"xx-large"} -->
+<h3 class="wp-block-heading has-text-align-center has-texas-tan-color has-text-color has-xx-large-font-size"><?php esc_html_e( 'Well-Trained Retrievers. Proven Experience.', '5f-ranch' ); ?></h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center"} -->
+<p class="has-text-align-center"><?php esc_html_e( 'The guide’s trusted retrievers are part of what sets this experience apart. He has personally trained his dogs from just six weeks of age, continues to run them in hunt tests, and has earned a Hunting Retriever Champion (HRCH) title. That hands-on training and proven working-dog experience reflect the high standard he brings to the field, and to the dogs working alongside him.', '5f-ranch' ); ?></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:columns {"align":"wide","style":{"spacing":{"margin":{"top":"var:preset|spacing|50"},"blockGap":{"left":"var:preset|spacing|30"}}}} -->
+<div class="wp-block-columns alignwide" style="margin-top:var(--wp--preset--spacing--50)"><?php foreach ( $fivef_dogs as $fivef_dog ) : ?><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"fivef-photo-square"} -->
+<figure class="wp-block-image size-full fivef-photo-square"><img src="<?php echo $fivef_duck( $fivef_dog[0] ); // phpcs:ignore ?>" alt="<?php echo esc_attr( $fivef_dog[1] ); ?>"/></figure>
+<!-- /wp:image --></div>
+<!-- /wp:column -->
+
+<?php endforeach; ?></div>
+<!-- /wp:columns --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|60"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:columns {"verticalAlignment":"center","align":"wide","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|60"}}}} -->
+<div class="wp-block-columns alignwide are-vertically-aligned-center"><!-- wp:column {"verticalAlignment":"center","width":"48%"} -->
+<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:48%"><!-- wp:heading {"level":2,"className":"is-style-eyebrow"} -->
+<h2 class="wp-block-heading is-style-eyebrow"><?php esc_html_e( 'The Water', '5f-ranch' ); ?></h2>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":3,"textColor":"texas-tan","fontSize":"xx-large"} -->
+<h3 class="wp-block-heading has-texas-tan-color has-text-color has-xx-large-font-size"><?php esc_html_e( 'Ten Huntable Ponds. More Places to Hunt.', '5f-ranch' ); ?></h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><?php esc_html_e( '5F Ranch features 10 huntable ponds across the property, creating multiple waterfowl hunting opportunities. Pond conditions, bird activity, weather, and seasonal patterns all influence where and how a hunt unfolds. Your guide will determine the best available approach for the conditions and the group.', '5f-ranch' ); ?></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"verticalAlignment":"center"} -->
+<div class="wp-block-column is-vertically-aligned-center"><!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"is-style-torn"} -->
+<figure class="wp-block-image size-full is-style-torn"><img src="<?php echo $fivef_duck( 'duck-13-ducks-over-the-pond.jpg' ); // phpcs:ignore ?>" alt="<?php esc_attr_e( 'Ducks dropping toward decoys on a 5F Ranch pond at first light, silhouetted against the tree line', '5f-ranch' ); ?>"/></figure>
+<!-- /wp:image --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
 <!-- /wp:group -->
@@ -73,14 +181,28 @@ $fivef_video  = file_exists( get_theme_file_path( 'assets/duck/duck-hunt.mp4' ) 
 <!-- /wp:heading -->
 
 <!-- wp:video {"className":"fivef-video"} -->
-<figure class="wp-block-video fivef-video"><video controls poster="<?php echo esc_url( get_theme_file_uri( 'assets/duck/duck-hunt-poster.jpg' ) ); ?>" preload="none" src="<?php echo esc_url( get_theme_file_uri( 'assets/duck/duck-hunt.mp4' ) ); ?>" playsinline></video></figure>
+<figure class="wp-block-video fivef-video"><video controls poster="<?php echo $fivef_duck( 'duck-hunt-poster.jpg' ); // phpcs:ignore ?>" preload="none" src="<?php echo $fivef_duck( 'duck-hunt.mp4' ); // phpcs:ignore ?>" playsinline></video></figure>
 <!-- /wp:video --></div>
 <!-- /wp:group -->
 <?php endif; ?>
 
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained","contentSize":"760px"}} -->
+<div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:heading {"textAlign":"center","level":2,"className":"is-style-eyebrow"} -->
+<h2 class="wp-block-heading has-text-align-center is-style-eyebrow"><?php esc_html_e( 'Straightforward Pricing', '5f-ranch' ); ?></h2>
+<!-- /wp:heading -->
+
+<!-- wp:table {"className":"fivef-price-table"} -->
+<figure class="wp-block-table fivef-price-table"><table><thead><tr><th><?php esc_html_e( 'Booking details', '5f-ranch' ); ?></th><th><?php esc_html_e( 'Rate', '5f-ranch' ); ?></th></tr></thead><tbody><tr><td><strong><?php esc_html_e( 'Guided duck hunt', '5f-ranch' ); ?></strong></td><td><strong><?php esc_html_e( '$300 per person', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Minimum group size', '5f-ranch' ); ?></td><td><?php esc_html_e( '4 hunters', '5f-ranch' ); ?></td></tr><tr><td><?php esc_html_e( 'Maximum standard group size', '5f-ranch' ); ?></td><td><?php esc_html_e( '6 hunters', '5f-ranch' ); ?></td></tr><tr><td><?php esc_html_e( 'Larger groups', '5f-ranch' ); ?></td><td><a href="<?php echo fivef_tel( $fivef_phone ); ?>"><?php echo esc_html( sprintf( /* translators: %s: phone number */ __( 'Call %s', '5f-ranch' ), $fivef_phone ) ); ?></a></td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:paragraph {"align":"center","textColor":"texas-tan","fontSize":"small"} -->
+<p class="has-text-align-center has-texas-tan-color has-text-color has-small-font-size"><?php echo wp_kses_post( sprintf( /* translators: %s: phone link */ __( 'A minimum of four hunters is required for a standard booking, with a maximum of six hunters. If your group has more than six hunters, call %s so we can discuss options.', '5f-ranch' ), '<a href="' . fivef_tel( $fivef_phone ) . '">' . esc_html( $fivef_phone ) . '</a>' ) ); ?></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
 <?php if ( $fivef_photos ) : ?>
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|50"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--50)"><!-- wp:heading {"textAlign":"center","level":2,"className":"is-style-eyebrow"} -->
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|50"},"margin":{"top":"0","bottom":"0"}}},"backgroundColor":"charcoal-soft","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull has-charcoal-soft-background-color has-background" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--50)"><!-- wp:heading {"textAlign":"center","level":2,"className":"is-style-eyebrow"} -->
 <h2 class="wp-block-heading has-text-align-center is-style-eyebrow"><?php esc_html_e( 'Duck Season at 5F Ranch', '5f-ranch' ); ?></h2>
 <!-- /wp:heading -->
 
@@ -98,38 +220,26 @@ $fivef_video  = file_exists( get_theme_file_path( 'assets/duck/duck-hunt.mp4' ) 
 <!-- /wp:group -->
 <?php endif; ?>
 
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|60"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained","contentSize":"860px"}} -->
-<div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:group {"className":"is-style-paper","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|50","right":"var:preset|spacing|50"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group is-style-paper" style="padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)"><!-- wp:heading {"textAlign":"center","level":2,"className":"is-style-script","style":{"color":{"text":"#26341f"}},"fontSize":"xx-large"} -->
-<h2 class="wp-block-heading has-text-align-center is-style-script has-text-color has-xx-large-font-size" style="color:#26341f"><?php esc_html_e( 'More Details Coming Soon', '5f-ranch' ); ?></h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center"><?php esc_html_e( 'Season dates, what to bring and what a morning on the water looks like at 5F Ranch. Call the Hunt & Booking line with any questions.', '5f-ranch' ); ?></p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"},"margin":{"top":"0","bottom":"0"}},"border":{"top":{"color":"var:preset|color|sunset-gold","width":"1px"}}},"backgroundColor":"pine","layout":{"type":"constrained"}} -->
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"},"margin":{"top":"0","bottom":"0"}},"border":{"top":{"color":"var:preset|color|sunset-gold","width":"1px"}}},"backgroundColor":"pine","layout":{"type":"constrained","contentSize":"760px"}} -->
 <div class="wp-block-group alignfull has-pine-background-color has-background" style="border-top-color:var(--wp--preset--color--sunset-gold);border-top-width:1px;margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:heading {"textAlign":"center","level":2,"textColor":"bone","fontSize":"xx-large"} -->
-<h2 class="wp-block-heading has-text-align-center has-bone-color has-text-color has-xx-large-font-size"><?php esc_html_e( 'Bring Your Crew. We’ll Have the Decoys Out.', '5f-ranch' ); ?></h2>
+<h2 class="wp-block-heading has-text-align-center has-bone-color has-text-color has-xx-large-font-size"><?php esc_html_e( 'Plan Your Hunt', '5f-ranch' ); ?></h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","textColor":"texas-tan"} -->
-<p class="has-text-align-center has-texas-tan-color has-text-color"><?php esc_html_e( 'One private group of 4 to 6 hunters per morning, $300 per person. Pick your date or call for availability.', '5f-ranch' ); ?></p>
+<p class="has-text-align-center has-texas-tan-color has-text-color"><?php esc_html_e( 'Gather your group and contact 5F Ranch to ask about available dates and current hunting conditions. We’ll discuss your group size and help you understand what to expect before you arrive.', '5f-ranch' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"margin":{"top":"var:preset|spacing|40"}}}} -->
 <div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--40)"><!-- wp:button -->
-<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( fivef_book_url( 'duck' ) ); ?>"><?php esc_html_e( 'Check Dates & Book', '5f-ranch' ); ?></a></div>
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="<?php echo fivef_tel( $fivef_phone ); ?>"><?php echo esc_html( sprintf( /* translators: %s: phone number */ __( 'Call %s', '5f-ranch' ), $fivef_phone ) ); ?></a></div>
 <!-- /wp:button -->
 
 <!-- wp:button {"className":"is-style-outline"} -->
-<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo fivef_tel( $fivef_c['booking']['phone'] ); ?>"><?php echo esc_html( sprintf( /* translators: %s: phone number */ __( 'Call %s', '5f-ranch' ), $fivef_c['booking']['phone'] ) ); ?></a></div>
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo $fivef_book; // phpcs:ignore -- escaped above. ?>"><?php esc_html_e( 'Book a Guided Duck Hunt', '5f-ranch' ); ?></a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons -->
 
 <!-- wp:paragraph {"align":"center","className":"is-style-tracked","style":{"spacing":{"margin":{"top":"var:preset|spacing|40"}}},"textColor":"sunset-gold","fontSize":"x-small"} -->
-<p class="has-text-align-center is-style-tracked has-sunset-gold-color has-text-color has-x-small-font-size" style="margin-top:var(--wp--preset--spacing--40)"><?php esc_html_e( 'Hunters must be 18 or older. No exceptions.', '5f-ranch' ); ?></p>
+<p class="has-text-align-center is-style-tracked has-sunset-gold-color has-text-color has-x-small-font-size" style="margin-top:var(--wp--preset--spacing--40)"><?php esc_html_e( '5F Ranch · Near Alvord, Texas · More Time Hunting. Less Time Driving.', '5f-ranch' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->

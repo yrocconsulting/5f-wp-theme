@@ -162,7 +162,7 @@ $fivef_pages = array(
 	'open-range-hunting' => array( 'Open Range Hunting', 'page-open-range-hunting', 'hunting-fishing', '', 'creek-bottom' ),
 	'fishing'            => array( 'Fishing', 'page-fishing', 'hunting-fishing', '', 'geese-lake' ),
 	// Hidden (draft) until the ranch's duck content and photos arrive.
-	'duck-hunting'       => array( 'Duck Hunting', 'page-duck-hunting', 'hunting-fishing', '', 'duck-banner', 'draft' ),
+	'duck-hunting'       => array( 'Guided Duck Hunting', 'page-duck-hunting', 'hunting-fishing', '', 'duck-banner', 'draft' ),
 	'field-notes'        => array( 'Field Notes', '', 0, '', 'creek-bottom' ),
 	'gallery'            => array( 'Gallery', 'page-gallery', 0, '', 'gallery-banner' ),
 	'contact'            => array( 'Contact', 'page-contact', 0, '', 'aerial-ponds' ),
@@ -797,6 +797,20 @@ if ( ! get_option( 'fivef_setup_nav_book' ) && isset( $fivef_ids['book'] ) ) {
 		$fivef_log( 'Added Book a Hunt to the Main Menu' );
 	}
 	update_option( 'fivef_setup_nav_book', 1, false );
+}
+
+// Duck page title from the client's copy (once, only if it still has our first title).
+if ( ! get_option( 'fivef_setup_duck_title' ) && isset( $fivef_ids['duck-hunting'] ) ) {
+	if ( 'Duck Hunting' === get_the_title( $fivef_ids['duck-hunting'] ) ) {
+		wp_update_post(
+			array(
+				'ID'         => $fivef_ids['duck-hunting'],
+				'post_title' => 'Guided Duck Hunting',
+			)
+		);
+		$fivef_log( 'Duck page renamed to Guided Duck Hunting' );
+	}
+	update_option( 'fivef_setup_duck_title', 1, false );
 }
 
 // Duck Hunting banner: the real decoys-at-sunrise photo instead of the stand-in lake photo, once.

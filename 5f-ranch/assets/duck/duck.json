@@ -1,26 +1,8 @@
 [
   {
-    "file": "duck-13-ducks-over-the-pond.jpg",
-    "alt": "Ducks dropping toward decoys on a 5F Ranch pond at first light, silhouetted against the tree line",
-    "caption": "Ducks working the decoys at first light",
-    "featured": true
-  },
-  {
     "file": "duck-04-teal-on-the-pond.jpg",
     "alt": "Two hunters standing in a ranch pond beside a boat with a black lab and a row of teal and shovelers",
     "caption": "Teal and spoonies on the pond",
-    "featured": true
-  },
-  {
-    "file": "duck-08-two-labs-and-the-limit.jpg",
-    "alt": "Two black labs sitting behind a row of ducks laid out on the bank",
-    "caption": "Two labs and the limit",
-    "featured": true
-  },
-  {
-    "file": "duck-12-two-labs-at-sunrise.jpg",
-    "alt": "A yellow lab and a black lab on a duck boat with mallards and shovelers at sunrise",
-    "caption": "Sunrise on the duck boat",
     "featured": true
   },
   {
@@ -36,16 +18,64 @@
     "featured": true
   },
   {
-    "file": "duck-18-strap-full-of-ducks.jpg",
-    "alt": "Hunter in waders carrying a full strap of ducks along the edge of a ranch pond",
-    "caption": "Walking out with a full strap",
-    "featured": true
-  },
-  {
     "file": "duck-02-labs-and-the-strap.jpg",
     "alt": "A yellow lab and a black lab sitting under a strap of ducks hung on a tree in the timber",
     "caption": "Retrievers and the strap",
     "featured": true
+  },
+  {
+    "file": "duck-11-yellow-lab-and-the-limit.jpg",
+    "alt": "Hunter and yellow lab on a truck tailgate with a long row of ducks",
+    "caption": "Tailgate full of ducks",
+    "featured": true
+  },
+  {
+    "file": "duck-06-black-lab-on-the-boat.jpg",
+    "alt": "Black lab sitting on a duck boat behind a row of gadwall and wigeon",
+    "caption": "Black lab and a row of gadwall",
+    "featured": true
+  },
+  {
+    "file": "duck-07-yellow-lab-and-teal.jpg",
+    "alt": "Muddy yellow lab sitting behind a pile of blue-winged teal",
+    "caption": "Early teal and a muddy lab",
+    "featured": true
+  },
+  {
+    "file": "duck-09-frosty-morning.jpg",
+    "alt": "Black lab behind a row of ducks laid on a frosty log",
+    "caption": "A frosty morning's bag",
+    "featured": true
+  },
+  {
+    "file": "duck-21-black-lab-and-the-strap.jpg",
+    "alt": "Black lab sitting beside a strap of ducks hung on a fallen tree",
+    "caption": "Waiting on the next one",
+    "featured": true
+  },
+  {
+    "file": "duck-13-ducks-over-the-pond.jpg",
+    "alt": "Ducks dropping toward decoys on a 5F Ranch pond at first light, silhouetted against the tree line",
+    "caption": "Ducks working the decoys at first light",
+    "featured": false
+  },
+  {
+    "file": "duck-08-two-labs-and-the-limit.jpg",
+    "alt": "Two black labs sitting behind a row of ducks laid out on the bank",
+    "caption": "Two labs and the limit",
+    "featured": false
+  },
+  {
+    "file": "duck-12-two-labs-at-sunrise.jpg",
+    "alt": "A yellow lab and a black lab on a duck boat with mallards and shovelers at sunrise",
+    "caption": "Sunrise on the duck boat",
+    "featured": false
+  },
+  {
+    "file": "duck-18-strap-full-of-ducks.jpg",
+    "alt": "Hunter in waders carrying a full strap of ducks along the edge of a ranch pond",
+    "caption": "Walking out with a full strap",
+    "featured": false
   },
   {
     "file": "duck-01-crew-on-the-boat.jpg",
@@ -66,30 +96,6 @@
     "featured": false
   },
   {
-    "file": "duck-06-black-lab-on-the-boat.jpg",
-    "alt": "Black lab sitting on a duck boat behind a row of gadwall and wigeon",
-    "caption": "Black lab and a row of gadwall",
-    "featured": false
-  },
-  {
-    "file": "duck-07-yellow-lab-and-teal.jpg",
-    "alt": "Muddy yellow lab sitting behind a pile of blue-winged teal",
-    "caption": "Early teal and a muddy lab",
-    "featured": false
-  },
-  {
-    "file": "duck-09-frosty-morning.jpg",
-    "alt": "Black lab behind a row of ducks laid on a frosty log",
-    "caption": "A frosty morning's bag",
-    "featured": false
-  },
-  {
-    "file": "duck-11-yellow-lab-and-the-limit.jpg",
-    "alt": "Hunter and yellow lab on a truck tailgate with a long row of ducks",
-    "caption": "Tailgate full of ducks",
-    "featured": true
-  },
-  {
     "file": "duck-03-geese-on-the-tailgate.jpg",
     "alt": "Yellow lab on a truck tailgate with Canada geese and ducks",
     "caption": "Geese and a happy lab",
@@ -105,12 +111,6 @@
     "file": "duck-20-mixed-bag.jpg",
     "alt": "Smiling hunter holding two straps of ducks in a field by the water",
     "caption": "A mixed bag",
-    "featured": false
-  },
-  {
-    "file": "duck-21-black-lab-and-the-strap.jpg",
-    "alt": "Black lab sitting beside a strap of ducks hung on a fallen tree",
-    "caption": "Waiting on the next one",
     "featured": false
   },
   {
