@@ -65,6 +65,7 @@ tools/process-photo.sh ~/Downloads/DJI_0042.JPG aerial-ponds
 | `hero-trailcam` | Homepage hero: real infrared trail-camera photo of a sounder at night (no people) | sunset illustration |
 | `hog-boar-banner` | Thermal Hog Hunts page banner, hog cards, Pricing: trail-camera photo of a big boar | (in place) |
 | `pricing-banner` | Pricing page banner: trail-camera sounder | (in place) |
+| `duck-banner` | Duck Hunting page banner: decoys under a red sunrise | (in place) |
 | `dove-fields` | Dove Hunting page, mourning dove post, Open Range dove card: real aerial of the ranch fields and tree lines (cropped from `ranch-overview`). Replace with a real dove photo when one is available | (in place) |
 | `hero-thermal`, `thermal-ranch-banner` | Earlier illustrated thermal versions, no longer used | |
 | `aerial-ponds` | Fishing card, Contact banner | (photo in place) |
@@ -128,3 +129,5 @@ Hog hunting is the focus of the whole site. Predators (coyotes, bobcats) are a b
 ## Gallery
 
 The Gallery page (`/gallery/`) is built from `5f-ranch/assets/gallery/gallery.json`. Each entry has a `file` (in the same folder), `alt` text, an optional `caption`, and `featured: true` for the top row. Everything else goes into the "From the Ranch" grid. Click any photo to enlarge it. Add a photo by dropping the file in that folder and adding an entry; it appears on the next deploy.
+
+**Duck photos** live in `5f-ranch/assets/duck/` with their own list, `duck.json` (same format). Entries marked `featured` show on the Duck Hunting page; all of them appear in a "Duck Hunts" section of the Gallery once the Duck Hunting page is published. The hunt video is `assets/duck/duck-hunt.mp4` (compressed to 720p) with `duck-hunt-poster.jpg` as its still.

@@ -276,6 +276,7 @@ function fivef_photo_alt( $slot ) {
 		'hero-trailcam'            => __( 'Infrared trail camera photo of a sounder of feral hogs feeding at night on 5F Ranch', '5f-ranch' ),
 		'dove-fields'          => __( 'Aerial view of 5F Ranch fields and tree lines on the dove hunting area', '5f-ranch' ),
 		'pricing-banner'       => __( 'Trail camera photo of a big sounder of feral hogs on 5F Ranch at night', '5f-ranch' ),
+		'duck-banner'          => __( 'Duck decoys on a 5F Ranch pond under a red sunrise', '5f-ranch' ),
 		'hog-boar-banner'      => __( 'Infrared trail camera photo of a big feral boar on 5F Ranch at dusk', '5f-ranch' ),
 		'thermal-ranch-banner' => __( 'Thermal-style night view of feral hogs crossing 5F Ranch pasture (illustrated)', '5f-ranch' ),
 	);
@@ -310,42 +311,50 @@ add_action( 'wp_head', 'fivef_favicons', 2 );
  * [{ "file": "...jpg", "alt": "...", "caption": "...", "featured": true }]
  *
  * @param bool|null $featured true = featured only, false = the rest, null = all.
+ * @param string    $set      Folder under assets/ holding the photos and <set>.json (gallery, duck).
  * @return array
  */
-function fivef_gallery_items( $featured = null ) {
-	$file  = get_theme_file_path( 'assets/gallery/gallery.json' );
+function fivef_gallery_items( $featured = null, $set = 'gallery' ) {
+	$set   = sanitize_key( $set );
+	$file  = get_theme_file_path( 'assets/' . $set . '/' . $set . '.json' );
 	$items = file_exists( $file ) ? json_decode( (string) file_get_contents( $file ), true ) : array(); // phpcs:ignore WordPress.WP.AlternativeFunctions
 	$items = is_array( $items ) ? $items : array();
-	return array_values(
+	$items = array_values(
 		array_filter(
 			$items,
-			static function ( $item ) use ( $featured ) {
-				if ( empty( $item['file'] ) || ! file_exists( get_theme_file_path( 'assets/gallery/' . $item['file'] ) ) ) {
+			static function ( $item ) use ( $featured, $set ) {
+				if ( empty( $item['file'] ) || ! file_exists( get_theme_file_path( 'assets/' . $set . '/' . $item['file'] ) ) ) {
 					return false;
 				}
 				return null === $featured || (bool) ( ! empty( $item['featured'] ) ) === $featured;
 			}
 		)
 	);
+	foreach ( $items as $i => $item ) {
+		$items[ $i ]['dir'] = $set;
+	}
+	return $items;
 }
 
 /**
  * Gallery block markup (core/gallery with click-to-enlarge images).
  *
  * @param array $items   Items from fivef_gallery_items().
- * @param int   $columns Columns on desktop.
+ * @param int    $columns Columns on desktop.
+ * @param string $class   Extra class for the gallery.
  * @return string
  */
-function fivef_gallery_markup( $items, $columns = 3 ) {
+function fivef_gallery_markup( $items, $columns = 3, $class = '' ) {
+	$class = trim( 'fivef-gallery ' . sanitize_html_class( $class ) );
 	if ( ! $items ) {
 		return '';
 	}
-	$out = '<!-- wp:gallery {"columns":' . (int) $columns . ',"linkTo":"none","sizeSlug":"full","align":"wide","className":"fivef-gallery"} -->' . "\n"
-		. '<figure class="wp-block-gallery alignwide has-nested-images columns-' . (int) $columns . ' is-cropped fivef-gallery">';
+	$out = '<!-- wp:gallery {"columns":' . (int) $columns . ',"linkTo":"none","sizeSlug":"full","align":"wide","className":"' . $class . '"} -->' . "\n"
+		. '<figure class="wp-block-gallery alignwide has-nested-images columns-' . (int) $columns . ' is-cropped ' . $class . '">';
 	foreach ( $items as $item ) {
 		$caption = ! empty( $item['caption'] ) ? '<figcaption class="wp-element-caption">' . esc_html( $item['caption'] ) . '</figcaption>' : '';
 		$out    .= '<!-- wp:image {"lightbox":{"enabled":true},"sizeSlug":"full","linkDestination":"none"} -->' . "\n"
-			. '<figure class="wp-block-image size-full"><img src="' . esc_url( get_theme_file_uri( 'assets/gallery/' . $item['file'] ) ) . '" alt="' . esc_attr( isset( $item['alt'] ) ? $item['alt'] : '' ) . '"/>' . $caption . '</figure>' . "\n"
+			. '<figure class="wp-block-image size-full"><img src="' . esc_url( get_theme_file_uri( 'assets/' . ( isset( $item['dir'] ) ? $item['dir'] : 'gallery' ) . '/' . $item['file'] ) ) . '" alt="' . esc_attr( isset( $item['alt'] ) ? $item['alt'] : '' ) . '"/>' . $caption . '</figure>' . "\n"
 			. '<!-- /wp:image -->' . "\n\n";
 	}
 	return $out . '</figure>' . "\n" . '<!-- /wp:gallery -->';

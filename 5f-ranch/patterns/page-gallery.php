@@ -12,6 +12,9 @@
 
 $fivef_featured = fivef_gallery_items( true );
 $fivef_more     = fivef_gallery_items( false );
+// Duck photos show once the Duck Hunting page is published.
+$fivef_duck_pg  = get_page_by_path( 'hunting-fishing/duck-hunting' );
+$fivef_duck     = ( $fivef_duck_pg && 'publish' === $fivef_duck_pg->post_status ) ? fivef_gallery_items( null, 'duck' ) : array();
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|50"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--50)"><!-- wp:paragraph {"align":"center","textColor":"texas-tan","fontSize":"large"} -->
@@ -23,7 +26,7 @@ $fivef_more     = fivef_gallery_items( false );
 <h2 class="wp-block-heading has-text-align-center is-style-eyebrow" style="margin-top:var(--wp--preset--spacing--50)"><?php esc_html_e( 'Featured', '5f-ranch' ); ?></h2>
 <!-- /wp:heading -->
 
-<?php echo fivef_gallery_markup( $fivef_featured, 3 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in the helper. ?>
+<?php echo fivef_gallery_markup( $fivef_featured, 3, 'fivef-gallery-featured' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in the helper. ?>
 <?php endif; ?>
 
 <?php if ( $fivef_more ) : ?>
@@ -32,6 +35,14 @@ $fivef_more     = fivef_gallery_items( false );
 <!-- /wp:heading -->
 
 <?php echo fivef_gallery_markup( $fivef_more, 4 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in the helper. ?>
+<?php endif; ?>
+
+<?php if ( $fivef_duck ) : ?>
+<!-- wp:heading {"textAlign":"center","level":2,"className":"is-style-eyebrow","anchor":"duck-hunts","style":{"spacing":{"margin":{"top":"var:preset|spacing|60"}}}} -->
+<h2 class="wp-block-heading has-text-align-center is-style-eyebrow" id="duck-hunts" style="margin-top:var(--wp--preset--spacing--60)"><?php esc_html_e( 'Duck Hunts', '5f-ranch' ); ?></h2>
+<!-- /wp:heading -->
+
+<?php echo fivef_gallery_markup( $fivef_duck, 4 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in the helper. ?>
 <?php endif; ?></div>
 <!-- /wp:group -->
 

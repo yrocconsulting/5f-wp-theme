@@ -73,6 +73,7 @@ $fivef_photo_titles = array(
 	'hog-boar-banner' => 'Trail camera: a big feral boar on 5F Ranch',
 	'dove-fields'    => 'Ranch fields and tree lines on the dove hunting area',
 	'pricing-banner' => 'Trail camera: a big sounder of feral hogs at night',
+	'duck-banner'    => 'Duck decoys on a ranch pond at sunrise',
 	'creek'          => 'Creek through the brush',
 	'creek-bottom'   => 'Timbered creek bottom',
 	'ranch-overview' => 'Aerial view across the ranch',
@@ -161,7 +162,7 @@ $fivef_pages = array(
 	'open-range-hunting' => array( 'Open Range Hunting', 'page-open-range-hunting', 'hunting-fishing', '', 'creek-bottom' ),
 	'fishing'            => array( 'Fishing', 'page-fishing', 'hunting-fishing', '', 'geese-lake' ),
 	// Hidden (draft) until the ranch's duck content and photos arrive.
-	'duck-hunting'       => array( 'Duck Hunting', 'page-duck-hunting', 'hunting-fishing', '', 'geese-lake', 'draft' ),
+	'duck-hunting'       => array( 'Duck Hunting', 'page-duck-hunting', 'hunting-fishing', '', 'duck-banner', 'draft' ),
 	'field-notes'        => array( 'Field Notes', '', 0, '', 'creek-bottom' ),
 	'gallery'            => array( 'Gallery', 'page-gallery', 0, '', 'gallery-banner' ),
 	'contact'            => array( 'Contact', 'page-contact', 0, '', 'aerial-ponds' ),
@@ -796,6 +797,16 @@ if ( ! get_option( 'fivef_setup_nav_book' ) && isset( $fivef_ids['book'] ) ) {
 		$fivef_log( 'Added Book a Hunt to the Main Menu' );
 	}
 	update_option( 'fivef_setup_nav_book', 1, false );
+}
+
+// Duck Hunting banner: the real decoys-at-sunrise photo instead of the stand-in lake photo, once.
+if ( ! get_option( 'fivef_setup_duck_banner' ) && isset( $fivef_ids['duck-hunting'], $fivef_media['duck-banner'] ) ) {
+	$fivef_thumb = (int) get_post_thumbnail_id( $fivef_ids['duck-hunting'] );
+	if ( ! $fivef_thumb || ( isset( $fivef_media['geese-lake'] ) && (int) $fivef_media['geese-lake'] === $fivef_thumb ) ) {
+		set_post_thumbnail( $fivef_ids['duck-hunting'], $fivef_media['duck-banner'] );
+		$fivef_log( 'Duck Hunting banner set to the decoys at sunrise' );
+	}
+	update_option( 'fivef_setup_duck_banner', 1, false );
 }
 
 flush_rewrite_rules( false );
