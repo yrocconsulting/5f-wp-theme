@@ -161,8 +161,7 @@ $fivef_pages = array(
 	'dove-hunting'       => array( 'Dove Hunting', 'page-dove-hunting', 'hunting-fishing', '', 'stock-tank' ),
 	'open-range-hunting' => array( 'Open Range Hunting', 'page-open-range-hunting', 'hunting-fishing', '', 'creek-bottom' ),
 	'fishing'            => array( 'Fishing', 'page-fishing', 'hunting-fishing', '', 'geese-lake' ),
-	// Hidden (draft) until the ranch's duck content and photos arrive.
-	'duck-hunting'       => array( 'Guided Duck Hunting', 'page-duck-hunting', 'hunting-fishing', '', 'duck-banner', 'draft' ),
+	'duck-hunting'       => array( 'Guided Duck Hunting', 'page-duck-hunting', 'hunting-fishing', '', 'duck-banner' ),
 	'field-notes'        => array( 'Field Notes', '', 0, '', 'creek-bottom' ),
 	'gallery'            => array( 'Gallery', 'page-gallery', 0, '', 'gallery-banner' ),
 	'contact'            => array( 'Contact', 'page-contact', 0, '', 'aerial-ponds' ),
@@ -323,7 +322,7 @@ $fivef_menu = implode(
 			$fivef_link( 'home' ),
 			$fivef_link( 'thermal-hog-hunts' ),
 			$fivef_link( 'pricing' ),
-			$fivef_link( 'hunting-fishing', 'navigation-submenu', $fivef_link( 'dove-hunting' ) . $fivef_link( 'open-range-hunting' ) . $fivef_link( 'fishing' ) ),
+			$fivef_link( 'hunting-fishing', 'navigation-submenu', $fivef_link( 'dove-hunting' ) . $fivef_link( 'duck-hunting' ) . $fivef_link( 'open-range-hunting' ) . $fivef_link( 'fishing' ) ),
 			$fivef_link( 'about-the-ranch' ),
 			$fivef_link( 'field-notes' ),
 			$fivef_link( 'gallery' ),
@@ -613,7 +612,7 @@ if ( class_exists( 'WPCF7_ContactForm' ) ) {
 						'<p class="fivef-field"><label for="fivef-name">Your name <span class="fivef-req">*</span></label>[text* your-name id:fivef-name autocomplete:name]</p>',
 						'<p class="fivef-field"><label for="fivef-email">Email <span class="fivef-req">*</span></label>[email* your-email id:fivef-email autocomplete:email]</p>',
 						'<p class="fivef-field"><label for="fivef-phone">Phone</label>[tel your-phone id:fivef-phone autocomplete:tel]</p>',
-						'<p class="fivef-field"><label for="fivef-interest">I’m interested in</label>[select your-interest id:fivef-interest default:get "Thermal Hog Hunt weekend" "Private / group weekend" "Dove Hunting" "Fishing" "Something else"]</p>',
+						'<p class="fivef-field"><label for="fivef-interest">I’m interested in</label>[select your-interest id:fivef-interest default:get "Thermal Hog Hunt weekend" "Private / group weekend" "Dove Hunting" "Guided Duck Hunt" "Fishing" "Something else"]</p>',
 						'</div>',
 						'<p class="fivef-field"><label for="fivef-message">Message <span class="fivef-req">*</span></label>[textarea* your-message id:fivef-message x5]</p>',
 						'<p class="fivef-submit">[submit "Send Message"]</p>',
@@ -831,6 +830,68 @@ if ( ! get_option( 'fivef_setup_duck_deposit' ) ) {
 		$fivef_log( 'Duck deposit set to $150 per person (50%)' );
 	}
 	update_option( 'fivef_setup_duck_deposit', 1, false );
+}
+
+// Duck hunts launch (client, Oct 2026), once: publish the Guided Duck Hunting page, put it in the
+// Hunting & Fishing dropdown after Dove Hunting, make duck hunts bookable online, and add it to the
+// contact form's options. Later changes in WordPress are kept.
+if ( ! get_option( 'fivef_setup_duck_launch' ) && isset( $fivef_ids['duck-hunting'] ) ) {
+	if ( 'draft' === get_post_status( $fivef_ids['duck-hunting'] ) ) {
+		wp_update_post(
+			array(
+				'ID'          => $fivef_ids['duck-hunting'],
+				'post_status' => 'publish',
+			)
+		);
+		$fivef_log( 'Guided Duck Hunting page published' );
+	}
+	$fivef_nav = get_posts(
+		array(
+			'post_type'   => 'wp_navigation',
+			'title'       => 'Main Menu',
+			'post_status' => 'publish',
+			'numberposts' => 1,
+		)
+	);
+	if ( $fivef_nav && false === strpos( $fivef_nav[0]->post_content, '"id":' . (int) $fivef_ids['duck-hunting'] . ',' ) ) {
+		$content  = $fivef_nav[0]->post_content;
+		$fivef_at = false;
+		foreach ( array( 'open-range-hunting', 'fishing' ) as $fivef_before ) {
+			if ( false === $fivef_at && isset( $fivef_ids[ $fivef_before ] ) && preg_match( '/<!-- wp:navigation-link \{[^}]*"id":' . (int) $fivef_ids[ $fivef_before ] . ',/', $content, $fivef_m, PREG_OFFSET_CAPTURE ) ) {
+				$fivef_at = $fivef_m[0][1];
+			}
+		}
+		if ( false !== $fivef_at ) {
+			wp_update_post(
+				array(
+					'ID'           => $fivef_nav[0]->ID,
+					'post_content' => substr( $content, 0, $fivef_at ) . $fivef_link( 'duck-hunting' ) . "\n" . substr( $content, $fivef_at ),
+				)
+			);
+			$fivef_log( 'Added Guided Duck Hunting to the Hunting & Fishing menu' );
+		} else {
+			$fivef_log( 'Could not find the Hunting & Fishing menu; add Guided Duck Hunting in Appearance → Editor → Navigation.' );
+		}
+	}
+	update_option( 'fivef_bk_duck_enabled', 1 );
+	$fivef_log( 'Duck hunts are bookable on the calendar' );
+	if ( class_exists( 'WPCF7_ContactForm' ) ) {
+		$fivef_form_post = get_posts(
+			array(
+				'post_type'   => 'wpcf7_contact_form',
+				'title'       => '5F Ranch Contact',
+				'post_status' => 'any',
+				'numberposts' => 1,
+			)
+		);
+		$fivef_form      = $fivef_form_post ? WPCF7_ContactForm::get_instance( $fivef_form_post[0]->ID ) : null;
+		if ( $fivef_form && false === strpos( $fivef_form->prop( 'form' ), 'Guided Duck Hunt' ) && false !== strpos( $fivef_form->prop( 'form' ), '"Dove Hunting"' ) ) {
+			$fivef_form->set_properties( array( 'form' => str_replace( '"Dove Hunting"', '"Dove Hunting" "Guided Duck Hunt"', $fivef_form->prop( 'form' ) ) ) );
+			$fivef_form->save();
+			$fivef_log( 'Contact form: added "Guided Duck Hunt"' );
+		}
+	}
+	update_option( 'fivef_setup_duck_launch', 1, false );
 }
 
 flush_rewrite_rules( false );

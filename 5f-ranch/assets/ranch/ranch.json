@@ -1,0 +1,62 @@
+[
+  {
+    "file": "ranch-overview.jpg",
+    "dir": "photos",
+    "alt": "Aerial view across 5F Ranch: pasture, tree lines and stock tanks",
+    "caption": "Across the ranch"
+  },
+  {
+    "file": "creek-bottom.jpg",
+    "dir": "photos",
+    "alt": "Timbered bottoms along Big Sandy Creek between open pastures",
+    "caption": "Big Sandy Creek bottoms"
+  },
+  {
+    "file": "aerial-ponds.jpg",
+    "dir": "photos",
+    "alt": "Aerial view of the ranch ponds",
+    "caption": "The ranch ponds from above"
+  },
+  {
+    "file": "quarry-lake.jpg",
+    "dir": "photos",
+    "alt": "Ranch lake with rock ledges and tree lines",
+    "caption": "The quarry lake"
+  },
+  {
+    "file": "long-pond.jpg",
+    "dir": "photos",
+    "alt": "Long pond winding between pastures",
+    "caption": "The long pond"
+  },
+  {
+    "file": "geese-lake.jpg",
+    "dir": "photos",
+    "alt": "Canada geese on a 5F Ranch lake",
+    "caption": "Geese on the lake"
+  },
+  {
+    "file": "creek.jpg",
+    "dir": "photos",
+    "alt": "Big Sandy Creek winding through the brush",
+    "caption": "Big Sandy Creek"
+  },
+  {
+    "file": "stock-tank.jpg",
+    "dir": "photos",
+    "alt": "Open pasture and a stock tank on the ranch",
+    "caption": "Pasture and stock tank"
+  },
+  {
+    "file": "headquarters.jpg",
+    "dir": "photos",
+    "alt": "Ranch headquarters with the 5F barn, pens and pond",
+    "caption": "Ranch headquarters"
+  },
+  {
+    "file": "duck-14-ranch-sky.jpg",
+    "dir": "duck",
+    "alt": "Purple and orange clouds over the trees on 5F Ranch",
+    "caption": "Evening sky over the ranch"
+  }
+]

@@ -885,3 +885,50 @@ body.blog .fivef-cat-pills > p a {
 	border-radius: 6px;
 	box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
 }
+
+/* Gallery filter buttons. */
+.fivef-gallery-filters {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.5rem;
+	margin: var(--wp--preset--spacing--40) auto 0;
+	scroll-margin-top: 1.5rem;
+}
+
+.fivef-filter {
+	font: inherit;
+	font-size: var(--wp--preset--font-size--x-small);
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--wp--preset--color--texas-tan);
+	background: transparent;
+	border: 1px solid rgba(217, 200, 169, 0.3);
+	border-radius: 999px;
+	padding: 0.6rem 1.15rem;
+	cursor: pointer;
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.fivef-filter:hover,
+.fivef-filter:focus-visible {
+	border-color: var(--wp--preset--color--sunset-gold);
+	color: var(--wp--preset--color--bone);
+	outline: none;
+}
+
+.fivef-filter.is-active {
+	background: var(--wp--preset--color--sunset-gold);
+	border-color: var(--wp--preset--color--sunset-gold);
+	color: var(--wp--preset--color--charcoal);
+}
+
+.fivef-gallery figure.wp-block-image[hidden],
+.fivef-gallery-section[hidden] {
+	display: none !important;
+}
+
+.fivef-gallery-section h2[hidden] {
+	display: none;
+}

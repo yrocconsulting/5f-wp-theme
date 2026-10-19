@@ -123,12 +123,14 @@ Hog hunting is the focus of the whole site. Predators (coyotes, bobcats) are a b
 - **Online deposits (Stripe Checkout):** Bookings → **Settings**. Paste the Stripe secret key and the webhook signing secret (the screen shows the webhook URL and the events to send). Or add `STRIPE_SECRET_KEY` / `STRIPE_WEBHOOK_SECRET` repository secrets and deploy. Use `sk_test_...` keys first and pay with Stripe's test card 4242 4242 4242 4242. Without keys, the calendar takes **requests**: the dates are held and the ranch collects the deposit itself.
 - Spots are held for 35 minutes while a guest pays; unpaid holds are released automatically.
 - Emails go to the guest and to the booking address in Settings (default: the contact form address).
-- **Guided Duck Hunting page** (`/hunting-fishing/duck-hunting/`, a draft until launch) uses the client's copy: guide, HRCH retrievers, ten ponds, pricing table, the hunt video and photos. Its "Check Availability" buttons call the ranch until duck hunts are bookable online, then open the calendar.
+- **Guided Duck Hunting page** (`/hunting-fishing/duck-hunting/`, published and in the Hunting & Fishing menu) uses the client's copy: guide, HRCH retrievers, ten ponds, pricing table, the hunt video and photos. Its "Check Availability" buttons call the ranch until duck hunts are bookable online, then open the calendar.
 - **Duck hunts** stay off the calendar until "Show duck hunts on the booking calendar" is ticked in Settings. Set the duck deposit there too. The Duck Hunting page (Pages → Drafts) is a placeholder until the ranch's copy and photos arrive.
 - Prices live in `5f-booking/includes/config.php`.
 
 ## Gallery
 
 The Gallery page (`/gallery/`) is built from `5f-ranch/assets/gallery/gallery.json`. Each entry has a `file` (in the same folder), `alt` text, an optional `caption`, and `featured: true` for the top row. Everything else goes into the "From the Ranch" grid. Click any photo to enlarge it. Add a photo by dropping the file in that folder and adding an entry; it appears on the next deploy.
+
+**Filters:** the Gallery has buttons for All, Hog Hunts, Duck Hunts, Predators and The Ranch. Each photo's category comes from its list: `gallery.json` photos are Hog Hunts unless they have `"cat"` (the bobcat is `"cat": "predators"`), `duck/duck.json` photos are Duck Hunts, and `ranch/ranch.json` lists property photos (`"dir"` says which folder each file is in). Link straight to a category with `/gallery/#ducks`, `#hogs`, `#predators` or `#ranch`.
 
 **Duck photos** live in `5f-ranch/assets/duck/` with their own list, `duck.json` (same format). Entries marked `featured` show on the Duck Hunting page; all of them appear in a "Duck Hunts" section of the Gallery once the Duck Hunting page is published. The hunt video is `assets/duck/duck-hunt.mp4` (compressed to 720p) with `duck-hunt-poster.jpg` as its still.

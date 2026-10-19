@@ -15,7 +15,8 @@
     "file": "featured-03-bobcat.jpg",
     "alt": "Bobcat taken on 5F Ranch, laid on the rack of a ranch truck at dusk",
     "caption": "A ranch bobcat at dusk",
-    "featured": true
+    "featured": true,
+    "cat": "predators"
   },
   {
     "file": "04-hogs-in-the-woods.jpg",

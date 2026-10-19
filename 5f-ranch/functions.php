@@ -28,6 +28,12 @@ add_action( 'after_setup_theme', 'fivef_setup' );
 function fivef_enqueue_assets() {
 	// Version by file time so every deploy busts browser and CDN caches.
 	wp_enqueue_style( 'fivef-style', get_stylesheet_uri(), array(), (string) filemtime( get_stylesheet_directory() . '/style.css' ) );
+
+	// Gallery filter buttons.
+	if ( is_page( 'gallery' ) ) {
+		$js = 'assets/js/gallery-filter.js';
+		wp_enqueue_script( 'fivef-gallery-filter', get_theme_file_uri( $js ), array(), (string) filemtime( get_theme_file_path( $js ) ), array( 'strategy' => 'defer' ) );
+	}
 }
 add_action( 'wp_enqueue_scripts', 'fivef_enqueue_assets' );
 
@@ -323,15 +329,23 @@ function fivef_gallery_items( $featured = null, $set = 'gallery' ) {
 		array_filter(
 			$items,
 			static function ( $item ) use ( $featured, $set ) {
-				if ( empty( $item['file'] ) || ! file_exists( get_theme_file_path( 'assets/' . $set . '/' . $item['file'] ) ) ) {
+				$dir = empty( $item['dir'] ) ? $set : sanitize_key( $item['dir'] );
+				if ( empty( $item['file'] ) || ! file_exists( get_theme_file_path( 'assets/' . $dir . '/' . $item['file'] ) ) ) {
 					return false;
 				}
 				return null === $featured || (bool) ( ! empty( $item['featured'] ) ) === $featured;
 			}
 		)
 	);
+	// Filter category on the Gallery page: from the item, or the set's default.
+	$cats = array(
+		'gallery' => 'hogs',
+		'duck'    => 'ducks',
+		'ranch'   => 'ranch',
+	);
 	foreach ( $items as $i => $item ) {
-		$items[ $i ]['dir'] = $set;
+		$items[ $i ]['dir'] = empty( $item['dir'] ) ? $set : sanitize_key( $item['dir'] );
+		$items[ $i ]['cat'] = empty( $item['cat'] ) ? ( isset( $cats[ $set ] ) ? $cats[ $set ] : $set ) : sanitize_key( $item['cat'] );
 	}
 	return $items;
 }
@@ -353,8 +367,9 @@ function fivef_gallery_markup( $items, $columns = 3, $class = '' ) {
 		. '<figure class="wp-block-gallery alignwide has-nested-images columns-' . (int) $columns . ' is-cropped ' . $class . '">';
 	foreach ( $items as $item ) {
 		$caption = ! empty( $item['caption'] ) ? '<figcaption class="wp-element-caption">' . esc_html( $item['caption'] ) . '</figcaption>' : '';
-		$out    .= '<!-- wp:image {"lightbox":{"enabled":true},"sizeSlug":"full","linkDestination":"none"} -->' . "\n"
-			. '<figure class="wp-block-image size-full"><img src="' . esc_url( get_theme_file_uri( 'assets/' . ( isset( $item['dir'] ) ? $item['dir'] : 'gallery' ) . '/' . $item['file'] ) ) . '" alt="' . esc_attr( isset( $item['alt'] ) ? $item['alt'] : '' ) . '"/>' . $caption . '</figure>' . "\n"
+		$cat     = empty( $item['cat'] ) ? '' : 'fivef-cat-' . sanitize_html_class( $item['cat'] );
+		$out    .= '<!-- wp:image {"lightbox":{"enabled":true},"sizeSlug":"full","linkDestination":"none"' . ( $cat ? ',"className":"' . $cat . '"' : '' ) . '} -->' . "\n"
+			. '<figure class="wp-block-image size-full' . ( $cat ? ' ' . $cat : '' ) . '"><img src="' . esc_url( get_theme_file_uri( 'assets/' . ( isset( $item['dir'] ) ? $item['dir'] : 'gallery' ) . '/' . $item['file'] ) ) . '" alt="' . esc_attr( isset( $item['alt'] ) ? $item['alt'] : '' ) . '"/>' . $caption . '</figure>' . "\n"
 			. '<!-- /wp:image -->' . "\n\n";
 	}
 	return $out . '</figure>' . "\n" . '<!-- /wp:gallery -->';
