@@ -106,10 +106,10 @@ Hog hunting is the focus of the whole site. Predators (coyotes, bobcats) are a b
 
 - **Home:** built from the client's home page copy (Oct 2026): a private, four-hunter thermal hog-hunting weekend. Hero ("Escape the Office. Own the Weekend."), weekend at a glance (4 hunters, 2,600 acres, overnight lodging, no hog harvest limit), the story, what's included, trail-cam photos, the private ranch (land photos), groups & private weekends, location and a closing call to action. No deer on the home page.
 - **Inquiry buttons** open the Contact form with "I'm interested in" already chosen, e.g. `/contact/?your-interest=Private%20%2F%20group%20weekend#message`. The value must match one of the form's options.
-- **Menu:** Home · Thermal Hog Hunts · Pricing · Hunting & Fishing ▾ (Open Range Hunting, Fishing) · About the Ranch · Field Notes · Gallery · Contact. Later menu edits in WordPress are kept.
+- **Menu:** Home · Thermal Hog Hunts · Pricing · Hunting & Fishing ▾ (Dove Hunting, Open Range Hunting, Fishing) · About the Ranch · Field Notes · Gallery · Contact. Later menu edits in WordPress are kept.
 - **Pricing** (`/pricing/`): two-day guided thermal hog hunt, $2,000 per hunter or $7,200 for all four spots, $1,000 non-refundable deposit per hunter. Prices live in `patterns/page-pricing.php`.
-- **Open Range Hunting:** dove and feral hogs only (no deer). The dove card links to the Dove Hunting page once it's published, otherwise to the contact form.
-- **Dove Hunting (hidden):** the page is kept as a draft because dove hunts may not run next year. To bring it back, publish it from Pages → Drafts, add it to the menu (Appearance → Editor → Navigation), and insert the *Dove hunting feature* pattern on the home page if wanted.
+- **Open Range Hunting:** dove and feral hogs only (no deer). The dove card links to the Dove Hunting page while it's published, otherwise to the contact form.
+- **Dove Hunting:** published again (Oct 2026) and first in the Hunting & Fishing dropdown. Its photo is the doves-over-sunflowers illustration.
 - Pages still built from the theme pattern update automatically with each deploy. If a page is opened and saved in the editor, it keeps its own copy, and the deploy log notes it.
 
 ## Gallery

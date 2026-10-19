@@ -13,7 +13,7 @@
 <div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:columns {"verticalAlignment":"center","align":"wide","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|60"}}}} -->
 <div class="wp-block-columns alignwide are-vertically-aligned-center"><!-- wp:column {"verticalAlignment":"center"} -->
 <div class="wp-block-column is-vertically-aligned-center"><!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"is-style-torn"} -->
-<figure class="wp-block-image size-full is-style-torn"><img src="<?php echo fivef_photo( 'doves-lake' ); ?>" alt="<?php echo fivef_photo_alt( 'doves-lake' ); ?>"/></figure>
+<figure class="wp-block-image size-full is-style-torn"><img src="<?php echo fivef_photo( 'dove-sunflowers' ); ?>" alt="<?php echo fivef_photo_alt( 'dove-sunflowers' ); ?>"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column -->
 

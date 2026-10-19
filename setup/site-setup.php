@@ -318,7 +318,7 @@ $fivef_menu = implode(
 			$fivef_link( 'home' ),
 			$fivef_link( 'thermal-hog-hunts' ),
 			$fivef_link( 'pricing' ),
-			$fivef_link( 'hunting-fishing', 'navigation-submenu', $fivef_link( 'open-range-hunting' ) . $fivef_link( 'fishing' ) ),
+			$fivef_link( 'hunting-fishing', 'navigation-submenu', $fivef_link( 'dove-hunting' ) . $fivef_link( 'open-range-hunting' ) . $fivef_link( 'fishing' ) ),
 			$fivef_link( 'about-the-ranch' ),
 			$fivef_link( 'field-notes' ),
 			$fivef_link( 'gallery' ),
@@ -698,6 +698,51 @@ if ( ! get_option( 'fivef_setup_oct19' ) ) {
 		}
 	}
 	update_option( 'fivef_setup_oct19', 1, false );
+}
+
+// Dove is back (client, Oct 2026), once: publish the Dove Hunting page and put it first in the
+// Hunting & Fishing dropdown. Later changes in WordPress are kept.
+if ( ! get_option( 'fivef_setup_dove_return' ) && isset( $fivef_ids['dove-hunting'] ) ) {
+	if ( 'draft' === get_post_status( $fivef_ids['dove-hunting'] ) ) {
+		wp_update_post(
+			array(
+				'ID'          => $fivef_ids['dove-hunting'],
+				'post_status' => 'publish',
+			)
+		);
+		$fivef_log( 'Dove Hunting page published' );
+	}
+	$fivef_nav = get_posts(
+		array(
+			'post_type'   => 'wp_navigation',
+			'title'       => 'Main Menu',
+			'post_status' => 'publish',
+			'numberposts' => 1,
+		)
+	);
+	if ( $fivef_nav ) {
+		$fivef_nav_post = get_post( $fivef_nav[0]->ID );
+		$content        = $fivef_nav_post->post_content;
+		$fivef_dove     = $fivef_link( 'dove-hunting' );
+		if ( false === strpos( $content, '"id":' . (int) $fivef_ids['dove-hunting'] . ',' ) ) {
+			$fivef_at = isset( $fivef_ids['open-range-hunting'] ) && preg_match( '/<!-- wp:navigation-link \{[^}]*"id":' . (int) $fivef_ids['open-range-hunting'] . ',/', $content, $fivef_m, PREG_OFFSET_CAPTURE ) ? $fivef_m[0][1] : false;
+			if ( false === $fivef_at && isset( $fivef_ids['hunting-fishing'] ) && preg_match( '/<!-- wp:navigation-submenu \{[^}]*"id":' . (int) $fivef_ids['hunting-fishing'] . ',[^}]*\} -->/', $content, $fivef_m, PREG_OFFSET_CAPTURE ) ) {
+				$fivef_at = $fivef_m[0][1] + strlen( $fivef_m[0][0] );
+			}
+			if ( false !== $fivef_at ) {
+				wp_update_post(
+					array(
+						'ID'           => $fivef_nav_post->ID,
+						'post_content' => substr( $content, 0, $fivef_at ) . $fivef_dove . "\n" . substr( $content, $fivef_at ),
+					)
+				);
+				$fivef_log( 'Added Dove Hunting to the Hunting & Fishing menu' );
+			} else {
+				$fivef_log( 'Could not find Hunting & Fishing in the menu; add Dove Hunting in Appearance → Editor → Navigation.' );
+			}
+		}
+	}
+	update_option( 'fivef_setup_dove_return', 1, false );
 }
 
 flush_rewrite_rules( false );
