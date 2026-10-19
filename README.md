@@ -77,7 +77,7 @@ tools/process-photo.sh ~/Downloads/DJI_0042.JPG aerial-ponds
 | `ranch-overview` | About the Ranch, Hunting & Fishing banner | (photo in place; house cropped out) |
 | `headquarters` | About the Ranch banner (the 5F barn) | (photo in place) |
 | `hog-hunt-1` | Thermal Hog Hunts page, hog cards, hog post banner | `creek-bottom` |
-| `hog-hunt-2`, `hog-hunt-3`, `hog-pair` | Homepage hog feature, hog post; Thermal Hog Hunts "From the Field" uses `hog-hunt-2`, `hog-hunt-4` and `hog-pair` portraits (`*-portrait.jpg`) | `creek-bottom` |
+| `hog-hunt-2`, `hog-hunt-3`, `hog-pair` | Homepage hog feature, hog post; Thermal Hog Hunts "From the Field" uses `hog-hunt-5`, `hog-hunt-4` and `hog-pair` portraits (`*-portrait.jpg`) | `creek-bottom` |
 
 `doves-lake.jpg` is a composite: the dove silhouettes were added digitally to the lake photo. Replace it if a real dove photo becomes available.
 
