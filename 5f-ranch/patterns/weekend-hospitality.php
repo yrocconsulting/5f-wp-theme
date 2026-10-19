@@ -48,7 +48,7 @@
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
-<li><?php echo wp_kses_post( __( '<strong>No harvest limit on feral hogs</strong>, subject to applicable laws and safe hunting practices', '5f-ranch' ) ); ?></li>
+<li><?php echo wp_kses_post( __( '<strong>No harvest limit on feral hogs</strong>', '5f-ranch' ) ); ?></li>
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
@@ -63,6 +63,10 @@
 <!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|40"}}}} -->
 <div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--40)"><!-- wp:button -->
 <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/thermal-hog-hunts/' ) ); ?>"><?php esc_html_e( 'Explore Thermal Hog Hunts', '5f-ranch' ); ?></a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"is-style-outline"} -->
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/pricing/' ) ); ?>"><?php esc_html_e( 'See Pricing', '5f-ranch' ); ?></a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:column --></div>

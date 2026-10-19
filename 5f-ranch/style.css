@@ -661,7 +661,8 @@ body.blog .fivef-cat-pills > p a {
 	flex-shrink: 0;
 }
 
-@media (max-width: 1399px) {
+/* The header button only fits beside the full menu on wide screens. */
+@media (max-width: 1719px) {
 	.fivef-header .fivef-header-cta {
 		display: none;
 	}
@@ -689,8 +690,8 @@ body.blog .fivef-cat-pills > p a {
 	}
 }
 
-/* Tablets: use the menu button + overlay up to 1080px (core switches at 600px). */
-@media (min-width: 600px) and (max-width: 1199px) {
+/* Tablets and small laptops: use the menu button + overlay below 1300px (core switches at 600px). */
+@media (min-width: 600px) and (max-width: 1299px) {
 	.fivef-header .wp-block-navigation__responsive-container-open:not(.always-shown) {
 		display: flex;
 	}
@@ -779,4 +780,57 @@ body.blog .fivef-cat-pills > p a {
 	.wp-block-columns.fivef-glance:not(.is-not-stacked-on-mobile) > .wp-block-column {
 		flex-basis: calc(50% - 1rem) !important;
 	}
+}
+
+/* ---------- Pricing ---------- */
+
+.fivef-price-card {
+	text-align: left;
+}
+
+.fivef-price-card.is-featured {
+	border: 1px solid var(--wp--preset--color--sunset-gold);
+	box-shadow: 0 0 0 4px rgba(200, 150, 62, 0.15), 0 18px 40px rgba(0, 0, 0, 0.4);
+}
+
+.fivef-price {
+	font-family: var(--wp--preset--font-family--cinzel);
+	font-size: clamp(2.6rem, 5vw, 3.6rem);
+	font-weight: 700;
+	line-height: 1;
+	color: var(--wp--preset--color--bone);
+	margin: 0;
+}
+
+.fivef-price span {
+	font-family: var(--wp--preset--font-family--montserrat);
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 500;
+	letter-spacing: 0.04em;
+	color: var(--wp--preset--color--texas-tan);
+}
+
+.fivef-price-table table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: var(--wp--preset--font-size--small);
+}
+
+.fivef-price-table th,
+.fivef-price-table td {
+	border: 0;
+	border-bottom: 1px solid rgba(217, 200, 169, 0.2);
+	padding: 0.85rem 0.75rem;
+	text-align: left;
+}
+
+.fivef-price-table th {
+	font-size: var(--wp--preset--font-size--x-small);
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--wp--preset--color--sunset-gold);
+}
+
+.fivef-price-table td strong {
+	color: var(--wp--preset--color--bone);
 }

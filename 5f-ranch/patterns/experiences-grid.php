@@ -4,7 +4,7 @@
  * Slug: 5f-ranch/experiences-grid
  * Categories: 5f-ranch, featured
  * Keywords: services, hunts, cards, grid, hogs, predators, fishing
- * Description: Linked cards for Thermal Hog Hunts, Predators, Open Range Hunting and Fishing.
+ * Description: Linked cards for Thermal Hog Hunts, Predators and Fishing.
  *
  * @package 5f-ranch
  */
@@ -23,13 +23,6 @@ $fivef_cards = array(
 		'img'   => esc_url( get_theme_file_uri( 'assets/gallery/featured-03-bobcat.jpg' ) ),
 		'alt'   => esc_attr__( 'Bobcat taken on 5F Ranch, laid on the rack of a ranch truck at dusk', '5f-ranch' ),
 		'text'  => __( 'Coyotes and bobcats are often taken on hog hunts when the opportunity comes up.', '5f-ranch' ),
-	),
-	array(
-		'title' => __( 'Open Range Hunting', '5f-ranch' ),
-		'url'   => '/hunting-fishing/open-range-hunting/',
-		'img'   => fivef_photo( 'creek-bottom' ),
-		'alt'   => fivef_photo_alt( 'creek-bottom' ),
-		'text'  => __( 'White-tailed deer and seasonal opportunities across the wider 2,600-acre property.', '5f-ranch' ),
 	),
 	array(
 		'title' => __( 'Fishing', '5f-ranch' ),

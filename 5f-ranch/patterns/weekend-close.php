@@ -17,7 +17,7 @@ $fivef_c = fivef_contacts();
 <!-- /wp:heading -->
 
 <!-- wp:heading {"textAlign":"center","level":3,"textColor":"texas-tan","fontSize":"xx-large"} -->
-<h3 class="wp-block-heading has-text-align-center has-texas-tan-color has-text-color has-xx-large-font-size"><?php esc_html_e( 'Conveniently Close. A World Away.', '5f-ranch' ); ?></h3>
+<h3 class="wp-block-heading has-text-align-center has-texas-tan-color has-text-color has-xx-large-font-size"><?php esc_html_e( 'Conveniently Close.', '5f-ranch' ); ?><br><?php esc_html_e( 'A World Away.', '5f-ranch' ); ?></h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","fontSize":"large"} -->
@@ -27,7 +27,7 @@ $fivef_c = fivef_contacts();
 
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"},"margin":{"top":"0","bottom":"0"}},"border":{"top":{"color":"var:preset|color|sunset-gold","width":"1px"}}},"backgroundColor":"pine","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull has-pine-background-color has-background" style="border-top-color:var(--wp--preset--color--sunset-gold);border-top-width:1px;margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:heading {"textAlign":"center","level":2,"textColor":"bone","fontSize":"xx-large"} -->
-<h2 class="wp-block-heading has-text-align-center has-bone-color has-text-color has-xx-large-font-size"><?php esc_html_e( 'Four Hunters. One Ranch. A Weekend Worth Remembering.', '5f-ranch' ); ?></h2>
+<h2 class="wp-block-heading has-text-align-center has-bone-color has-text-color has-xx-large-font-size"><?php esc_html_e( 'Four Hunters. One Ranch.', '5f-ranch' ); ?><br><?php esc_html_e( 'A Weekend Worth Remembering.', '5f-ranch' ); ?></h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","textColor":"texas-tan"} -->

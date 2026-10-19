@@ -9,7 +9,7 @@
  * @package 5f-ranch
  */
 
-$fivef_pick  = array( 'featured-01-trail-cam-feeder.jpg', '07-sounder-at-field-feeder.jpg', '12-sounder-on-the-oil-pump-trail.jpg', '17-snow-day-at-the-hog-trap.jpg' );
+$fivef_pick  = array( 'featured-01-trail-cam-feeder.jpg', '07-sounder-at-field-feeder.jpg', '12-sounder-on-the-oil-pump-trail.jpg', '17-snow-day-at-the-feeder.jpg' );
 $fivef_items = array_values(
 	array_filter(
 		fivef_gallery_items(),

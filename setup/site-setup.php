@@ -71,6 +71,8 @@ $fivef_photo_titles = array(
 	'gallery-banner' => 'Trail camera: feral hogs at a feeder on 5F Ranch',
 	'hero-trailcam'      => 'Trail camera: a sounder of feral hogs at night on 5F Ranch',
 	'hog-boar-banner' => 'Trail camera: a big feral boar on 5F Ranch',
+	'dove-sunflowers' => 'Illustration: mourning doves over a sunflower field',
+	'pricing-banner' => 'Trail camera: a big sounder of feral hogs at night',
 	'creek'          => 'Creek through the brush',
 	'creek-bottom'   => 'Timbered creek bottom',
 	'ranch-overview' => 'Aerial view across the ranch',
@@ -152,6 +154,7 @@ if ( ! get_option( 'site_icon' ) && file_exists( get_theme_file_path( 'assets/im
 $fivef_pages = array(
 	'home'               => array( 'Home', 'page-home', 0, 'page-landing', '' ),
 	'thermal-hog-hunts'  => array( 'Thermal Hog Hunts', 'page-hog-hunts', 0, '', 'hog-boar-banner' ),
+	'pricing'            => array( 'Pricing', 'page-pricing', 0, '', 'pricing-banner' ),
 	'about-the-ranch'    => array( 'About the Ranch', 'page-about', 0, '', 'headquarters' ),
 	'hunting-fishing'    => array( 'Hunting & Fishing', 'page-hunting-fishing', 0, '', 'ranch-overview' ),
 	'dove-hunting'       => array( 'Dove Hunting', 'page-dove-hunting', 'hunting-fishing', '', 'stock-tank' ),
@@ -314,6 +317,7 @@ $fivef_menu = implode(
 		array(
 			$fivef_link( 'home' ),
 			$fivef_link( 'thermal-hog-hunts' ),
+			$fivef_link( 'pricing' ),
 			$fivef_link( 'hunting-fishing', 'navigation-submenu', $fivef_link( 'open-range-hunting' ) . $fivef_link( 'fishing' ) ),
 			$fivef_link( 'about-the-ranch' ),
 			$fivef_link( 'field-notes' ),
@@ -339,6 +343,7 @@ if ( ! $fivef_nav && ! get_option( 'fivef_setup_nav' ) ) {
 		update_option( 'fivef_setup_nav', $nav_id, false );
 		update_option( 'fivef_setup_nav_v2', 1, false );
 		update_option( 'fivef_setup_nav_gallery', 1, false );
+		update_option( 'fivef_setup_nav_pricing', 1, false );
 		$fivef_log( "Created Main Menu (#{$nav_id})" );
 	}
 } elseif ( $fivef_nav && ! get_option( 'fivef_setup_nav_v2' ) ) {
@@ -373,6 +378,25 @@ if ( $fivef_nav && ! get_option( 'fivef_setup_nav_gallery' ) && isset( $fivef_id
 		$fivef_log( 'Added Gallery to Main Menu' );
 	}
 	update_option( 'fivef_setup_nav_gallery', 1, false );
+}
+
+// Pricing page (Oct 19, 2026): add to an existing menu once, after Thermal Hog Hunts.
+if ( $fivef_nav && ! get_option( 'fivef_setup_nav_pricing' ) && isset( $fivef_ids['pricing'], $fivef_ids['thermal-hog-hunts'] ) ) {
+	$fivef_nav_post = get_post( $fivef_nav[0]->ID );
+	$content        = $fivef_nav_post->post_content;
+	if ( false === strpos( $content, '"id":' . (int) $fivef_ids['pricing'] . ',' )
+		&& preg_match( '/<!-- wp:navigation-link \{[^}]*"id":' . (int) $fivef_ids['thermal-hog-hunts'] . ',[^}]*\} \/-->/', $content, $fivef_m, PREG_OFFSET_CAPTURE ) ) {
+		$fivef_at = $fivef_m[0][1] + strlen( $fivef_m[0][0] );
+		$content  = substr( $content, 0, $fivef_at ) . "\n" . $fivef_link( 'pricing' ) . substr( $content, $fivef_at );
+		wp_update_post(
+			array(
+				'ID'           => $fivef_nav_post->ID,
+				'post_content' => $content,
+			)
+		);
+		$fivef_log( 'Added Pricing to the Main Menu' );
+	}
+	update_option( 'fivef_setup_nav_pricing', 1, false );
 }
 
 // Tagline (shown in the homepage's browser title): lead with hog hunts, once, if still our earlier wording.
@@ -582,7 +606,7 @@ if ( class_exists( 'WPCF7_ContactForm' ) ) {
 						'<p class="fivef-field"><label for="fivef-name">Your name <span class="fivef-req">*</span></label>[text* your-name id:fivef-name autocomplete:name]</p>',
 						'<p class="fivef-field"><label for="fivef-email">Email <span class="fivef-req">*</span></label>[email* your-email id:fivef-email autocomplete:email]</p>',
 						'<p class="fivef-field"><label for="fivef-phone">Phone</label>[tel your-phone id:fivef-phone autocomplete:tel]</p>',
-						'<p class="fivef-field"><label for="fivef-interest">I’m interested in</label>[select your-interest id:fivef-interest default:get "Thermal Hog Hunt weekend" "Private / group weekend" "Open Range / Deer Hunting" "Fishing" "Something else"]</p>',
+						'<p class="fivef-field"><label for="fivef-interest">I’m interested in</label>[select your-interest id:fivef-interest default:get "Thermal Hog Hunt weekend" "Private / group weekend" "Dove Hunting" "Fishing" "Something else"]</p>',
 						'</div>',
 						'<p class="fivef-field"><label for="fivef-message">Message <span class="fivef-req">*</span></label>[textarea* your-message id:fivef-message x5]</p>',
 						'<p class="fivef-submit">[submit "Send Message"]</p>',
@@ -637,6 +661,43 @@ if ( ! get_option( 'fivef_setup_weekend_form' ) && class_exists( 'WPCF7_ContactF
 		$fivef_log( 'Contact form: added "Private / group weekend" and link preselection' );
 	}
 	update_option( 'fivef_setup_weekend_form', 1, false );
+}
+
+// Client edits (Oct 19, 2026), once: deer/turkey/quail posts to Trash, doves-over-sunflowers image
+// on the dove post, and "Dove Hunting" back in the contact form in place of deer.
+if ( ! get_option( 'fivef_setup_oct19' ) ) {
+	foreach ( array( 'white-tailed-deer-texas-guide', 'rio-grande-wild-turkey-guide', 'northern-bobwhite-quail-guide' ) as $fivef_slug ) {
+		$fivef_p = get_page_by_path( $fivef_slug, OBJECT, 'post' );
+		if ( $fivef_p && 'publish' === $fivef_p->post_status ) {
+			wp_trash_post( $fivef_p->ID );
+			$fivef_log( "Moved post '{$fivef_p->post_title}' to Trash" );
+		}
+	}
+
+	$fivef_p = get_page_by_path( 'mourning-dove-texas-guide', OBJECT, 'post' );
+	if ( $fivef_p && isset( $fivef_media['dove-sunflowers'] )
+		&& ( ! has_post_thumbnail( $fivef_p ) || ( isset( $fivef_media['doves-lake'] ) && (int) get_post_thumbnail_id( $fivef_p ) === (int) $fivef_media['doves-lake'] ) ) ) {
+		set_post_thumbnail( $fivef_p->ID, $fivef_media['dove-sunflowers'] );
+		$fivef_log( 'Mourning dove post image set to doves over sunflowers' );
+	}
+
+	if ( class_exists( 'WPCF7_ContactForm' ) ) {
+		$fivef_form_post = get_posts(
+			array(
+				'post_type'   => 'wpcf7_contact_form',
+				'title'       => '5F Ranch Contact',
+				'post_status' => 'any',
+				'numberposts' => 1,
+			)
+		);
+		$fivef_form      = $fivef_form_post ? WPCF7_ContactForm::get_instance( $fivef_form_post[0]->ID ) : null;
+		if ( $fivef_form && false !== strpos( $fivef_form->prop( 'form' ), '"Open Range / Deer Hunting"' ) ) {
+			$fivef_form->set_properties( array( 'form' => str_replace( '"Open Range / Deer Hunting"', '"Dove Hunting"', $fivef_form->prop( 'form' ) ) ) );
+			$fivef_form->save();
+			$fivef_log( 'Contact form: "Open Range / Deer Hunting" replaced with "Dove Hunting"' );
+		}
+	}
+	update_option( 'fivef_setup_oct19', 1, false );
 }
 
 flush_rewrite_rules( false );

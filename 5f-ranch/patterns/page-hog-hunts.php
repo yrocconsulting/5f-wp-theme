@@ -56,13 +56,17 @@ $fivef_steps = array(
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
-<li><?php esc_html_e( 'No harvest limit on feral hogs, subject to applicable laws and safe hunting practices', '5f-ranch' ); ?></li>
+<li><?php esc_html_e( 'No harvest limit on feral hogs', '5f-ranch' ); ?></li>
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
 <!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|40"}}}} -->
 <div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--40)"><!-- wp:button -->
 <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="<?php echo fivef_tel( $fivef_c['booking']['phone'] ); ?>"><?php echo esc_html( sprintf( /* translators: %s: phone number */ __( 'Book: %s', '5f-ranch' ), $fivef_c['booking']['phone'] ) ); ?></a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"is-style-outline"} -->
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/pricing/' ) ); ?>"><?php esc_html_e( 'See Pricing', '5f-ranch' ); ?></a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:column --></div>

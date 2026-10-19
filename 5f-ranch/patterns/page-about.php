@@ -50,7 +50,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php echo wp_kses_post( __( 'We intentionally limit hunting to Opening Day and weekends, because <strong>rested habitat hunts better</strong>.', '5f-ranch' ) ); ?></p>
+<p><?php echo wp_kses_post( __( 'We intentionally limit dove hunting to Opening Day and weekends, because <strong>rested habitat hunts better</strong>.', '5f-ranch' ) ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -77,7 +77,7 @@
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
-<li><?php esc_html_e( 'Hunt only on authorized dates: Opening Day and weekends during the season.', '5f-ranch' ); ?></li>
+<li><?php esc_html_e( 'Hunt only on authorized dates: dove Opening Day and weekends during the season.', '5f-ranch' ); ?></li>
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->

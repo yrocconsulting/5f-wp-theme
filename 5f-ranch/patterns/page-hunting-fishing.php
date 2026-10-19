@@ -12,7 +12,7 @@
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"0"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:0"><!-- wp:paragraph {"align":"center","textColor":"texas-tan","fontSize":"large"} -->
-<p class="has-text-align-center has-texas-tan-color has-text-color has-large-font-size"><?php esc_html_e( 'Thermal hog hunts after dark come first at 5F Ranch, with predators as a bonus, plus deer on the wider property and quiet afternoons on the ponds. Hunts are limited, the land is rested, and the drive from Fort Worth is less than an hour.', '5f-ranch' ); ?></p>
+<p class="has-text-align-center has-texas-tan-color has-text-color has-large-font-size"><?php esc_html_e( 'Thermal hog hunts after dark come first at 5F Ranch, with predators as a bonus and quiet afternoons on the ponds. Hunts are limited, the land is rested, and the drive from Fort Worth is less than an hour.', '5f-ranch' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
@@ -42,11 +42,11 @@
 
 <!-- wp:column -->
 <div class="wp-block-column"><!-- wp:heading {"className":"is-style-ruled","textColor":"texas-tan","fontSize":"x-large"} -->
-<h2 class="wp-block-heading is-style-ruled has-texas-tan-color has-text-color has-x-large-font-size"><?php esc_html_e( 'Memberships & Booking', '5f-ranch' ); ?></h2>
+<h2 class="wp-block-heading is-style-ruled has-texas-tan-color has-text-color has-x-large-font-size"><?php esc_html_e( 'Dove Memberships & Booking', '5f-ranch' ); ?></h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'Hunts are booked ahead with a limited number of hunters, so the ranch never gets crowded. Once you’re confirmed, you’ll receive gate access, a property map, the Ranch Guidelines and everything you need before arriving.', '5f-ranch' ); ?></p>
+<p><?php esc_html_e( '1st season dove hunts are booked ahead with a limited number of hunters, so the ranch never gets crowded. Once you’re confirmed, you’ll receive gate access, a property map, the Ranch Guidelines and everything you need before arriving.', '5f-ranch' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->

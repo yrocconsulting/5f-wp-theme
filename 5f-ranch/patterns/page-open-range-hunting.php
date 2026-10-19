@@ -3,9 +3,9 @@
  * Title: Open Range Hunting page
  * Slug: 5f-ranch/page-open-range-hunting
  * Categories: 5f-ranch-pages
- * Keywords: open range, deer, whitetail, hog, thermal, hunting
+ * Keywords: open range, dove, hog, thermal, hunting
  * Post Types: page
- * Description: Open range hunting across the wider property: white-tailed deer, feral hogs and seasonal opportunities.
+ * Description: Hunting across the wider property: dove and feral hogs.
  *
  * @package 5f-ranch
  */
@@ -49,27 +49,25 @@
 <!-- /wp:group -->
 
 <?php
+$fivef_dove = get_page_by_path( 'hunting-fishing/dove-hunting' );
+$fivef_dove = ( $fivef_dove && 'publish' === $fivef_dove->post_status )
+	? array( get_permalink( $fivef_dove ), __( 'Dove hunting →', '5f-ranch' ) )
+	: array( fivef_inquiry_url( 'Dove Hunting' ), __( 'Ask about dove season →', '5f-ranch' ) );
+
 $fivef_species = array(
 	array(
-		'title' => __( 'White-tailed Deer', '5f-ranch' ),
-		'slot'  => 'creek-bottom',
-		'text'  => __( 'Whitetails travel the creek bottoms, tree lines and pasture edges across the property. Deer hunts follow Texas season dates and county rules. Call to ask about availability and options.', '5f-ranch' ),
-		'link'  => '/white-tailed-deer-texas-guide/',
-		'label' => __( 'Whitetail field notes →', '5f-ranch' ),
+		'title' => __( 'Dove', '5f-ranch' ),
+		'slot'  => 'dove-sunflowers',
+		'text'  => __( 'Mourning doves work the fields and tree lines in early fall. Dove hunts run on Opening Day and weekends during the 1st season, with a limited number of hunters.', '5f-ranch' ),
+		'link'  => $fivef_dove[0],
+		'label' => $fivef_dove[1],
 	),
 	array(
 		'title' => __( 'Feral Hogs', '5f-ranch' ),
-		'slot'  => 'hog-hunt-1',
+		'slot'  => 'hog-boar-banner',
 		'text'  => __( 'Hogs are an invasive species and can be hunted year-round. Guided thermal night hunts put you in the field with an experienced guide and thermal optics.', '5f-ranch' ),
-		'link'  => '/thermal-hog-hunts/',
+		'link'  => home_url( '/thermal-hog-hunts/' ),
 		'label' => __( 'Thermal hog hunts →', '5f-ranch' ),
-	),
-	array(
-		'title' => __( 'Ask About This Season', '5f-ranch' ),
-		'slot'  => 'headquarters',
-		'text'  => __( 'Have something else in mind? Opportunities on the wider property change with the seasons. Call the Hunt & Booking line to ask what’s open.', '5f-ranch' ),
-		'link'  => '/contact/',
-		'label' => __( 'Contact the ranch →', '5f-ranch' ),
 	),
 );
 ?>
@@ -86,7 +84,7 @@ $fivef_species = array(
 <div class="wp-block-columns alignwide" style="margin-top:var(--wp--preset--spacing--50)"><?php foreach ( $fivef_species as $fivef_sp ) : ?><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:group {"className":"is-style-card","style":{"spacing":{"padding":{"bottom":"var:preset|spacing|40"},"blockGap":"var:preset|spacing|30"},"dimensions":{"minHeight":"100%"}},"layout":{"type":"default"}} -->
 <div class="wp-block-group is-style-card" style="min-height:100%;padding-bottom:var(--wp--preset--spacing--40)"><!-- wp:image {"sizeSlug":"full","linkDestination":"custom","style":{"border":{"radius":"0px"}}} -->
-<figure class="wp-block-image size-full has-custom-border"><a href="<?php echo esc_url( home_url( $fivef_sp['link'] ) ); ?>"><img src="<?php echo fivef_photo( $fivef_sp['slot'] ); ?>" alt="<?php echo fivef_photo_alt( $fivef_sp['slot'] ); ?>" style="border-radius:0px"/></a></figure>
+<figure class="wp-block-image size-full has-custom-border"><a href="<?php echo esc_url( $fivef_sp['link'] ); ?>"><img src="<?php echo fivef_photo( $fivef_sp['slot'] ); ?>" alt="<?php echo fivef_photo_alt( $fivef_sp['slot'] ); ?>" style="border-radius:0px"/></a></figure>
 <!-- /wp:image -->
 
 <!-- wp:group {"style":{"spacing":{"padding":{"left":"var:preset|spacing|40","right":"var:preset|spacing|40"},"blockGap":"var:preset|spacing|30"}},"layout":{"type":"default"}} -->
@@ -99,7 +97,7 @@ $fivef_species = array(
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"is-style-tracked","style":{"typography":{"fontWeight":"700"}},"fontSize":"x-small"} -->
-<p class="is-style-tracked has-x-small-font-size" style="font-weight:700"><a href="<?php echo esc_url( home_url( $fivef_sp['link'] ) ); ?>"><?php echo esc_html( $fivef_sp['label'] ); ?></a></p>
+<p class="is-style-tracked has-x-small-font-size" style="font-weight:700"><a href="<?php echo esc_url( $fivef_sp['link'] ); ?>"><?php echo esc_html( $fivef_sp['label'] ); ?></a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></div>
@@ -116,7 +114,7 @@ $fivef_species = array(
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center"><?php esc_html_e( 'What’s open on the wider property depends on the time of year and Texas season dates. Call the Hunt & Booking line and we’ll tell you what’s available and help you plan your hunt.', '5f-ranch' ); ?></p>
+<p class="has-text-align-center"><?php esc_html_e( 'What’s open on the wider property depends on the time of year and Texas season dates. Currently only dove and hog hunting are available.', '5f-ranch' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
