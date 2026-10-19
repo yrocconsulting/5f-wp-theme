@@ -254,6 +254,7 @@ function fivef_photo_alt( $slot ) {
 		'hog-hunt-1'     => __( 'Hunter with a large feral hog taken at night on 5F Ranch', '5f-ranch' ),
 		'hog-hunt-2'     => __( 'Hunter with a thermal-scoped rifle and a feral hog taken at night', '5f-ranch' ),
 		'hog-hunt-3'     => __( 'Hunter kneeling beside a feral hog after a night hunt', '5f-ranch' ),
+		'hog-hunt-4'     => __( 'Hunter with a suppressed, thermal-scoped rifle beside a feral hog taken at night', '5f-ranch' ),
 		'hog-pair'       => __( 'Two feral hogs taken on a night hunt, with a thermal-scoped rifle', '5f-ranch' ),
 		'hero-thermal'         => __( 'Thermal-style night view of 5F Ranch pasture and stock tank with feral hogs in a riflescope reticle (illustrated)', '5f-ranch' ),
 		'gallery-banner'       => __( 'Trail camera photo of feral hogs at a feeder on 5F Ranch', '5f-ranch' ),

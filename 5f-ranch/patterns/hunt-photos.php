@@ -28,7 +28,7 @@
 
 <!-- wp:column -->
 <div class="wp-block-column"><!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"fivef-photo-portrait"} -->
-<figure class="wp-block-image size-full fivef-photo-portrait"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/photos/hog-hunt-3-portrait.jpg' ) ); ?>" alt="<?php echo fivef_photo_alt( 'hog-hunt-3' ); ?>"/></figure>
+<figure class="wp-block-image size-full fivef-photo-portrait"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/photos/hog-hunt-4-portrait.jpg' ) ); ?>" alt="<?php echo fivef_photo_alt( 'hog-hunt-4' ); ?>"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column -->
 
