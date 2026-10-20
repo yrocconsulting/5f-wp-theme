@@ -932,3 +932,8 @@ body.blog .fivef-cat-pills > p a {
 .fivef-gallery-section h2[hidden] {
 	display: none;
 }
+
+.fivef-price-glance .fivef-price span {
+	display: block;
+	margin-top: 0.5rem;
+}

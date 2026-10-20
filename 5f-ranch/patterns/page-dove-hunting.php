@@ -47,11 +47,15 @@
 
 <!-- wp:list {"className":"is-style-checks"} -->
 <ul class="wp-block-list is-style-checks"><!-- wp:list-item -->
-<li><?php esc_html_e( 'Opening Day access', '5f-ranch' ); ?></li>
+<li><?php echo wp_kses_post( __( '<strong>$350 per hunter</strong> for the 1st season', '5f-ranch' ) ); ?></li>
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
-<li><?php esc_html_e( 'Weekend hunting during the first (early) dove season', '5f-ranch' ); ?></li>
+<li><?php esc_html_e( 'Opening Day and Labor Day', '5f-ranch' ); ?></li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><?php esc_html_e( 'Weekends only during the first (early) dove season', '5f-ranch' ); ?></li>
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->

@@ -5,7 +5,7 @@
  * Categories: 5f-ranch-pages
  * Keywords: pricing, price, rates, deposit, book, hog hunt, group
  * Post Types: page
- * Description: Pricing for the two-day guided thermal hog hunt: per-hunter and four-hunter group prices, deposit, what's included and booking buttons.
+ * Description: Pricing for every hunt (hog, duck, dove), with the two-day guided thermal hog hunt: per-hunter and four-hunter group prices, deposit, what's included and booking buttons.
  *
  * @package 5f-ranch
  */
@@ -24,9 +24,47 @@ $fivef_includes = array(
 $fivef_book  = fivef_book_url( 'hog' );
 $fivef_group = fivef_inquiry_url( 'Private / group weekend' );
 ?>
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|50"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained","contentSize":"820px"}} -->
-<div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--50)"><!-- wp:paragraph {"align":"center","className":"is-style-tracked","style":{"typography":{"fontWeight":"700"}},"textColor":"sunset-gold","fontSize":"x-small"} -->
-<p class="has-text-align-center is-style-tracked has-sunset-gold-color has-text-color has-x-small-font-size" style="font-weight:700"><?php esc_html_e( 'Escape the Office. Own the Weekend.', '5f-ranch' ); ?></p>
+<?php
+$fivef_c     = fivef_contacts();
+$fivef_hunts = array(
+	array( 'hog-hunts', __( 'Thermal Hog Hunts', '5f-ranch' ), '$2,000', __( 'per hunter · two-day weekend', '5f-ranch' ), __( '$7,200 for all four spots · lodging & meals included', '5f-ranch' ) ),
+	array( 'duck-hunts', __( 'Guided Duck Hunts', '5f-ranch' ), '$300', __( 'per person · one morning', '5f-ranch' ), __( 'Groups of 4 to 6 · guide, decoys, blinds & dogs', '5f-ranch' ) ),
+	array( 'dove-hunts', __( 'Dove Hunting', '5f-ranch' ), '$350', __( 'per hunter · 1st season', '5f-ranch' ), __( 'Opening Day, Labor Day & weekends', '5f-ranch' ) ),
+);
+?>
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|40"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--40)"><!-- wp:heading {"textAlign":"center","level":2,"className":"is-style-eyebrow"} -->
+<h2 class="wp-block-heading has-text-align-center is-style-eyebrow"><?php esc_html_e( 'Pricing at a Glance', '5f-ranch' ); ?></h2>
+<!-- /wp:heading -->
+
+<!-- wp:columns {"align":"wide","className":"fivef-prices fivef-price-glance","style":{"spacing":{"margin":{"top":"var:preset|spacing|40"},"blockGap":{"left":"var:preset|spacing|40"}}}} -->
+<div class="wp-block-columns alignwide fivef-prices fivef-price-glance" style="margin-top:var(--wp--preset--spacing--40)"><?php foreach ( $fivef_hunts as $fivef_h ) : ?><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:group {"className":"is-style-card fivef-price-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|50","right":"var:preset|spacing|50"},"blockGap":"var:preset|spacing|30"},"dimensions":{"minHeight":"100%"}},"layout":{"type":"default"}} -->
+<div class="wp-block-group is-style-card fivef-price-card" style="min-height:100%;padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)"><!-- wp:paragraph {"className":"is-style-tracked","style":{"typography":{"fontWeight":"700"}},"textColor":"sunset-gold","fontSize":"x-small"} -->
+<p class="is-style-tracked has-sunset-gold-color has-text-color has-x-small-font-size" style="font-weight:700"><?php echo esc_html( $fivef_h[1] ); ?></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"fivef-price"} -->
+<p class="fivef-price"><?php echo esc_html( $fivef_h[2] ); ?> <span><?php echo esc_html( $fivef_h[3] ); ?></span></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><?php echo esc_html( $fivef_h[4] ); ?></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"is-style-tracked","style":{"typography":{"fontWeight":"700"}},"fontSize":"x-small"} -->
+<p class="is-style-tracked has-x-small-font-size" style="font-weight:700"><a href="#<?php echo esc_attr( $fivef_h[0] ); ?>"><?php esc_html_e( 'Details →', '5f-ranch' ); ?></a></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:column -->
+
+<?php endforeach; ?></div>
+<!-- /wp:columns --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"anchor":"hog-hunts","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|50"},"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained","contentSize":"820px"}} -->
+<div id="hog-hunts" class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--50)"><!-- wp:paragraph {"align":"center","className":"is-style-tracked","style":{"typography":{"fontWeight":"700"}},"textColor":"sunset-gold","fontSize":"x-small"} -->
+<p class="has-text-align-center is-style-tracked has-sunset-gold-color has-text-color has-x-small-font-size" style="font-weight:700"><?php esc_html_e( 'Thermal Hog Hunts · Escape the Office. Own the Weekend.', '5f-ranch' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"textAlign":"center","level":2,"textColor":"texas-tan","fontSize":"xx-large"} -->
@@ -146,4 +184,61 @@ $fivef_group = fivef_inquiry_url( 'Private / group weekend' );
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
-<?php echo fivef_section( 'weekend-close' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+
+<!-- wp:group {"anchor":"duck-hunts","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"},"margin":{"top":"0","bottom":"0"}},"border":{"top":{"color":"#d9c8a926","width":"1px"}}},"layout":{"type":"constrained","contentSize":"820px"}} -->
+<div id="duck-hunts" class="wp-block-group alignfull" style="border-top-color:#d9c8a926;border-top-width:1px;margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:heading {"textAlign":"center","level":2,"className":"is-style-eyebrow"} -->
+<h2 class="wp-block-heading has-text-align-center is-style-eyebrow"><?php esc_html_e( 'Guided Duck Hunts', '5f-ranch' ); ?></h2>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"textAlign":"center","level":3,"textColor":"texas-tan","fontSize":"xx-large"} -->
+<h3 class="wp-block-heading has-text-align-center has-texas-tan-color has-text-color has-xx-large-font-size"><?php esc_html_e( 'One Morning on the Water', '5f-ranch' ); ?></h3>
+<!-- /wp:heading -->
+
+<!-- wp:table {"className":"fivef-price-table"} -->
+<figure class="wp-block-table fivef-price-table"><table><tbody><tr><td><?php esc_html_e( 'Guided duck hunt', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( '$300 per person', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Group size', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( '4 to 6 hunters', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Deposit to book', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( '50% ($150 per person)', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Hunt hours', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( '30 minutes before sunrise to 10 a.m.', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Includes', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( 'Guide, decoys, blinds and dogs', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Not included', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( 'Meals and lodging', '5f-ranch' ); ?></strong></td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:paragraph {"align":"center","textColor":"texas-tan","fontSize":"small"} -->
+<p class="has-text-align-center has-texas-tan-color has-text-color has-small-font-size"><?php esc_html_e( 'Larger groups: call the Hunt & Booking line to discuss options.', '5f-ranch' ); ?></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"margin":{"top":"var:preset|spacing|40"}}}} -->
+<div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--40)"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( fivef_book_url( 'duck' ) ); ?>"><?php esc_html_e( 'Check Duck Dates', '5f-ranch' ); ?></a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"is-style-outline"} -->
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/hunting-fishing/duck-hunting/' ) ); ?>"><?php esc_html_e( 'About Duck Hunts', '5f-ranch' ); ?></a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"anchor":"dove-hunts","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"},"margin":{"top":"0","bottom":"0"}},"border":{"top":{"color":"#d9c8a926","width":"1px"}}},"layout":{"type":"constrained","contentSize":"820px"}} -->
+<div id="dove-hunts" class="wp-block-group alignfull" style="border-top-color:#d9c8a926;border-top-width:1px;margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:heading {"textAlign":"center","level":2,"className":"is-style-eyebrow"} -->
+<h2 class="wp-block-heading has-text-align-center is-style-eyebrow"><?php esc_html_e( 'Dove Hunting', '5f-ranch' ); ?></h2>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"textAlign":"center","level":3,"textColor":"texas-tan","fontSize":"xx-large"} -->
+<h3 class="wp-block-heading has-text-align-center has-texas-tan-color has-text-color has-xx-large-font-size"><?php esc_html_e( 'First Season Dove', '5f-ranch' ); ?></h3>
+<!-- /wp:heading -->
+
+<!-- wp:table {"className":"fivef-price-table"} -->
+<figure class="wp-block-table fivef-price-table"><table><tbody><tr><td><?php esc_html_e( 'Dove hunting, 1st season', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( '$350 per hunter', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Includes', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( 'Opening Day, Labor Day and weekends', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Season', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( '1st (early) season only; the late season is not included', '5f-ranch' ); ?></strong></td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:paragraph {"align":"center","textColor":"texas-tan","fontSize":"small"} -->
+<p class="has-text-align-center has-texas-tan-color has-text-color has-small-font-size"><?php esc_html_e( 'Dove hunting is weekends only, plus Opening Day and Labor Day.', '5f-ranch' ); ?></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"margin":{"top":"var:preset|spacing|40"}}}} -->
+<div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--40)"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( fivef_inquiry_url( 'Dove Hunting' ) ); ?>"><?php esc_html_e( 'Ask About Dove Hunting', '5f-ranch' ); ?></a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"is-style-outline"} -->
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/hunting-fishing/dove-hunting/' ) ); ?>"><?php esc_html_e( 'About Dove Hunting', '5f-ranch' ); ?></a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:group -->
+
+<?php echo fivef_section( 'cta-band' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>

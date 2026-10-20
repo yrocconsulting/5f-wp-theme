@@ -16,22 +16,25 @@ $fivef_more     = fivef_gallery_items( false );
 $fivef_duck_pg  = get_page_by_path( 'hunting-fishing/duck-hunting' );
 $fivef_duck     = ( $fivef_duck_pg && 'publish' === $fivef_duck_pg->post_status ) ? fivef_gallery_items( null, 'duck' ) : array();
 $fivef_ranch    = fivef_gallery_items( null, 'ranch' );
+$fivef_dove     = fivef_gallery_items( null, 'dove' );
 
 // Filter buttons for the categories that have photos.
 $fivef_labels = array(
 	'hogs'      => __( 'Hog Hunts', '5f-ranch' ),
 	'ducks'     => __( 'Duck Hunts', '5f-ranch' ),
+	'dove'      => __( 'Dove Hunts', '5f-ranch' ),
 	'predators' => __( 'Predators', '5f-ranch' ),
 	'ranch'     => __( 'The Ranch', '5f-ranch' ),
 );
 $fivef_have   = array();
-foreach ( array_merge( $fivef_featured, $fivef_more, $fivef_duck, $fivef_ranch ) as $fivef_item ) {
+foreach ( array_merge( $fivef_featured, $fivef_more, $fivef_duck, $fivef_dove, $fivef_ranch ) as $fivef_item ) {
 	$fivef_have[ $fivef_item['cat'] ] = true;
 }
 $fivef_sections = array(
 	array( '', __( 'Featured', '5f-ranch' ), $fivef_featured, 3, 'fivef-gallery-featured' ),
 	array( 'hog-hunts', __( 'Hog Hunts & Trail Cams', '5f-ranch' ), $fivef_more, 4, '' ),
 	array( 'duck-hunts', __( 'Duck Hunts', '5f-ranch' ), $fivef_duck, 4, '' ),
+	array( 'dove-hunts', __( 'Dove Hunts', '5f-ranch' ), $fivef_dove, 4, '' ),
 	array( 'the-ranch', __( 'The Ranch', '5f-ranch' ), $fivef_ranch, 4, '' ),
 );
 ?>

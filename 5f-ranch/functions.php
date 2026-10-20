@@ -341,6 +341,7 @@ function fivef_gallery_items( $featured = null, $set = 'gallery' ) {
 	$cats = array(
 		'gallery' => 'hogs',
 		'duck'    => 'ducks',
+		'dove'    => 'dove',
 		'ranch'   => 'ranch',
 	);
 	foreach ( $items as $i => $item ) {
