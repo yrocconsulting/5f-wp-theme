@@ -929,5 +929,26 @@ if ( ! get_option( 'fivef_setup_duck_pct' ) ) {
 	update_option( 'fivef_setup_duck_pct', 1, false );
 }
 
+// Duck hunts every day of the 2026-27 regular season (client, Oct 2026), once. Days already on the
+// calendar (including closed ones) are left as they are; the Nov 30 – Dec 4 split stays closed.
+if ( ! get_option( 'fivef_setup_duck_daily' ) && function_exists( 'fivef_bk_set_date' ) ) {
+	$fivef_have = fivef_bk_dates( 'duck' );
+	$fivef_n    = 0;
+	foreach ( array( array( '2026-11-14', '2026-11-29' ), array( '2026-12-05', '2027-01-31' ) ) as $fivef_seg ) {
+		$d   = new DateTime( $fivef_seg[0], new DateTimeZone( 'UTC' ) );
+		$end = new DateTime( $fivef_seg[1], new DateTimeZone( 'UTC' ) );
+		while ( $d <= $end ) {
+			$key = $d->format( 'Y-m-d' );
+			if ( ! isset( $fivef_have[ $key ] ) && $key > fivef_bk_today() ) {
+				fivef_bk_set_date( 'duck', $key, 1 );
+				$fivef_n++;
+			}
+			$d->modify( '+1 day' );
+		}
+	}
+	$fivef_log( "Duck hunts opened every day of the season: {$fivef_n} weekday mornings added" );
+	update_option( 'fivef_setup_duck_daily', 1, false );
+}
+
 flush_rewrite_rules( false );
 $fivef_log( '5F Ranch setup complete.' );
