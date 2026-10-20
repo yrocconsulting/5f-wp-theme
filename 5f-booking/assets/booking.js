@@ -38,12 +38,19 @@
 		return '$' + Number(n).toLocaleString('en-US');
 	}
 
-	function quote(t, people) {
-		var discount = t.mode === 'spots' && people >= t.capacity && t.groupPrice < t.price;
-		var per = discount ? t.groupPrice : t.price;
+	function quote(t, people, base, addon) {
+		base = base || t.price;
+		var discount = t.mode === 'spots' && people >= t.capacity && t.groupPrice < base;
+		var per = discount ? t.groupPrice : base;
 		var total = per * people;
-		var deposit = Math.min(total, t.deposit * people);
-		return { per: per, total: total, deposit: deposit, balance: total - deposit, discount: discount };
+		var deposit = t.depositPct ? Math.round(total * t.depositPct / 100) : t.deposit * people;
+		addon = !!(addon && t.addon && people >= t.capacity);
+		if (addon) {
+			total += t.addon.price;
+			deposit += t.addon.deposit;
+		}
+		deposit = Math.min(total, deposit);
+		return { per: per, total: total, deposit: deposit, balance: total - deposit, discount: discount, addon: addon };
 	}
 
 	function ymd(y, m, d) {
@@ -187,9 +194,15 @@
 		}
 		var priceBox = el('div', { class: 'fivef-bk-price' });
 		function paintPrice() {
-			var q = quote(t, state.people);
+			var q = quote(t, state.people, info.price, state.addon);
+			var canAddon = !!(t.addon && state.people >= t.capacity);
+			addonRow.hidden = !canAddon;
 			priceBox.innerHTML = '';
-			priceBox.appendChild(el('div', { class: 'fivef-bk-row' }, [el('span', { text: state.people + ' × ' + money(q.per) + (q.discount ? ' (all four spots)' : '') }), el('strong', { text: money(q.total) })]));
+			priceBox.appendChild(el('div', { class: 'fivef-bk-row' }, [el('span', { text: state.people + ' × ' + money(q.per) + (q.discount ? ' (all four spots)' : '') }), el('strong', { text: money(q.per * state.people) })]));
+			if (q.addon) {
+				priceBox.appendChild(el('div', { class: 'fivef-bk-row' }, [el('span', { text: 'Morning duck hunt add-on' }), el('strong', { text: money(t.addon.price) })]));
+				priceBox.appendChild(el('div', { class: 'fivef-bk-row' }, [el('span', { text: 'Total' }), el('strong', { text: money(q.total) })]));
+			}
 			priceBox.appendChild(el('div', { class: 'fivef-bk-row is-due' }, [el('span', { text: cfg.online ? 'Deposit due today' : 'Deposit to confirm' }), el('strong', { text: money(q.deposit) })]));
 			priceBox.appendChild(el('div', { class: 'fivef-bk-row' }, [el('span', { text: 'Remaining balance' }), el('strong', { text: money(q.balance) })]));
 			if (t.mode === 'spots' && info.left >= t.capacity && state.people < t.capacity) {
@@ -198,6 +211,13 @@
 			submit.textContent = cfg.online ? 'Pay ' + money(q.deposit) + ' deposit' : 'Request these dates';
 		}
 
+		var addonRow = el('label', { class: 'fivef-bk-check fivef-bk-addon', hidden: true }, t.addon ? [
+			el('input', { type: 'checkbox', name: 'addon', value: '1', checked: !!state.addon, onchange: function (e) {
+				state.addon = e.target.checked;
+				paintPrice();
+			} }),
+			el('span', { html: '<strong>' + t.addon.label + '</strong> (+' + money(t.addon.price) + ')' })
+		] : []);
 		var errorBox = el('p', { class: 'fivef-bk-error', role: 'alert', hidden: true });
 		var submit = el('button', { type: 'submit', class: 'wp-element-button fivef-bk-submit' });
 
@@ -212,6 +232,7 @@
 					paintPrice();
 				}
 			}, options)),
+			addonRow,
 			priceBox,
 			field('Your name', el('input', { name: 'name', type: 'text', autocomplete: 'name', required: true })),
 			el('div', { class: 'fivef-bk-two' }, [
@@ -232,7 +253,7 @@
 			e.preventDefault();
 			errorBox.hidden = true;
 			var fd = new FormData(form);
-			var body = { type: state.type, date: state.date, people: state.people };
+			var body = { type: state.type, date: state.date, people: state.people, addon: (state.addon && t.addon && state.people >= t.capacity) ? '1' : '' };
 			fd.forEach(function (v, k) {
 				body[k] = v;
 			});

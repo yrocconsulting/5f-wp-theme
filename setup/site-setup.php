@@ -920,5 +920,14 @@ if ( ! get_option( 'fivef_setup_dates_2026' ) && function_exists( 'fivef_bk_set_
 	update_option( 'fivef_setup_dates_2026', 1, false );
 }
 
+// Duck deposit is now a percentage (50%) of the weekday ($300) or weekend ($350) price.
+if ( ! get_option( 'fivef_setup_duck_pct' ) ) {
+	if ( false === get_option( 'fivef_bk_duck_deposit_pct', false ) ) {
+		update_option( 'fivef_bk_duck_deposit_pct', 50 );
+	}
+	$fivef_log( 'Duck hunts: $300 weekdays, $350 weekends, 50% deposit' );
+	update_option( 'fivef_setup_duck_pct', 1, false );
+}
+
 flush_rewrite_rules( false );
 $fivef_log( '5F Ranch setup complete.' );

@@ -176,6 +176,7 @@ function fivef_bk_availability( $type ) {
 			'date'  => $date,
 			'label' => fivef_bk_date_label( $type, $date ),
 			'left'  => fivef_bk_left( $type, $date ),
+			'price' => fivef_bk_base_price( $type, $date ),
 		);
 	}
 	return $out;
@@ -230,6 +231,7 @@ function fivef_bk_get( $id ) {
 		'total'   => (int) $m( 'total' ),
 		'deposit' => (int) $m( 'deposit' ),
 		'balance' => (int) $m( 'balance' ),
+		'addon'   => (bool) $m( 'addon' ),
 		'status'  => $m( 'status' ),
 		'token'   => $m( 'token' ),
 		'session' => $m( 'session' ),

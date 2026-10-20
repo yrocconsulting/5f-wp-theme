@@ -255,6 +255,7 @@ function fivef_bk_details_box( $post ) {
 		__( 'Hunt', '5f-booking' )      => $t ? $t['label'] : $b['type'],
 		__( 'Date', '5f-booking' )      => fivef_bk_date_label( $b['type'], $b['date'] ),
 		__( 'Hunters', '5f-booking' )   => $b['people'],
+		__( 'Add-on', '5f-booking' )    => ( $b['addon'] && $t && ! empty( $t['addon'] ) ) ? $t['addon']['short'] : '—',
 		__( 'Name', '5f-booking' )      => $b['name'],
 		__( 'Email', '5f-booking' )     => $b['email'],
 		__( 'Phone', '5f-booking' )     => $b['phone'],
@@ -305,7 +306,7 @@ add_action(
 			register_setting( 'fivef_bk', $opt, array( 'sanitize_callback' => 'sanitize_text_field' ) );
 		}
 		register_setting( 'fivef_bk', 'fivef_bk_duck_enabled', array( 'sanitize_callback' => 'absint' ) );
-		register_setting( 'fivef_bk', 'fivef_bk_duck_deposit', array( 'sanitize_callback' => 'absint' ) );
+		register_setting( 'fivef_bk', 'fivef_bk_duck_deposit_pct', array( 'sanitize_callback' => 'absint' ) );
 	}
 );
 
@@ -358,9 +359,9 @@ function fivef_bk_settings_screen() {
 					<td><label><input type="checkbox" name="fivef_bk_duck_enabled" value="1" <?php checked( (int) get_option( 'fivef_bk_duck_enabled', 0 ), 1 ); ?>> <?php esc_html_e( 'Show duck hunts on the booking calendar', '5f-booking' ); ?></label></td>
 				</tr>
 				<tr>
-					<th><label for="fivef_bk_duck_deposit"><?php esc_html_e( 'Deposit per hunter ($)', '5f-booking' ); ?></label></th>
-					<td><input type="number" min="0" max="300" step="1" id="fivef_bk_duck_deposit" name="fivef_bk_duck_deposit" value="<?php echo esc_attr( (int) get_option( 'fivef_bk_duck_deposit', 150 ) ); ?>">
-					<p class="description"><?php esc_html_e( 'Duck hunts are $300 per person with a 50% deposit ($150). Enter 300 to take full payment online.', '5f-booking' ); ?></p></td>
+					<th><label for="fivef_bk_duck_deposit_pct"><?php esc_html_e( 'Deposit (% of the total)', '5f-booking' ); ?></label></th>
+					<td><input type="number" min="0" max="100" step="1" id="fivef_bk_duck_deposit_pct" name="fivef_bk_duck_deposit_pct" value="<?php echo esc_attr( (int) get_option( 'fivef_bk_duck_deposit_pct', 50 ) ); ?>">
+					<p class="description"><?php esc_html_e( 'Duck hunts are $300 per person on weekdays and $350 on Saturdays and Sundays. 50 takes half up front; 100 takes full payment online.', '5f-booking' ); ?></p></td>
 				</tr>
 			</table>
 			<?php submit_button(); ?>

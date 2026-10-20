@@ -141,7 +141,8 @@ function fivef_bk_rest_book( WP_REST_Request $req ) {
 		);
 	}
 
-	$q      = fivef_bk_quote( $type, $people );
+	$addon  = '' !== $g( 'addon' ) && 'false' !== $g( 'addon' ) && '0' !== $g( 'addon' ) && fivef_bk_addon_allowed( $type, $people );
+	$q      = fivef_bk_quote( $type, $people, $date, $addon );
 	$stripe = '' !== fivef_bk_stripe_key();
 	$id     = wp_insert_post(
 		array(
@@ -166,6 +167,7 @@ function fivef_bk_rest_book( WP_REST_Request $req ) {
 		'total'      => $q['total'],
 		'deposit'    => $q['deposit'],
 		'balance'    => $q['balance'],
+		'addon'      => $q['addon'] ? 1 : 0,
 		'token'      => wp_generate_password( 20, false ),
 		'hold_until' => time() + FIVEF_BK_HOLD_MINUTES * MINUTE_IN_SECONDS,
 	);

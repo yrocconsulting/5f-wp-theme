@@ -84,6 +84,12 @@ function fivef_bk_shortcode( $atts ) {
 			'groupPrice' => $t['group_price'],
 			'deposit'    => $t['deposit'],
 			'terms'      => $t['terms'],
+			'depositPct' => empty( $t['deposit_pct'] ) ? 0 : $t['deposit_pct'],
+			'addon'      => empty( $t['addon'] ) ? null : array(
+				'label'   => $t['addon']['label'],
+				'price'   => $t['addon']['price'],
+				'deposit' => $t['addon']['deposit'],
+			),
 		);
 	}
 	$start = isset( $_GET['type'] ) ? sanitize_key( wp_unslash( $_GET['type'] ) ) : sanitize_key( $atts['type'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -124,7 +130,7 @@ add_action(
 );
 
 // Switching payments on or off changes the booking page; clear SiteGround's cache when settings change.
-foreach ( array( 'fivef_bk_stripe_secret', 'fivef_bk_duck_enabled', 'fivef_bk_duck_deposit' ) as $fivef_bk_opt ) {
+foreach ( array( 'fivef_bk_stripe_secret', 'fivef_bk_duck_enabled', 'fivef_bk_duck_deposit_pct' ) as $fivef_bk_opt ) {
 	add_action(
 		'update_option_' . $fivef_bk_opt,
 		static function () {

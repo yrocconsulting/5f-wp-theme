@@ -24,7 +24,15 @@ function fivef_bk_send_emails( $id, $kind ) {
 		__( 'Hunt:', '5f-booking' ) . ' ' . $t['label'],
 		__( 'Date:', '5f-booking' ) . ' ' . $when,
 		__( 'Hunters:', '5f-booking' ) . ' ' . $b['people'],
-		__( 'Total:', '5f-booking' ) . ' ' . fivef_bk_money( $b['total'] ),
+	);
+	if ( $b['addon'] && ! empty( $t['addon'] ) ) {
+		$lines[] = __( 'Add-on:', '5f-booking' ) . ' ' . $t['addon']['short'] . ' (' . fivef_bk_money( $t['addon']['price'] ) . ')';
+	}
+	$lines = array_merge(
+		$lines,
+		array(
+			__( 'Total:', '5f-booking' ) . ' ' . fivef_bk_money( $b['total'] ),
+		)
 	);
 	if ( 'paid' === $kind ) {
 		$lines[] = __( 'Deposit paid:', '5f-booking' ) . ' ' . fivef_bk_money( $b['deposit'] ) . ' (' . rtrim( $t['deposit_note'], '.' ) . ')';

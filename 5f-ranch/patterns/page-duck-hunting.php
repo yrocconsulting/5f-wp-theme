@@ -5,7 +5,7 @@
  * Categories: 5f-ranch-pages
  * Keywords: duck, waterfowl, guided, ponds, retrievers, group
  * Post Types: page
- * Description: Guided duck hunts: experienced guide, HRCH retrievers, ten ponds, $300 per person for groups of 4 to 6, with the hunt video and photos.
+ * Description: Guided duck hunts: experienced guide, HRCH retrievers, ten ponds, $300 per person on weekdays and $350 on weekends for groups of 4 to 6, with the hunt video and photos.
  *
  * @package 5f-ranch
  */
@@ -21,7 +21,7 @@ $fivef_duck   = static function ( $file ) {
 	return esc_url( get_theme_file_uri( 'assets/duck/' . $file ) );
 };
 $fivef_facts  = array(
-	array( '$300', __( 'Per person', '5f-ranch' ) ),
+	array( '$300', __( 'Per person weekdays · $350 weekends', '5f-ranch' ) ),
 	array( '4', __( 'Hunter minimum', '5f-ranch' ) ),
 	array( '6', __( 'Hunter maximum per standard booking', '5f-ranch' ) ),
 	array( '10', __( 'Huntable ponds', '5f-ranch' ) ),
@@ -52,7 +52,7 @@ $fivef_dogs   = array(
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"style":{"typography":{"fontWeight":"700"}},"textColor":"bone"} -->
-<p class="has-bone-color has-text-color" style="font-weight:700"><?php esc_html_e( 'Hunts start at $300 per person · 4-hunter minimum · 6-hunter maximum per standard booking', '5f-ranch' ); ?></p>
+<p class="has-bone-color has-text-color" style="font-weight:700"><?php esc_html_e( 'Hunts start at $300 per person ($350 on weekends) · 4-hunter minimum · 6-hunter maximum per standard booking', '5f-ranch' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"textColor":"texas-tan","fontSize":"small"} -->
@@ -246,7 +246,7 @@ $fivef_dogs   = array(
 <!-- /wp:heading -->
 
 <!-- wp:table {"className":"fivef-price-table"} -->
-<figure class="wp-block-table fivef-price-table"><table><thead><tr><th><?php esc_html_e( 'Booking details', '5f-ranch' ); ?></th><th><?php esc_html_e( 'Rate', '5f-ranch' ); ?></th></tr></thead><tbody><tr><td><strong><?php esc_html_e( 'Guided duck hunt', '5f-ranch' ); ?></strong></td><td><strong><?php esc_html_e( '$300 per person', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Minimum group size', '5f-ranch' ); ?></td><td><?php esc_html_e( '4 hunters', '5f-ranch' ); ?></td></tr><tr><td><?php esc_html_e( 'Maximum standard group size', '5f-ranch' ); ?></td><td><?php esc_html_e( '6 hunters', '5f-ranch' ); ?></td></tr><tr><td><?php esc_html_e( 'Deposit to book', '5f-ranch' ); ?></td><td><?php esc_html_e( '50% ($150 per person)', '5f-ranch' ); ?></td></tr><tr><td><?php esc_html_e( 'Hunt hours', '5f-ranch' ); ?></td><td><?php esc_html_e( '30 minutes before sunrise to 10 a.m.', '5f-ranch' ); ?></td></tr><tr><td><?php esc_html_e( 'Larger groups', '5f-ranch' ); ?></td><td><a href="<?php echo fivef_tel( $fivef_phone ); ?>"><?php echo esc_html( sprintf( /* translators: %s: phone number */ __( 'Call %s', '5f-ranch' ), $fivef_phone ) ); ?></a></td></tr></tbody></table></figure>
+<figure class="wp-block-table fivef-price-table"><table><thead><tr><th><?php esc_html_e( 'Booking details', '5f-ranch' ); ?></th><th><?php esc_html_e( 'Rate', '5f-ranch' ); ?></th></tr></thead><tbody><tr><td><strong><?php esc_html_e( 'Weekday hunt (Mon–Fri)', '5f-ranch' ); ?></strong></td><td><strong><?php esc_html_e( '$300 per person', '5f-ranch' ); ?></strong></td></tr><tr><td><strong><?php esc_html_e( 'Weekend hunt (Sat–Sun)', '5f-ranch' ); ?></strong></td><td><strong><?php esc_html_e( '$350 per person', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Minimum group size', '5f-ranch' ); ?></td><td><?php esc_html_e( '4 hunters', '5f-ranch' ); ?></td></tr><tr><td><?php esc_html_e( 'Maximum standard group size', '5f-ranch' ); ?></td><td><?php esc_html_e( '6 hunters', '5f-ranch' ); ?></td></tr><tr><td><?php esc_html_e( 'Deposit to book', '5f-ranch' ); ?></td><td><?php esc_html_e( '50% ($150 per person weekdays, $175 weekends)', '5f-ranch' ); ?></td></tr><tr><td><?php esc_html_e( 'Hunt hours', '5f-ranch' ); ?></td><td><?php esc_html_e( '30 minutes before sunrise to 10 a.m.', '5f-ranch' ); ?></td></tr><tr><td><?php esc_html_e( 'Larger groups', '5f-ranch' ); ?></td><td><a href="<?php echo fivef_tel( $fivef_phone ); ?>"><?php echo esc_html( sprintf( /* translators: %s: phone number */ __( 'Call %s', '5f-ranch' ), $fivef_phone ) ); ?></a></td></tr></tbody></table></figure>
 <!-- /wp:table -->
 
 <!-- wp:paragraph {"align":"center","textColor":"texas-tan","fontSize":"small"} -->

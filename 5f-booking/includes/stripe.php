@@ -83,6 +83,9 @@ function fivef_bk_stripe_checkout( $id ) {
 	);
 	/* translators: 1: hunt name, 2: number of hunters */
 	$desc = sprintf( _n( '%1$s · %2$d hunter', '%1$s · %2$d hunters', $b['people'], '5f-booking' ), fivef_bk_date_label( $b['type'], $b['date'] ), $b['people'] );
+	if ( $b['addon'] && ! empty( $t['addon'] ) ) {
+		$desc .= ' · ' . $t['addon']['short'];
+	}
 	return fivef_bk_stripe(
 		'POST',
 		'checkout/sessions',

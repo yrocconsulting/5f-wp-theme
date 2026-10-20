@@ -28,7 +28,7 @@ $fivef_group = fivef_inquiry_url( 'Private / group weekend' );
 $fivef_c     = fivef_contacts();
 $fivef_hunts = array(
 	array( 'hog-hunts', __( 'Thermal Hog Hunts', '5f-ranch' ), '$2,000', __( 'per hunter · two-day weekend', '5f-ranch' ), __( '$7,200 for all four spots · lodging & meals included · add a morning duck hunt for $1,200', '5f-ranch' ) ),
-	array( 'duck-hunts', __( 'Guided Duck Hunts', '5f-ranch' ), '$300', __( 'per person · one morning', '5f-ranch' ), __( 'Groups of 4 to 6 · guide, decoys, blinds & dogs', '5f-ranch' ) ),
+	array( 'duck-hunts', __( 'Guided Duck Hunts', '5f-ranch' ), '$300', __( 'per person weekdays · $350 weekends', '5f-ranch' ), __( 'Groups of 4 to 6 · guide, decoys, blinds & dogs', '5f-ranch' ) ),
 	array( 'dove-hunts', __( 'Dove Hunting', '5f-ranch' ), '$350', __( 'per hunter · 1st season', '5f-ranch' ), __( 'Opening Day, Labor Day & weekends', '5f-ranch' ) ),
 );
 ?>
@@ -145,12 +145,12 @@ $fivef_hunts = array(
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"align":"center","fontSize":"small"} -->
-<p class="has-text-align-center has-small-font-size"><?php esc_html_e( 'Make the most of your weekend: add a one-morning guided duck hunt for your group of four, from 30 minutes before sunrise to 10 a.m. Guide, decoys, blinds and the guide’s retrievers are included. Ask for it when you book your hog hunt.', '5f-ranch' ); ?></p>
+<p class="has-text-align-center has-small-font-size"><?php esc_html_e( 'Make the most of your weekend: add a one-morning guided duck hunt for your group of four, from 30 minutes before sunrise to 10 a.m. Guide, decoys, blinds and the guide’s retrievers are included. Tick the add-on when you book all four spots online, or ask when you call.', '5f-ranch' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
 <div class="wp-block-buttons"><!-- wp:button {"className":"is-style-outline"} -->
-<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( fivef_inquiry_url( 'Thermal Hog Hunt weekend' ) ); ?>"><?php esc_html_e( 'Ask About the Add-On', '5f-ranch' ); ?></a></div>
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( fivef_book_url( 'hog' ) ); ?>"><?php esc_html_e( 'Book a Weekend + Duck Hunt', '5f-ranch' ); ?></a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:group --></div>
@@ -219,7 +219,7 @@ $fivef_hunts = array(
 <!-- /wp:heading -->
 
 <!-- wp:table {"className":"fivef-price-table"} -->
-<figure class="wp-block-table fivef-price-table"><table><tbody><tr><td><?php esc_html_e( 'Guided duck hunt', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( '$300 per person', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Group size', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( '4 to 6 hunters', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Deposit to book', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( '50% ($150 per person)', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Hunt hours', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( '30 minutes before sunrise to 10 a.m.', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Includes', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( 'Guide, decoys, blinds and dogs', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Not included', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( 'Meals and lodging', '5f-ranch' ); ?></strong></td></tr></tbody></table></figure>
+<figure class="wp-block-table fivef-price-table"><table><tbody><tr><td><?php esc_html_e( 'Weekday hunt (Mon–Fri)', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( '$300 per person', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Weekend hunt (Sat–Sun)', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( '$350 per person', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Group size', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( '4 to 6 hunters', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Deposit to book', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( '50% ($150 per person weekdays, $175 weekends)', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Hunt hours', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( '30 minutes before sunrise to 10 a.m.', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Includes', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( 'Guide, decoys, blinds and dogs', '5f-ranch' ); ?></strong></td></tr><tr><td><?php esc_html_e( 'Not included', '5f-ranch' ); ?></td><td><strong><?php esc_html_e( 'Meals and lodging', '5f-ranch' ); ?></strong></td></tr></tbody></table></figure>
 <!-- /wp:table -->
 
 <!-- wp:paragraph {"align":"center","textColor":"texas-tan","fontSize":"small"} -->
