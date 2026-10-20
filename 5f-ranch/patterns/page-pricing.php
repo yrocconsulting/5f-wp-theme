@@ -27,7 +27,7 @@ $fivef_group = fivef_inquiry_url( 'Private / group weekend' );
 <?php
 $fivef_c     = fivef_contacts();
 $fivef_hunts = array(
-	array( 'hog-hunts', __( 'Thermal Hog Hunts', '5f-ranch' ), '$2,000', __( 'per hunter · two-day weekend', '5f-ranch' ), __( '$7,200 for all four spots · lodging & meals included', '5f-ranch' ) ),
+	array( 'hog-hunts', __( 'Thermal Hog Hunts', '5f-ranch' ), '$2,000', __( 'per hunter · two-day weekend', '5f-ranch' ), __( '$7,200 for all four spots · lodging & meals included · add a morning duck hunt for $1,200', '5f-ranch' ) ),
 	array( 'duck-hunts', __( 'Guided Duck Hunts', '5f-ranch' ), '$300', __( 'per person · one morning', '5f-ranch' ), __( 'Groups of 4 to 6 · guide, decoys, blinds & dogs', '5f-ranch' ) ),
 	array( 'dove-hunts', __( 'Dove Hunting', '5f-ranch' ), '$350', __( 'per hunter · 1st season', '5f-ranch' ), __( 'Opening Day, Labor Day & weekends', '5f-ranch' ) ),
 );
@@ -129,7 +129,31 @@ $fivef_hunts = array(
 
 <!-- wp:paragraph {"align":"center","textColor":"texas-tan","fontSize":"small","style":{"spacing":{"margin":{"top":"var:preset|spacing|40"}}}} -->
 <p class="has-text-align-center has-texas-tan-color has-text-color has-small-font-size" style="margin-top:var(--wp--preset--spacing--40)"><?php esc_html_e( 'The 10% discount applies when one booking reserves all four hunter spots together. Individual bookings and groups booking fewer than four spots are charged the standard rate of $2,000 per hunter.', '5f-ranch' ); ?></p>
-<!-- /wp:paragraph --></div>
+<!-- /wp:paragraph -->
+
+<!-- wp:group {"className":"is-style-card fivef-addon","style":{"spacing":{"margin":{"top":"var:preset|spacing|50"},"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|50","right":"var:preset|spacing|50"}}},"layout":{"type":"constrained","contentSize":"760px"}} -->
+<div class="wp-block-group is-style-card fivef-addon" style="margin-top:var(--wp--preset--spacing--50);padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)"><!-- wp:paragraph {"align":"center","className":"is-style-tracked","style":{"typography":{"fontWeight":"700"}},"textColor":"sunset-gold","fontSize":"x-small"} -->
+<p class="has-text-align-center is-style-tracked has-sunset-gold-color has-text-color has-x-small-font-size" style="font-weight:700"><?php esc_html_e( 'Hog Hunt Add-On', '5f-ranch' ); ?></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"textAlign":"center","level":3,"textColor":"texas-tan","fontSize":"x-large"} -->
+<h3 class="wp-block-heading has-text-align-center has-texas-tan-color has-text-color has-x-large-font-size"><?php esc_html_e( 'Add a Morning Duck Hunt', '5f-ranch' ); ?></h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center","className":"fivef-price"} -->
+<p class="has-text-align-center fivef-price"><?php esc_html_e( '$1,200', '5f-ranch' ); ?> <span><?php esc_html_e( 'for four hunters ($300 each)', '5f-ranch' ); ?></span></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"align":"center","fontSize":"small"} -->
+<p class="has-text-align-center has-small-font-size"><?php esc_html_e( 'Make the most of your weekend: add a one-morning guided duck hunt for your group of four, from 30 minutes before sunrise to 10 a.m. Guide, decoys, blinds and the guide’s retrievers are included. Ask for it when you book your hog hunt.', '5f-ranch' ); ?></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
+<div class="wp-block-buttons"><!-- wp:button {"className":"is-style-outline"} -->
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( fivef_inquiry_url( 'Thermal Hog Hunt weekend' ) ); ?>"><?php esc_html_e( 'Ask About the Add-On', '5f-ranch' ); ?></a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:group --></div>
 <!-- /wp:group -->
 
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"},"margin":{"top":"0","bottom":"0"}}},"backgroundColor":"charcoal-soft","layout":{"type":"constrained","contentSize":"820px"}} -->
